@@ -15,7 +15,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         {
             if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + new Vector3(0f, 0.6625f, 0f), detectionPoint) >= detectionProtection) // protection so it doesnt constantly go off ounce a player has already been detected for attempting to cheat (like using a collider to fly around or menu bugging)
             {
-                // Speed Detection (this is gonna affect everyone! prevents players from doing real cheaty things :)  )
+                // Speed Detection (this is gonna affect everyone! prevents players from doing real cheaty things :)  ) (this is also not very good at doing its job so ima be reworking it at some point)
 
                 Vector3 localPlayerCameraPosition = Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
 
