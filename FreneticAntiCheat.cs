@@ -6,10 +6,12 @@ using VRC.SDKBase;
 public class FreneticAntiCheat : UdonSharpBehaviour
 {
     public Vector3 detectionPoint; // this is the "respawn" point for when someone gets detected as a cheater
-    public float detectionProtection = 5; // alot like Minecrafts Spawn protection
-    public float maxSpeed = 5.5f; // maximum allowed speed! VRChat default runspeed is 4 so i ahve it at 5.5 for vr users because sometimes they may move abit irl & arnt trying to cheat (recommended: test this inside the vrchat application because the ClientSim player is different from that actual vrchat player!)
+    public float detectionProtection = 2; // alot like Minecrafts Spawn protection
+    public float maxSpeed = 5.7f; // maximum allowed speed! VRChat default runspeed is 4 so i ahve it at 5.5 for vr users because sometimes they may move abit irl & arnt trying to cheat (recommended: test this inside the vrchat application because the ClientSim player is different from that actual vrchat player!)
     public float maxOVRAdvancedHeight = 0.9f;
     private Vector3 previousPosition;
+    private Vector3 velocity;
+    private float timer = 0f;
     // Anti Cheat System
     private void Update()
     {
@@ -17,7 +19,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             // Variables
 
             Vector3 localPlayerCameraPosition = Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
-            Vector3 velocity;
 
             // Detection Protection
 
@@ -26,7 +27,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
                 //Speed Detection
 
-                float timer = 0f;
                 timer += Time.deltaTime;
 
                 if (timer >= 0.05f)
@@ -42,7 +42,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         Networking.LocalPlayer.SetVelocity(Vector3.zero);
                     }
 
-                    if (Networking.LocalPlayer.GetVelocity().y > Networking.LocalPlayer.GetJumpImpulse()*1.5) // this detects flying "most" of the time but players can still get around it by going slowly so i suggest using colliders to limit areas to prevent them from getting into places they shouldn't.
+                    if (Networking.LocalPlayer.GetVelocity().y > Networking.LocalPlayer.GetJumpImpulse()*3) // this detects flying "most" of the time but players can still get around it by going slowly so i suggest using colliders to limit areas to prevent them from getting into places they shouldn't.
                     {
                         Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                         Networking.LocalPlayer.SetVelocity(Vector3.zero);
