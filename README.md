@@ -9,14 +9,14 @@ colliders in avatars can be used to fly or gain a intense amount of speed that t
 
 {How To Use}
 
-make a new U# script and name it "FreneticAntiCheat" then copy & paste the code into it!
-next make a empty game object and place the U# script on it and then configure the settings as you wish :D
+1. make a new U# script and name it "FreneticAntiCheat" then copy & paste the code into it!
+2. next make a empty game object and place the U# script on it and then configure the settings as you wish :D
 
 {Complications}
 
-VRChat devs do not allow access to avatars so this is about the best that i can think of for things such as collider flying (can be refined further with seeing how long the velocity is going up or a raycast to see if the player continues to go up but either method can be bypassed easily)
-if the vrchat devs with Udon 2 decide to not be inept then actual things can be created! if access & other things happen with Udon 2 this'll get a update accordingly to hopefully make it better!
-unfortunately world creators also may not outright ban players from their worlds so this system will detect and allow the creator to either a respawn them after being detected as a cheater or b place them into a per server cheater room to ban players per instance (ik its dumb but its the vrchat devs so what'd you expect from them.)
+1. VRChat devs do not allow access to avatars so this is about the best that i can think of for things such as collider flying (can be refined further with seeing how long the velocity is going up or a raycast to see if the player continues to go up but either method can be bypassed easily)
+2. if the vrchat devs with Udon 2 decide to not be inept then actual things can be created! if access & other things happen with Udon 2 this'll get a update accordingly to hopefully make it better!
+3. unfortunately world creators also may not outright ban players from their worlds so this system will detect and allow the creator to either a respawn them after being detected as a cheater or b place them into a per server cheater room to ban players per instance (ik its dumb but its the vrchat devs so what'd you expect from them.)
 
 {Terms}
 
