@@ -185,7 +185,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         }
         else
         {
-            Debug.Log("Anti Cheat Disabled");
             velocity = new Vector3(0, 0, 0); // Resets velocity after being detected so it won't falsely trigger once outside of the detection protection properly
             previousPosition = localPlayerCameraPosition;
         }
