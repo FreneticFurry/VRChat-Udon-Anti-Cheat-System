@@ -17,7 +17,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     [Header("Speed")]
     [Space]
-    [Tooltip("Maximum allowed speed!, this should be higher than the VRCWorld RunSpeed!")]
+    [Tooltip("Maximum allowed speed! this should be higher than the VRCWorld RunSpeed!")]
     public float maxSpeed = 6.5f;
 
     [Header("Height")]
@@ -27,18 +27,18 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     [Header("Flying")]
     [Space]
-    [Tooltip("Radius from the ground before being considered if the player is flying")]
+    [Tooltip("Radius from the ground before considering if the player is flying/ cheating")]
     public float FlyingDistThreshold = 0.5f;
 
-    [Tooltip("Time required to be considered flying")]
+    [Tooltip("Time required to be considered flying/ cheating in the air")]
     public float flyTime = 0.25f;
 
     [Header("Automatic Settings")]
     [Space]
-    [Tooltip("Automatically set the maximum speed based on VRCWorld RunSpeed (may not work well at some speeds)")]
+    [Tooltip("Automatically sets the maximum speed based on VRCWorld RunSpeed (may not work well at some speeds)")]
     public bool autoMaxSpeed = false;
 
-    [Tooltip("Automatically set the Maximum height someone can go before being detected as a cheater")]
+    [Tooltip("Automatically sets the Maximum height someone can go before being detected as a cheater")]
     public bool autoMaxOVRHeight = false;
 
     [Header("Anti Cheat")]
