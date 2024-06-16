@@ -1,5 +1,5 @@
-// VRChat anti cheat system by: FreneticFurry!
 using Unity.Mathematics;
+// VRChat anti cheat system by: FreneticFurry!
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -40,6 +40,11 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     [Tooltip("Automatically set the Maximum height someone can go before being detected as a cheater")]
     public bool autoMaxOVRHeight = false;
+
+    [Header("Anti Cheat")]
+    [Space]
+    [Tooltip("Enables or disables the anti cheat system")]
+    public bool antiCheat = false;
 
     private float ftimer = 0f;
     private float gTimer = 0f;
@@ -86,7 +91,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         Vector3 localPlayerCameraPosition = Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
 
         // Detection Protection
-        if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtection || IsRespawning == false)
+        if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtection || IsRespawning == false || antiCheat == false)
         {
             //Speed Detection
             timer += Time.deltaTime;
