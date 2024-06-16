@@ -1,4 +1,4 @@
-# VRChat-Anti-Cheat-System
+# VRChat-Udon-Anti-Cheat-System
 {Description}
 
 a simple but very good VRChat anti cheat system :)
