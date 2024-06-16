@@ -7,7 +7,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 {
     public Vector3 detectionPoint; // this is the "respawn" point for when someone gets detected as a cheater
     public float detectionProtection = 2; // alot like Minecrafts Spawn protection
-    public float maxSpeed = 5.7f; // maximum allowed speed! VRChat default runspeed is 4 so i ahve it at 5.5 for vr users because sometimes they may move abit irl & arnt trying to cheat (recommended: test this inside the vrchat application because the ClientSim player is different from that actual vrchat player!)
+    public float maxSpeed = 6.4f; // maximum allowed speed! VRChat default runspeed is 4 so i ahve it at 5.5 for vr users because sometimes they may move abit irl & arnt trying to cheat (recommended: test this inside the vrchat application because the ClientSim player is different from that actual vrchat player!)
     public float maxOVRAdvancedHeight = 0.9f;
     public bool autoMaxSpeed = false;
     public bool autoMaxOVRHeight = false;
