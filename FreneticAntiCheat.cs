@@ -25,7 +25,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         }
         if (autoMaxOVRHeight == true)
         {
-            maxOVRAdvancedHeight = Networking.LocalPlayer.GetAvatarEyeHeightAsMeters() * 0.6978f;
+            maxOVRAdvancedHeight = Networking.LocalPlayer.GetAvatarEyeHeightAsMeters() * 0.7f;
             middlepoint = new Vector3(0f, Networking.LocalPlayer.GetAvatarEyeHeightAsMeters() * 0.51f, 0f);
         }
     }
