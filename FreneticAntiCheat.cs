@@ -60,7 +60,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         Networking.LocalPlayer.SetVelocity(Vector3.zero);
                     }
 
-                    if (Networking.LocalPlayer.GetVelocity().y > Networking.LocalPlayer.GetJumpImpulse() * 0.9) // this detects flying "most" of the time but players can still get around it by going slowly so i suggest using colliders to limit areas to prevent them from getting into places they shouldn't.
+                    if (Networking.LocalPlayer.GetVelocity().y > Networking.LocalPlayer.GetJumpImpulse() * 1.075) // this detects flying "most" of the time but players can still get around it by going slowly so i suggest using colliders to limit areas to prevent them from getting into places they shouldn't.
                     {
                         Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                         Networking.LocalPlayer.SetVelocity(Vector3.zero);
