@@ -47,7 +47,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     private Vector3 velocity;
     private float timer = 0f;
     private Vector3 middlepoint = new Vector3(0f, 0.6625f, 0f); // this is for the height of 1.3 so change it accordingly to match the middle of the height!
-    public bool IsRespawning = false;
+    private bool IsRespawning = false;
 
     // attempted calculation (may not work for all speeds or heights so you may want to turn it off.)
     private void Start()
