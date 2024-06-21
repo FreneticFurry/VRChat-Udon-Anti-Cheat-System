@@ -6,7 +6,7 @@
 3. OVR Advanced Settings abuse
 4. Menu Bugging
 5. Sticking heads through walls
-6. Long Armed Avatars (WIP currently)
+6. Long Armed Avatars
 
 this will not prevent someone who is using 3rd party software, that is EAC's job not mine!
 
