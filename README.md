@@ -9,9 +9,8 @@ this will not prevent someone who is using 3rd party software, that is EAC's job
 
 {How To Use}
 
-1. make a new U# script and name it "FreneticAntiCheat" then copy & paste the code into it!
-2. next make a empty game object and place the U# script on it and then configure the settings as you wish :D
-(eventually will be made to work with VRC Creator Companion & have a UnityPackage for easier setup for now its like this because im still adding and updating it pretty frequently)
+1. download from the releases section and place anti cheat prefab into the scene!
+(if i ever figure it out it'll also be able to be used with the VRC Creator Companion)
 
 {Complications}
 
