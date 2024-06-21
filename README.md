@@ -1,9 +1,12 @@
 # VRChat-Udon-Anti-Cheat-System
-{Description}
+{What This protects against}
 
-a simple but very good VRChat anti cheat system :)
-
-this protects against: Collider Flying, Collider Speeding, OVR Advanced Settings Abuse & Sticking heads through walls
+1. Collider Flying
+2. Seat Cheating
+3. OVR Advanced Settings abuse
+4. Menu Bugging
+5. Sticking heads through walls
+6. Long Armed Avatars (WIP currently)
 
 this will not prevent someone who is using 3rd party software, that is EAC's job not mine!
 
