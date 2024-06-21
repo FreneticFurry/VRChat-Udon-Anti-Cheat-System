@@ -34,6 +34,10 @@ things can change at any moment! mainly detection methods so trying to stay up t
 
 this is meant to be pretty easy to comprehend even for someone who doesnt have the most experience with C# so that is why there is alot of comments that tell you what detects what :D
 
+{Planned Future Updates}
+
+1. Editor UI or a method to automatically setup anti-personal mirror & anti-camera to prevent "ESP"ing/ seeing players through walls
+
 {Terms}
 
 you may redistribute this code & even edit it, i only ask that you credit me for the code!
