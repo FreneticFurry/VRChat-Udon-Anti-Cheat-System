@@ -22,3 +22,8 @@ this will not prevent someone who is using 3rd party software, that is EAC's job
 {Terms}
 
 you may redistribute this code & even edit it! i only ask that you credit me for the code :)
+
+{Support}
+
+if you'd like to support my random shananagains then feel free! https://www.patreon.com/freneticfurry
+i intend to keep most if not all of my things free so supporting would be very nice :) 
