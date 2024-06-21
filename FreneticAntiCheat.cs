@@ -142,12 +142,12 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                         Networking.LocalPlayer.SetVelocity(Vector3.zero);
                     }
-                    
+
                     previousPosition = localPlayerCameraPosition;
                 }
             }
 
-            if (allowBhopping == true)
+            if (allowBhopping)
             {
                 if (Networking.LocalPlayer.GetVelocity().y < -0.25f)
                 {
@@ -164,7 +164,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             }
 
             // Flying detection \\
-            if (allowFlight)
+            if (allowFlight == false)
             {
                 if (velocity.y > 0.1f)
                 {
@@ -259,7 +259,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             {
                 if (Vector3.Distance(localPlayerCameraPosition, Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.LeftHand).position) > Networking.LocalPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.6769230769230769f || Vector3.Distance(localPlayerCameraPosition, Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position) > Networking.LocalPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.6769230769230769f)
                 {
-                    Debug.Log("Log Arms");
                     Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
                 }
