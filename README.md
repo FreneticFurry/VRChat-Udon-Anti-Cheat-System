@@ -30,13 +30,15 @@ if pickupable items exist also make sure to mark them properly in the anti cheat
 
 {Do Note}
 
-this is still currently being worked on! so if you do decide to use it right now please be sure to check back semi frequently until its no longer being worked on at least nearly as much! im pushing out alot of updates because im adding & testing then finding things that should be fixed!
+things can change at any moment! mainly detection methods so trying to stay up to date with this is recommended!
+
+this is meant to be pretty easy to comprehend even for someone who doesnt have the most experience with C# so that is why there is alot of comments that tell you what detects what :D
 
 {Terms}
 
-you may redistribute this code & even edit it! i only ask that you credit me for the code :)
+you may redistribute this code & even edit it, i only ask that you credit me for the code!
 
 {Support}
 
 if you'd like to support my random shananagains then feel free! https://www.patreon.com/freneticfurry
-i intend to keep most if not all of my things free so supporting would be very nice :) 
+i intend to keep most if not all of my things free so supporting would be very nice :3
