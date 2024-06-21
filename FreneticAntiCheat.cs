@@ -94,7 +94,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         }
         if (autoMaxSpeed)
         {
-            maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.75f;
+            maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 2f;
         }
         if (autoMaxOVRHeight)
         {
