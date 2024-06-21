@@ -20,6 +20,10 @@ this will not prevent someone who is using 3rd party software, that is EAC's job
 2. if the vrchat devs with Udon 2 decide to not be inept then actual things can be created! if access & other things happen with Udon 2 this'll get a update accordingly to hopefully make it better!
 3. unfortunately world creators also may not outright ban players from their worlds so this system will detect and allow the creator to either a respawn them after being detected as a cheater or b place them into a per server cheater room to ban players per instance (ik its dumb but its the vrchat devs so what'd you expect from them.)
 
+{Do Note}
+
+this is still currently being worked on! so if you do decide to use it right now please be sure to check back semi frequently until its no longer being worked on at least nearly as much! im pushing out alot of updates because im adding & testing then finding things that should be fixed!
+
 {Terms}
 
 you may redistribute this code & even edit it! i only ask that you credit me for the code :)
