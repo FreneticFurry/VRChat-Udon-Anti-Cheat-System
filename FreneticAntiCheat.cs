@@ -1,9 +1,11 @@
-using Unity.Mathematics;
 // VRChat anti cheat system by: FreneticFurry!
+
+using Unity.Mathematics;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
+[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class FreneticAntiCheat : UdonSharpBehaviour
 {
     // thanks to Zerithax for telling me about tooltips :) (i had initially thought it was only for shaders)
@@ -12,7 +14,12 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     [Tooltip("This is the 'respawn' point for when someone gets detected as a cheater")]
     public Vector3 detectionPoint;
 
-    [Tooltip("Similar to Minecraft's Spawn protection")]
+    [Tooltip("Uses a transform as a spawnpoint instead")]
+    public bool enableSpawnPoint = false;
+
+    public GameObject spawnPointLocation;
+
+    [Tooltip("Distance from the detection area a player can be without the anti cheat doing anything")]
     public float detectionProtection = 2;
 
     [Header("Speed")]
@@ -30,43 +37,34 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     [Tooltip("Radius from the ground before considering if the player is flying/ cheating")]
     public float FlyingDistThreshold = 0.5f;
 
-    [Tooltip("Time required to be considered flying/ cheating in the air")]
+    [Tooltip("Time required to be considered flying/ cheating in the air (recommended 0.25)")]
     public float flyTime = 0.25f;
 
     [Header("Automatic Settings")]
     [Space]
     [Tooltip("Automatically sets the maximum speed based on VRCWorld RunSpeed (may not work well at some speeds)")]
-    public bool autoMaxSpeed = false;
+    public bool autoMaxSpeed = true;
 
     [Tooltip("Automatically sets the Maximum height someone can go before being detected as a cheater")]
-    public bool autoMaxOVRHeight = false;
+    public bool autoMaxOVRHeight = true;
+
+    [Tooltip("Automatically set the maximum distance from the ground before considering that someone might be flying")]
+    public bool autoFlyingThreshold = true;
 
     [Header("Anti Cheat")]
     [Space]
     [Tooltip("Enables or disables the anti cheat system")]
-    public bool antiCheat = false;
+    public bool antiCheat = true;
+
+    [Tooltip("Tells the system that the localplayer is teleporting or not & will allow them to teleport properly")]
+    public bool isTeleporting = false;
 
     private float ftimer = 0f;
     private float gTimer = 0f;
     private Vector3 previousPosition;
     private Vector3 velocity;
     private float timer = 0f;
-    private Vector3 middlepoint = new Vector3(0f, 0.6625f, 0f); // this is for the height of 1.3 so change it accordingly to match the middle of the height!
-    private bool IsRespawning = false;
-
-    // attempted calculation (may not work for all speeds or heights so you may want to turn it off.)
-    private void Start()
-    {
-        if (autoMaxSpeed == true)
-        {
-            maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.625f;
-        }
-        if (autoMaxOVRHeight == true)
-        {
-            maxOVRAdvancedHeight = Networking.LocalPlayer.GetAvatarEyeHeightAsMeters() * 0.7f;
-            middlepoint = new Vector3(0f, Networking.LocalPlayer.GetAvatarEyeHeightAsMeters() * 0.51f, 0f);
-        }
-    }
+    private Vector3 middlepoint = new Vector3(0f, 0.65f, 0f); // this should always be half of the maximum allowed height eg max height being 1.3 = 0.65!
 
     // Respawning
 
@@ -74,14 +72,14 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     {
         if (player.isLocal)
         {
-            IsRespawning = true;
-            SendCustomEventDelayedSeconds("Respawned", 0.5f); // thanks to Zerithax for also suggesting to do this (would've done yet another wait in a loop probably)
+            isTeleporting = true;
+            SendCustomEventDelayedSeconds("Respawned", 0.1f); // thanks to Zerithax for also suggesting to do this (would've done yet another wait in a loop probably)
         }
     }
 
     public void Respawned()
     {
-        IsRespawning = false;
+        isTeleporting = false;
     }
 
     // Anti Cheat System
@@ -90,8 +88,31 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         // Variables
         Vector3 localPlayerCameraPosition = Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
 
+        // Automatic system
+
+        if (autoFlyingThreshold)
+        {
+            FlyingDistThreshold = Networking.LocalPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.9615385f;
+        }
+        if (autoMaxSpeed)
+        {
+            maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.635f;
+        }
+        if (autoMaxOVRHeight)
+        {
+            float height = Networking.LocalPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f;
+            maxOVRAdvancedHeight = height * 1.4f;
+            middlepoint = new Vector3(0f, height, 0f);
+        }
+
+        // spawn point
+        if (enableSpawnPoint)
+        {
+            detectionPoint = spawnPointLocation.transform.position;
+        }
+
         // Detection Protection
-        if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtection || IsRespawning == false || antiCheat == false)
+        if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtection && isTeleporting == false && antiCheat == true)
         {
             //Speed Detection
             timer += Time.deltaTime;
@@ -109,12 +130,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
                 }
 
-                if (Networking.LocalPlayer.GetVelocity().y > Networking.LocalPlayer.GetJumpImpulse())
-                {
-                    Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
-                    Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                }
-
                 previousPosition = localPlayerCameraPosition;
             }
 
@@ -126,11 +141,11 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 gTimer = 0f;
 
                 RaycastHit hit;
-                if (Physics.Raycast(Networking.LocalPlayer.GetPosition() + new Vector3(0, -0.5f, 0), Vector3.down, out hit, math.INFINITY))
+                if (Physics.Raycast(Networking.LocalPlayer.GetPosition() + middlepoint, Vector3.down, out hit, math.INFINITY, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player")))))
                 {
-                    if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + new Vector3(0, -0.5f, 0), hit.point) > FlyingDistThreshold)
+                    if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + middlepoint, hit.point) > FlyingDistThreshold)
                     {
-                        Debug.DrawLine(Networking.LocalPlayer.GetPosition() + new Vector3(0, -0.5f, 0), hit.point, Color.red); // Debug for Unity!
+                        Debug.DrawLine(Networking.LocalPlayer.GetPosition() + middlepoint, hit.point, Color.red); // Debug for Unity, wont do anything in the VRC client!
 
                         if (ftimer >= flyTime)
                         {
@@ -157,7 +172,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             }
 
             // Collider detection (this likely won't affect desktop players but in some cases can still affect them such as if you make bounding boxes/triggers)
-            Collider[] colliders = Physics.OverlapSphere(localPlayerCameraPosition, 0.1f);
+            Collider[] colliders = Physics.OverlapSphere(localPlayerCameraPosition, 0.1f, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player")))); // using layers as a failsafe for incase it somehow tries to trigger with another player (though it shouldn't)
 
             foreach (Collider collider in colliders)
             {
@@ -167,13 +182,13 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     {
                         switch (collider.gameObject.name)
                         {
-                            case "Player":
-                            case "player":
-                            case "Bounding Box":
-                            case "bounding box": // Excluded colliders so you can still use triggers or make triggers with colliders
+                            case "ExampleCollider":
+                            case "examplecollider":
+                            case "Bounding Box Example":
+                            case "bounding box second Example": // if a object has any of these names & a collider it'll get ignored & allow them to b used for things like triggers & other things
                                 break;
                             default:
-                                Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
+                                Networking.LocalPlayer.TeleportTo(Networking.LocalPlayer.GetPosition() - localPlayerCameraPosition * 0.05f, Networking.LocalPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                                 Networking.LocalPlayer.SetVelocity(Vector3.zero);
                                 break;
                         }
@@ -190,7 +205,8 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         }
         else
         {
-            velocity = new Vector3(0, 0, 0); // Resets velocity after being detected so it won't falsely trigger once outside of the detection protection properly
+            // reset for when the anti cheat is turned off so when it turns back on it wont falsely trigger
+            velocity = new Vector3(0, 0, 0);
             previousPosition = localPlayerCameraPosition;
         }
     }
