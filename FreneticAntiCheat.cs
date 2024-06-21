@@ -1,6 +1,4 @@
 // VRChat anti cheat system by: FreneticFurry!
-
-using Unity.Mathematics;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
