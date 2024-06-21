@@ -10,6 +10,7 @@ this will not prevent someone who is using 3rd party software, that is EAC's job
 {How To Use}
 
 1. download from the releases section and place anti cheat prefab into the scene!
+2. ensure that the "Enforce Player Height" is turned on in VRCWorld
 
 (if i ever figure it out it'll also be able to be used with the VRC Creator Companion)
 
