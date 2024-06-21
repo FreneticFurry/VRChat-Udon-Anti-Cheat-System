@@ -142,18 +142,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                         Networking.LocalPlayer.SetVelocity(Vector3.zero);
                     }
-                    if (new Vector3(velocity.x, 0f, velocity.z).magnitude > maxSpeed)
-                    {
-                        if (maxSpeed >= 6.3)
-                        {
-                            Debug.Log("Upper speed triggered");
-                        }
-                        else
-                        {
-                            Debug.Log("Lower speed triggered");
-                        }
-                    }
-
+                    
                     previousPosition = localPlayerCameraPosition;
                 }
             }
