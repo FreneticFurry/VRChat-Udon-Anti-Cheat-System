@@ -138,7 +138,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 ftimer += Time.deltaTime;
                 gTimer = 0f;
 
-                Collider[] Colliders = Physics.OverlapSphere(Networking.LocalPlayer.GetPosition() + new Vector3(0,-FlyingDistThreshold-0.15f, 0), FlyingDistThreshold, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player"))));
+                Collider[] Colliders = Physics.OverlapSphere(Networking.LocalPlayer.GetPosition() + new Vector3(0, -FlyingDistThreshold - 0.15f, 0), FlyingDistThreshold, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player"))));
 
                 if (Colliders.Length == 0)
                 {
@@ -166,15 +166,15 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             }
 
             // Collider detection (this likely won't affect desktop players but in some cases can still affect them such as if you make bounding boxes/triggers)
-            Collider[] colliders = Physics.OverlapSphere(localPlayerCameraPosition, 0.1f, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player")))); // using layers as a failsafe for incase it somehow tries to trigger with another player (though it shouldn't)
+            Collider[] colliders = Physics.OverlapSphere(localPlayerCameraPosition, 0.1f, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player"))));
 
             foreach (Collider collider in colliders)
             {
                 if (collider != null)
                 {
-                    if (Vector3.Distance(localPlayerCameraPosition, collider.ClosestPointOnBounds(localPlayerCameraPosition)) <= 0)
+                    if (Vector3.Distance(localPlayerCameraPosition, collider.ClosestPointOnBounds(localPlayerCameraPosition)) <= 0.1f) // Using 0.1f as the threshold, same as the OverlapSphere radius
                     {
-                        switch (collider.gameObject.name)
+                        switch (collider.gameObject.name.ToLower())
                         {
                             case "ExampleCollider":
                             case "examplecollider":
@@ -182,8 +182,8 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                             case "bounding box second Example": // if a object has any of these names & a collider it'll get ignored & allow them to b used for things like triggers & other things
                                 break;
                             default:
-                                Networking.LocalPlayer.TeleportTo(Networking.LocalPlayer.GetPosition() - localPlayerCameraPosition * 0.05f, Networking.LocalPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
-                                Networking.LocalPlayer.SetVelocity(Vector3.zero);
+                                float push = 0.1f - Vector3.Distance(localPlayerCameraPosition, collider.ClosestPointOnBounds(localPlayerCameraPosition)); // instead of placing the player back to detection area pushing them away would be better because someone in vr may mistakenly put their head in or to close to the wall so this acts to forgive that :)
+                                Networking.LocalPlayer.TeleportTo(Networking.LocalPlayer.GetPosition() + (localPlayerCameraPosition - collider.ClosestPointOnBounds(localPlayerCameraPosition)).normalized * push, Networking.LocalPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                                 break;
                         }
                     }
