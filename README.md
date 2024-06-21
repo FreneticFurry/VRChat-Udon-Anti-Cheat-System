@@ -15,6 +15,9 @@ this will not prevent someone who is using 3rd party software, that is EAC's job
 1. download from the releases section and place anti cheat prefab into the scene!
 2. ensure that the "Enforce Player Height" is turned on in VRCWorld
 
+if seats exist then make sure to have a script to check when the player wants to enter and exit the seat in question as it is considered teleporting when using a seat!
+if pickupable items exist also make sure to mark them properly in the anti cheat so they wont collide with the players camera (unless you want them to collide then just exclude them)
+
 (if i ever figure it out it'll also be able to be used with the VRC Creator Companion)
 
 {Complications}
