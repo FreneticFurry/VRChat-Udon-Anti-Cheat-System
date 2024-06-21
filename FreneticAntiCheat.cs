@@ -44,6 +44,9 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     [Tooltip("Automatically set the maximum distance from the ground before considering that someone might be flying")]
     public bool autoFlyingThreshold = true;
 
+    [Tooltip("Tells the anti cheat to automatically ignore pickupable items!")]
+    public bool autoIgnorePickupables = true;
+
     [Header("Anti Cheat")]
     [Space]
     [Tooltip("Enables or Disables the anti cheat system")]
@@ -155,18 +158,18 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 }
                 else
                 {
-                    maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.7f;
+                    maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.8f;
                 }
             }
             else
             {
-                maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.7f;
+                maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.8f;
             }
 
             // Flying detection \\
             if (allowFlight == false)
             {
-                if (velocity.y > 0.1f)
+                if (velocity.y > 0.1f || velocity.y >= -0.25f && velocity.y <= -0.17f)
                 {
                     ftimer += Time.deltaTime;
                     gTimer = 0f;
@@ -223,19 +226,28 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
                 foreach (Collider collider in colliders)
                 {
-                    if (collider != null)
+                    if (collider != null && Vector3.Distance(localPlayerCameraPosition, collider.ClosestPointOnBounds(localPlayerCameraPosition)) <= 0.1f)
                     {
-                        if (Vector3.Distance(localPlayerCameraPosition, collider.ClosestPointOnBounds(localPlayerCameraPosition)) <= 0.1f)
+                        bool skipCollider = false;
+
+                        if (autoIgnorePickupables)
+                        {
+                            if (collider.GetComponentInParent<VRC.SDK3.Components.VRCPickup>() != null)
+                            {
+                                skipCollider = true;
+                            }
+                        }
+
+                        if (!skipCollider)
                         {
                             switch (collider.gameObject.name.ToLower())
                             {
-                                case "ExampleCollider":
                                 case "examplecollider":
-                                case "Bounding Box Example":
-                                case "bounding box second Example": // if a object has any of these names & a collider it'll get ignored & allow them to b used for things like triggers & other things
+                                case "bounding box example":
+                                case "bounding box second example":
                                     break;
                                 default:
-                                    float push = 0.1f - Vector3.Distance(localPlayerCameraPosition, collider.ClosestPointOnBounds(localPlayerCameraPosition)); // instead of placing the player back to detection area pushing them away would be better because someone in vr may mistakenly put their head in or to close to the wall so this acts to forgive that :)
+                                    float push = 0.1f - Vector3.Distance(localPlayerCameraPosition, collider.ClosestPointOnBounds(localPlayerCameraPosition));
                                     Networking.LocalPlayer.TeleportTo(Networking.LocalPlayer.GetPosition() + (localPlayerCameraPosition - collider.ClosestPointOnBounds(localPlayerCameraPosition)).normalized * push, Networking.LocalPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                                     break;
                             }
