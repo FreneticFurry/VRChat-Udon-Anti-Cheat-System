@@ -92,11 +92,11 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
         if (autoFlyingThreshold)
         {
-            FlyingDistThreshold = Networking.LocalPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.9615385f;
+            FlyingDistThreshold = Networking.LocalPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.3076923076923077f;
         }
         if (autoMaxSpeed)
         {
-            maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.635f;
+            maxSpeed = Networking.LocalPlayer.GetRunSpeed() * 1.75f;
         }
         if (autoMaxOVRHeight)
         {
@@ -140,24 +140,20 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 ftimer += Time.deltaTime;
                 gTimer = 0f;
 
-                RaycastHit hit;
-                if (Physics.Raycast(Networking.LocalPlayer.GetPosition() + middlepoint, Vector3.down, out hit, math.INFINITY, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player")))))
-                {
-                    if (Vector3.Distance(Networking.LocalPlayer.GetPosition() + middlepoint, hit.point) > FlyingDistThreshold)
-                    {
-                        Debug.DrawLine(Networking.LocalPlayer.GetPosition() + middlepoint, hit.point, Color.red); // Debug for Unity, wont do anything in the VRC client!
+                Collider[] Colliders = Physics.OverlapSphere(Networking.LocalPlayer.GetPosition() + new Vector3(0,-FlyingDistThreshold-0.15f, 0), FlyingDistThreshold, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal") & ~(1 << LayerMask.NameToLayer("Player"))));
 
-                        if (ftimer >= flyTime)
-                        {
-                            Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
-                            Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                            ftimer = 0f;
-                        }
-                    }
-                    else
+                if (Colliders.Length == 0)
+                {
+                    if (ftimer >= flyTime)
                     {
+                        Networking.LocalPlayer.TeleportTo(detectionPoint, new Quaternion(0, 0, 0, 0), VRC_SceneDescriptor.SpawnOrientation.Default, false);
+                        Networking.LocalPlayer.SetVelocity(Vector3.zero);
                         ftimer = 0f;
                     }
+                }
+                else
+                {
+                    ftimer = 0f;
                 }
             }
             else
