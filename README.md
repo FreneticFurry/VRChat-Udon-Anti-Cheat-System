@@ -3,7 +3,7 @@
 
 1. Collider Flying
 2. Seat Cheating
-3. OVR Advanced Settings abuse
+3. OVR Advanced & gogo loco abuse
 4. Menu Bugging
 5. Sticking heads through walls
 6. Long Armed Avatars
