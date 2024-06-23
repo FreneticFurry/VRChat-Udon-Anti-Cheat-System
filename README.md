@@ -3,13 +3,11 @@
 
 Q. why is this being discontinued so early?
 
-A. i was unaware of how disgustingly bad the vrchat team actually is.
+A. i dont feel comfortable developing for vrchat at this moment due to finding out that a quite a few of the developers/ moderators are pedofiles
 
-this has been discontinued & will not get anymore updates or further work for the time being, it could & may get work in the future.
-the reason why i feel and am currently stopping all my work on the VRChat platform is due to the sippbox & fpaul situation, they only act NOW after a video was made on it and it gained alot of eyes, who knows how many more of these disgusting individuals are a dev or a mod for vrchat (these people cannot be trusted.)
-if you wish to get more information then this video explains it very well: https://www.youtube.com/watch?v=psa8yTsmCqs&ab_channel=BrandonFM
+for the time being this wont be worked on by me along with anything else i worked on untill i may feel abit more comfortable with doing things on vrchat
 
-if you still feel "safe" playing vrchat & even developing you may ofc update this code and do more with it but be warnned about how bad the vrchat team actually is.
+i was already aware that the playerbase holds alot of pedofiles & other types of disgusting things but i at least hoped that the developers/ mods themselves wouldn't be apart of that, they dont even moderate it & it even happens publicly, so ofc i am not comfortable with that.
 
 {What This protects against}
 
