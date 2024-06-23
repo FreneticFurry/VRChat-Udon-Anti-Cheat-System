@@ -1,13 +1,11 @@
 # VRChat-Udon-Anti-Cheat-System
-{Discontinued.. at least for now}
+{VRChat general warning}
 
-Q. why is this being discontinued so early?
+VRChat hosts alot of things, pedofiles/ groomers being one of them and 2 of the Moderators and 1 of the developers have done things that're quite bad
 
-A. i dont feel comfortable developing for vrchat at this moment due to finding out that a quite a few of the developers/ moderators are pedofiles
+2 sippbox & fpaul being pedofiles and 1 being tupper who invited a 14 year old to a party with open drugs and alcohol (if this was to groom said child or not is not exactly known afaik so be aware ig)
 
-for the time being this wont be worked on by me along with anything else i worked on untill i may feel abit more comfortable with doing things on vrchat
-
-i was already aware that the playerbase holds alot of pedofiles & other types of disgusting things but i at least hoped that the developers/ mods themselves wouldn't be apart of that, they dont even moderate it & it even happens publicly, so ofc i am not comfortable with that.
+if you feel "safe" with these people running vrchat then thats you but i myself dont but im still gonna choose to develop on vrchat.. at least for the time being!
 
 {What This protects against}
 
