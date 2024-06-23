@@ -2,6 +2,7 @@
 {Discontinued.. at least for now}
 
 Q. why is this being discontinued so early?
+
 A. i was unaware of how disgustingly bad the vrchat team actually is.
 
 this has been discontinued & will not get anymore updates or further work for the time being, it could & may get work in the future.
