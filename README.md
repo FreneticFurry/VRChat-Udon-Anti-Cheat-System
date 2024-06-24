@@ -1,11 +1,8 @@
 # VRChat-Udon-Anti-Cheat-System
 {VRChat general warning}
 
-VRChat hosts alot of things, pedofiles/ groomers being one of them and 2 of the Moderators and 1 of the developers have done things that're quite bad
-
-2 sippbox & fpaul being pedofiles and 1 being tupper who invited a 14 year old to a party with open drugs and alcohol (if this was to groom said child or not is not exactly known afaik so be aware ig)
-
-if you feel "safe" with these people running vrchat then thats you but i myself dont but im still gonna choose to develop on vrchat.. at least for the time being!
+as a general notice: i suggest to avoid talking with/ interesting with the VRChat team, multiple of them have been shown to be a pedofile & who knows how many more exist in their team
+none the less! happy Udoning :)
 
 {What This protects against}
 
