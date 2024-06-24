@@ -42,6 +42,10 @@ if pickupable items exist also make sure to mark them properly in the anti cheat
 
 you may redistribute this code & even edit it, i only ask that you credit me for the code!
 
+{Contacting}
+
+if you'd like to contribute/ help with this project then feel free! my discord is: freneticfurry    im very active and will most likely respond decently quickly! so dont feel shy to send a quick dm as im always down for a chat
+
 {Support}
 
 if you'd like to support my random shananagains then feel free! https://www.patreon.com/freneticfurry
