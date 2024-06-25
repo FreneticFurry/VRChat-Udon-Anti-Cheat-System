@@ -1,4 +1,5 @@
 // VRChat anticheat by: Frenetic Furry!
+
 using UdonSharp;
 using Unity.Mathematics;
 using UnityEngine;
@@ -128,7 +129,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 isDetected();
             }
 
-            maxSpeed = localPlayer.GetRunSpeed() * (allowBhopping && localPlayer.GetVelocity().y < -0.25f || (localPlayer.GetVelocity().y > 0.25f) ? 1.5f : 1.3f);
+            maxSpeed = localPlayer.GetRunSpeed() * (allowBhopping && localPlayer.GetVelocity().y < -0.25f || (localPlayer.GetVelocity().y > 0.25f) ? 1.6f : 1.35f);
         }
         else
         { maxSpeed = math.INFINITY; }
