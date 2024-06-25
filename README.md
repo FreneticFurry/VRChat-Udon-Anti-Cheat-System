@@ -50,3 +50,8 @@ if you'd like to contribute/ help with this project then feel free! my discord i
 
 if you'd like to support my random shananagains then feel free! https://www.patreon.com/freneticfurry
 i intend to keep most if not all of my things free so supporting would be very nice :3
+
+{Credit}
+
+- RyuukaVR: some bug finding
+- Zerithax: some code suggestions
