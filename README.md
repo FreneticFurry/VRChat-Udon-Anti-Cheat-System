@@ -36,7 +36,7 @@ if pickupable items exist also make sure to mark them properly in the anti cheat
 {Planned Future Updates}
 
 1. Editor UI or a method to automatically setup anti-personal mirror & anti-camera to prevent "ESP"ing/ seeing players through walls
-2. Overhauling some detection methods with some better & newer ones (should happen sometime soon?)
+2. -Overhauling some detection methods with some better & newer ones (should happen sometime soon?)-
 
 {Terms}
 
