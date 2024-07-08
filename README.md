@@ -1,7 +1,7 @@
 # VRChat-Udon-Anti-Cheat-System
 {VRChat general warning}
 
-as a general notice: i suggest to avoid talking with/ interesting with the VRChat team, multiple of them have been shown to be a pedofile & who knows how many more exist in their team
+as a general notice: i suggest to avoid talking with/ interacting with the VRChat team, multiple of the moderators have been shown be pedofiles and its unknown how many more of them are also pedofiles.
 none the less! happy Udoning :)
 
 {What This protects against}
