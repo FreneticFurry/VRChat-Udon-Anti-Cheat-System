@@ -6,7 +6,8 @@ using VRC.SDKBase;
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class FreneticAntiCheat : UdonSharpBehaviour
 {
-    [Header("Detection")] [Space]
+    [Header("Detection")]
+    [Space]
     [Tooltip("This is the 'respawn' point for when someone gets detected as a cheater")]
     public Vector3 detectionPoint;
     [Tooltip("Uses a transform as a spawnpoint instead")]
@@ -16,20 +17,24 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public float detectionProtection = 2;
     [Tooltip("Allowed Colliders to be used for other things such as Triggers (not case sensitive & separated with ,)")]
     public string allowedColliderNames = "examplecollider, bounding box example, bounding box second example";
-    [Header("Height")] [Space]
+    [Header("Height")]
+    [Space]
     [Tooltip("Maximum allowed height (ensure that 'Always Enforce Height' is turned on.)")]
     public float maxOVRAdvancedHeight = 0.9f;
-    [Header("Automatic Settings")] [Space]
+    [Header("Automatic Settings")]
+    [Space]
     [Tooltip("Automatically sets the maximum height allowed!")]
     public bool autoMaxOVRHeight = true;
     [Tooltip("Tells the anti cheat to automatically ignore pickupable items!")]
     public bool autoIgnorePickupables = true;
-    [Header("Anti Cheat")] [Space]
+    [Header("Anti Cheat")]
+    [Space]
     [Tooltip("Enables or Disables the anti cheat system")]
     public bool antiCheat = true;
     [Tooltip("Tells the system that the localplayer is teleporting or not & will allow them to teleport properly")]
     public bool isTeleporting = false;
-    [Header("Debugging")] [Space]
+    [Header("Debugging")]
+    [Space]
     [Tooltip("Allow or disallow Bhopping! (Recommended: true unless players cant jump & wont be falling)")]
     public bool allowBhopping = true;
     [Tooltip("Allow or disallow Long reaching!")]
@@ -42,7 +47,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public bool allowColliderView = false;
     [Tooltip("Allow or disallow players to alter their speed with things such as colliders or OVR advanced")]
     public bool allowSpeedManipulation = false;
-    [Tooltip("Enable or disable printing detection messages to the console")]    
+    [Tooltip("Enable or disable printing detection messages to the console")]
     public bool printDetection = true;
 
     private string[] funnycolliders;
@@ -174,50 +179,62 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     public void CheckViewing()
     {
-        Collider[] colliders = Physics.OverlapSphere(camerapos, 0.1f, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal")) & ~(1 << LayerMask.NameToLayer("Player")));
-
-        foreach (Collider collider in colliders)
+        if (AC() & !allowColliderView)
         {
-            if (collider != null && collider.gameObject != null)
+            Collider[] colliders = Physics.OverlapSphere(camerapos, 0.1f, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal")) & ~(1 << LayerMask.NameToLayer("Player")));
+
+            foreach (Collider collider in colliders)
             {
-                bool isAllowed = false;
-                for (int i = 0; i < funnycolliders.Length; i++)
+                if (collider != null && collider.gameObject != null)
                 {
-                    if (funnycolliders[i] == collider.gameObject.name.ToLower().Trim())
+                    bool isAllowed = false;
+
+                    if (collider.GetComponent<VRCStation>() != null ||
+                        (collider.transform.parent != null && collider.transform.parent.GetComponent<VRCStation>() != null))
                     {
                         isAllowed = true;
-                        break;
-                    }
-                }
-
-                if (!isAllowed && autoIgnorePickupables)
-                {
-                    VRC.SDK3.Components.VRCPickup pickup = collider.GetComponent<VRC.SDK3.Components.VRCPickup>();
-                    if (pickup == null && collider.transform.parent != null)
-                    {
-                        pickup = collider.transform.parent.GetComponentInParent<VRC.SDK3.Components.VRCPickup>();
-                    }
-                    if (pickup != null)
-                    {
-                        isAllowed = true;
-                    }
-                }
-
-                if (!isAllowed)
-                {
-                    PTC("Collider Viewing");
-                    Vector3 reflection = Vector3.Reflect(localPlayer.GetVelocity(), (camerapos - collider.ClosestPoint(camerapos)).normalized) * 0.8f;
-                    reflection = reflection.magnitude < 0.5f ? reflection.normalized * 2f : reflection;
-                    localPlayer.SetVelocity(reflection);
-                    if (localPlayer.IsUserInVR())
-                    {
-                        localPlayer.TeleportTo(localPlayer.GetPosition(), localPlayer.GetRotation());
                     }
                     else
                     {
-                        localPlayer.TeleportTo(localPlayer.GetPosition() + (camerapos - collider.ClosestPoint(camerapos)).normalized * 0.045f, localPlayer.GetRotation());
+                        for (int i = 0; i < funnycolliders.Length; i++)
+                        {
+                            if (funnycolliders[i] == collider.gameObject.name.ToLower().Trim())
+                            {
+                                isAllowed = true;
+                                break;
+                            }
+                        }
+
+                        if (!isAllowed && autoIgnorePickupables)
+                        {
+                            VRC.SDK3.Components.VRCPickup pickup = collider.GetComponent<VRC.SDK3.Components.VRCPickup>();
+                            if (pickup == null && collider.transform.parent != null)
+                            {
+                                pickup = collider.transform.parent.GetComponentInParent<VRC.SDK3.Components.VRCPickup>();
+                            }
+                            if (pickup != null)
+                            {
+                                isAllowed = true;
+                            }
+                        }
                     }
-                    break;
+
+                    if (!isAllowed)
+                    {
+                        PTC("Collider Viewing");
+                        Vector3 reflection = Vector3.Reflect(localPlayer.GetVelocity(), (camerapos - collider.ClosestPoint(camerapos)).normalized) * 0.8f;
+                        reflection = reflection.magnitude < 0.5f ? reflection.normalized * 2f : reflection;
+                        localPlayer.SetVelocity(reflection);
+                        if (localPlayer.IsUserInVR())
+                        {
+                            localPlayer.TeleportTo(localPlayer.GetPosition(), localPlayer.GetRotation());
+                        }
+                        else
+                        {
+                            localPlayer.TeleportTo(localPlayer.GetPosition() + (camerapos - collider.ClosestPoint(camerapos)).normalized * 0.045f, localPlayer.GetRotation());
+                        }
+                        break;
+                    }
                 }
             }
         }
@@ -312,6 +329,14 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public void TeleportPlayer(Vector3 pos, Quaternion rot, VRC_SceneDescriptor.SpawnOrientation sori, bool smooth) // Example usage: antiCheat.TeleportPlayer(Position, Rotation, SpawnOrientation, Smooth), antiCheat.TeleportPlayer(new Vector3(0,5,0), Quaternion.identity, VRC_SceneDescriptor.SpawnOrientation.Default, false);
     {
         localPlayer.TeleportTo(pos, rot, sori, smooth);
+        spt = math.INFINITY;
+        isTeleporting = true;
+        SendCustomEventDelayedSeconds(nameof(Teleported), 0.25f);
+    }
+
+    public void Seat()
+    {
+        PTC("VRCStation");
         spt = math.INFINITY;
         isTeleporting = true;
         SendCustomEventDelayedSeconds(nameof(Teleported), 0.25f);
