@@ -1,4 +1,7 @@
-V0.0.31 (Latest)
+V0.0.032 (Latest)
+- Added Seat Support & Seat code
+
+V0.0.31
 - Added proper support for SetVelocity & TeleportTo
 - Optimization
 - Changed Collider Viewing to act abit differently
