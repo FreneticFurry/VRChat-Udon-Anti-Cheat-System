@@ -1,0 +1,11 @@
+V0.0.31 (Latest)
+- Added proper support for SetVelocity & TeleportTo
+- Optimization
+- Changed Collider Viewing to act abit differently
+- Changed Avatar Collider Flying Detection to be instant (popular requested change)
+- Fixed Long arms not updating fast enough (when crouching fully it would false flag but only when getting up)
+- Added Sudden Speed Detection to Anti Speed Manipulation
+
+{Inital Changelog creation}
+
+(Previous Changes beyond V0.0.31 wont be added because im just lazy :D)
