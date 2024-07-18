@@ -36,7 +36,14 @@ if pickupable items exist also make sure to mark them properly in the anti cheat
 {Planned Future Updates}
 
 1. Editor UI or a method to automatically setup anti-personal mirror & anti-camera to prevent "ESP"ing/ seeing players through walls
-2. ~Overhauling some detection methods with some better & newer ones (should happen sometime soon?)~
+2. ~Overhauling some detection methods with some better & newer ones (should happen sometime soon?)~ (done)
+3. adding detection for: Player Blocking, if a player blocks another then they cannot see each other and in something like a game world that makes things very difficult so making players visible when blocked will surfice!
+
+{Known Issues}
+
+1. the anti avatar collider detection will detect things like Menus & personal mirrors... this is fine because in order for this to happen a player must intentionally place a menu or mirror at their feet so if anyone does this then its entirely their own fault!
+2. potentially some weird cases where Speed Manipulation detection will false flag (though its unlikely/ shouldn't...)
+3. Using VRChat's native methods of TeleportTo & SetVelocity dont work! instead use the new function: antiCheat.TeleportPlayer(Position, Rotation, SpawnOrientation, Smooth), antiCheat.SetPlayerVelocity() (until vrchat adds proper hooking i cant do anything about it besides just remaking the functions themselves like this!)
 
 {Terms}
 
