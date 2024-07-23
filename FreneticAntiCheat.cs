@@ -196,9 +196,10 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     }
                     else
                     {
+                        string colliderName = collider.gameObject.name.ToLower().Trim();
                         for (int i = 0; i < funnycolliders.Length; i++)
                         {
-                            if (funnycolliders[i] == collider.gameObject.name.ToLower().Trim())
+                            if (colliderName.StartsWith(funnycolliders[i].ToLower().Trim()))
                             {
                                 isAllowed = true;
                                 break;
