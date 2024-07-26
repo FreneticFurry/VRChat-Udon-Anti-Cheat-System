@@ -1,0 +1,4 @@
+Current Known Bugs
+
+1. Sudden speed is to low and triggers improperly
+2. using Ragdolls causes a collider to spawn and makes the anti cheat think that the player is attempting to fly
