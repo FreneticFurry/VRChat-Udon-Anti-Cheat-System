@@ -61,4 +61,3 @@ i intend to keep most if not all of my things free so supporting would be very n
 {Credit}
 
 - RyuukaVR: some bug finding
-- Zerithax: some code suggestions
