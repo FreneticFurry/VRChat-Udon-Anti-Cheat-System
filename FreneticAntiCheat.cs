@@ -63,7 +63,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             detectionPoint = spawnPointLocation.transform.position;
 
         SendCustomEventDelayedSeconds(nameof(CheckStuff), 0.5f);
-        SendCustomEventDelayedSeconds(nameof(CheckOVRAdvanced), 15f);
     }
 
     void FixedUpdate()
@@ -190,27 +189,21 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     lt = Time.time;
                 }
             }
+
+            if (autoMaxOVRHeight)
+            {
+                maxOVRAdvancedHeight = (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f) * 1.4f;
+                middlepoint = new Vector3(0f, (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f), 0f);
+            }
+
+            if (!allowOVRAdvanced && Vector3.Distance(localPlayer.GetPosition() + middlepoint, camerapos) >= maxOVRAdvancedHeight)
+            {
+                PTC("OVR/ Gogo Loco");
+                OVR_GoGoLocoAttempts += 1;
+                Detected();
+            }
         }
-
-            SendCustomEventDelayedSeconds(nameof(CheckStuff), 0f);
-    }
-
-    public void CheckOVRAdvanced()
-    {
-        if (autoMaxOVRHeight)
-        {
-            maxOVRAdvancedHeight = (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f) * 1.4f;
-            middlepoint = new Vector3(0f, (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f), 0f);
-        }
-
-        if (AC() && !allowOVRAdvanced && Vector3.Distance(localPlayer.GetPosition() + middlepoint, camerapos) >= maxOVRAdvancedHeight)
-        {
-            PTC("OVR/ Gogo Loco");
-            OVR_GoGoLocoAttempts += 1;
-            Detected();
-        }
-
-        SendCustomEventDelayedSeconds(nameof(CheckOVRAdvanced), 0f);
+        SendCustomEventDelayedSeconds(nameof(CheckStuff), 0f);
     }
 
     private bool IsAllowedCollider(Collider collider)
