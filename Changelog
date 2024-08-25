@@ -1,6 +1,11 @@
-just a update note: im currently working on some other projects right now! but when i am done with them the anti cheat will get some really good updates & more detection cases!
+V0.0.034 (Latest)
+- Removed: "Sudden Speed" due to it not actually being needed and being more problematic then not
+- Performance Optimization's
+- Removed: Tooltips due to popular developer vote
+- Added: Attempt Counters so other code may read them and know that a player has attempted to do something x amount of times
+- Combined things together instead of having them all as individual functions
 
-V0.0.033 (Latest)
+V0.0.033
 - Added better collider support
 
 V0.0.032
