@@ -1,93 +1,70 @@
 using UdonSharp;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using VRC.SDKBase;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class FreneticAntiCheat : UdonSharpBehaviour
 {
     [Header("Detection")]
-    [Space]
-    [Tooltip("This is the 'respawn' point for when someone gets detected as a cheater")]
     public Vector3 detectionPoint;
-    [Tooltip("Uses a transform as a spawnpoint instead")]
     public bool enableSpawnPoint = false;
     public GameObject spawnPointLocation;
-    [Tooltip("Distance from the detection area a player can be without the anti cheat doing anything")]
     public float detectionProtection = 2;
-    [Tooltip("Allowed Colliders to be used for other things such as Triggers (not case sensitive & separated with ,)")]
     public string allowedColliderNames = "examplecollider, bounding box example, bounding box second example";
+
     [Header("Height")]
-    [Space]
-    [Tooltip("Maximum allowed height (ensure that 'Always Enforce Height' is turned on.)")]
     public float maxOVRAdvancedHeight = 0.9f;
+
     [Header("Automatic Settings")]
-    [Space]
-    [Tooltip("Automatically sets the maximum height allowed!")]
     public bool autoMaxOVRHeight = true;
-    [Tooltip("Tells the anti cheat to automatically ignore pickupable items!")]
     public bool autoIgnorePickupables = true;
+
     [Header("Anti Cheat")]
-    [Space]
-    [Tooltip("Enables or Disables the anti cheat system")]
     public bool antiCheat = true;
-    [Tooltip("Tells the system that the localplayer is teleporting or not & will allow them to teleport properly")]
     public bool isTeleporting = false;
+    public bool isRagdoll = false;
+
     [Header("Debugging")]
-    [Space]
-    [Tooltip("Allow or disallow Bhopping! (Recommended: true unless players cant jump & wont be falling)")]
     public bool allowBhopping = true;
-    [Tooltip("Allow or disallow Long reaching!")]
     public bool allowLongArms = false;
-    [Tooltip("Allow or disallow avatars to fly")]
     public bool allowFlight = false;
-    [Tooltip("Allow or disallow players to use OVR advanced or GoGo Loco for view adjusting")]
     public bool allowOVRAdvanced = false;
-    [Tooltip("Allow or disallow players to look though walls with their head")]
     public bool allowColliderView = false;
-    [Tooltip("Allow or disallow players to alter their speed with things such as colliders or OVR advanced")]
     public bool allowSpeedManipulation = false;
-    [Tooltip("Enable or disable printing detection messages to the console")]
     public bool printDetection = true;
 
+    [HideInInspector] public int LongArmAttempts;
+    [HideInInspector] public int FlightAttempts;
+    [HideInInspector] public int OVR_GoGoLocoAttempts;
+    [HideInInspector] public int ColliderViewAttempts;
+    [HideInInspector] public int SpeedManipulationAttempts;
+    [HideInInspector] public int SeatAttempts;
+    [HideInInspector] public int RespawnAttempts;
+    
     private string[] funnycolliders;
-    private float maxSpeed, jumpspeed, runspeed, spt, ct;
-    private Vector3 previousPosition, velocity, middlepoint, pv, camerapos;
+    private float maxSpeed, jumpspeed = 3.75f, runspeed = 2.75f, spt, ct, lt, isp;
+    private Vector3 previousPosition, velocity, middlepoint, camerapos, lastknowngood;
     private VRCPlayerApi localPlayer;
-    private Vector3[] funnytable;
-    private int CS;
+    private Vector3[] funnytable = new Vector3[10];
+    private int CS, AIS;
     private bool velocityChanged;
-
-    // Startup \\
 
     private void Start()
     {
         localPlayer = Networking.LocalPlayer;
-        SendCustomEventDelayedSeconds(nameof(CheckSpeed), 0.5f);
-        SendCustomEventDelayedSeconds(nameof(CheckViewing), 0.5f);
-        SendCustomEventDelayedSeconds(nameof(CheckAvatarCollider), 0.5f);
-        SendCustomEventDelayedSeconds(nameof(CheckOVRAdvanced), 15f);
-
         previousPosition = camerapos = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
-        funnytable = new Vector3[10];
-        jumpspeed = 3.75f;
-        runspeed = 2.75f;
         spt = localPlayer.GetRunSpeed() + 0.5f;
-
-        string[] tempArray = allowedColliderNames.ToLower().Split(',');
-        funnycolliders = new string[tempArray.Length];
-        for (int i = 0; i < tempArray.Length; i++)
-        {
-            funnycolliders[i] = tempArray[i].Trim();
-        }
+        funnycolliders = allowedColliderNames.ToLower().Split(',');
+        for (int i = 0; i < funnycolliders.Length; i++) funnycolliders[i] = funnycolliders[i].Trim();
 
         if (enableSpawnPoint && spawnPointLocation != null)
-        {
             detectionPoint = spawnPointLocation.transform.position;
-        }
-    }
 
-    // Anti Cheat \\
+        SendCustomEventDelayedSeconds(nameof(CheckStuff), 0.5f);
+        SendCustomEventDelayedSeconds(nameof(CheckOVRAdvanced), 15f);
+    }
 
     void FixedUpdate()
     {
@@ -95,159 +72,179 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         Vector3 currentVelocity = (camerapos - previousPosition) / Time.fixedDeltaTime;
         funnytable[CS] = currentVelocity;
         CS = (CS + 1) % 10;
-
         velocity = Vector3.zero;
         for (int i = 0; i < 10; i++) velocity += funnytable[i];
         velocity /= 10;
-
         previousPosition = camerapos;
-
         Vector3 playerVelocity = localPlayer.GetVelocity();
         maxSpeed = localPlayer.GetRunSpeed() + (allowBhopping && (playerVelocity.y < -0.25f || playerVelocity.y > 0.25f) ? jumpspeed : runspeed);
     }
 
-    public void CheckSpeed()
+    public void CheckStuff()
     {
-        if (AC() && !allowSpeedManipulation)
+        if (AC())
         {
-            Vector3 hv = new Vector3(velocity.x, 0f, velocity.z);
-            if (hv.magnitude > maxSpeed)
+            if (!allowSpeedManipulation && new Vector3(velocity.x, 0f, velocity.z).magnitude > maxSpeed)
             {
                 PTC("Speed Manipulation");
+                SpeedManipulationAttempts += 1;
                 Detected();
             }
-            if ((hv - new Vector3(pv.x, 0f, pv.z)).magnitude > spt)
+
+            if (!allowLongArms)
             {
-                PTC("Sudden Speed");
-                Detected();
+                float arml = localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.677f;
+                if (Vector3.Distance(camerapos, localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.LeftHand).position) > arml || Vector3.Distance(camerapos, localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position) > arml)
+                {
+                    PTC("Long Arms");
+                    LongArmAttempts += 1;
+                    Detected();
+                }
             }
-            pv = velocity;
+
+            if (!allowFlight)
+            {
+                Collider[] colliders = Physics.OverlapSphere(localPlayer.GetPosition(), 0.025f, 1 << LayerMask.NameToLayer("PlayerLocal"));
+                foreach (Collider collider in colliders)
+                {
+                    if (collider == null || collider.gameObject == null || !collider.gameObject.activeInHierarchy)
+                    {
+                        PTC("Avatar Collider");
+                        FlightAttempts += 1;
+                        Detected();
+                        break;
+                    }
+                }
+            }
+
+            if (!allowColliderView)
+            {
+                bool iic = false;
+                bool inc = false;
+
+                foreach (Collider collider in Physics.OverlapSphere(camerapos, 0.1f, Physics.AllLayers))
+                {
+                    if (collider != null && collider.gameObject != null && !IsAllowedCollider(collider))
+                    {
+                        inc = true;
+
+                        if (collider.bounds.Contains(camerapos))
+                        {
+                            PTC("Collider Viewing & attempted to correct.");
+                            ColliderViewAttempts += 1;
+                            
+                            Vector3 movement = (camerapos - collider.ClosestPoint(camerapos)).normalized;
+
+                            if (Time.time - lt >= 0.5f)
+                            {
+                                Vector3 safe = collider.ClosestPoint(camerapos) + movement * 2f;
+
+                                bool issafe = true;
+                                Collider[] near = Physics.OverlapSphere(safe, 0.15f, Physics.AllLayers);
+                                for (int i = 0; i < near.Length; i++)
+                                {
+                                    if (!IsAllowedCollider(near[i]))
+                                    {
+                                        issafe = false;
+                                        break;
+                                    }
+                                }
+
+                                if (issafe)
+                                {
+                                    localPlayer.TeleportTo(safe, localPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
+                                }
+                                else
+                                {
+                                    localPlayer.TeleportTo(lastknowngood, localPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
+                                }
+
+                                lt = Time.time;
+                            }
+                            else
+                            {
+                                localPlayer.SetVelocity(movement * 2f);
+                            }
+
+                            iic = true;
+                            break;
+                        }
+                        else
+                        {
+                            localPlayer.SetVelocity((camerapos - collider.ClosestPoint(camerapos)).normalized * 2f);
+                        }
+                    }
+                }
+
+                if (!iic && inc)
+                {
+                    if (Time.time - lt >= 0.5f)
+                    {
+                        lastknowngood = localPlayer.GetPosition();
+                        lt = Time.time;
+                    }
+                }
+                else if (!inc)
+                {
+                    lastknowngood = localPlayer.GetPosition();
+                    lt = Time.time;
+                }
+            }
         }
-        SendCustomEventDelayedSeconds(nameof(CheckSpeed), 0.05f);
+
+            SendCustomEventDelayedSeconds(nameof(CheckStuff), 0f);
     }
 
     public void CheckOVRAdvanced()
     {
         if (autoMaxOVRHeight)
         {
-            float height = localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f;
-            maxOVRAdvancedHeight = height * 1.4f;
-            middlepoint = new Vector3(0f, height, 0f);
+            maxOVRAdvancedHeight = (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f) * 1.4f;
+            middlepoint = new Vector3(0f, (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f), 0f);
         }
 
         if (AC() && !allowOVRAdvanced && Vector3.Distance(localPlayer.GetPosition() + middlepoint, camerapos) >= maxOVRAdvancedHeight)
         {
             PTC("OVR/ Gogo Loco");
+            OVR_GoGoLocoAttempts += 1;
             Detected();
         }
-        SendCustomEventDelayedSeconds(nameof(CheckOVRAdvanced), 0.05f);
+
+        SendCustomEventDelayedSeconds(nameof(CheckOVRAdvanced), 0f);
     }
 
-    private void CheckLongArms()
+    private bool IsAllowedCollider(Collider collider)
     {
-        if (AC() && !allowLongArms)
+        Transform current = collider.transform;
+        while (current != null)
         {
-            float arml = localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.677f;
-
-            if (Vector3.Distance(camerapos, localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.LeftHand).position) > arml || Vector3.Distance(camerapos, localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position) > arml)
+            if (collider.transform.GetComponent<VRC.SDK3.Components.VRCStation>() != null)
             {
-                PTC("Long Arms");
-                Detected();
+                return true;
             }
+            current = current.parent;
         }
-        SendCustomEventDelayedSeconds(nameof(CheckOVRAdvanced), 0.05f);
-    }
 
-    public void CheckAvatarCollider()
-    {
-        if (AC() && !allowFlight)
+        string colliderName = collider.gameObject.name.ToLower().Trim();
+        foreach (string allowedName in funnycolliders)
         {
-            Collider[] colliders = Physics.OverlapSphere(localPlayer.GetPosition(), 0.025f, 1 << LayerMask.NameToLayer("PlayerLocal"));
-
-            foreach (Collider collider in colliders)
-            {
-                if (collider == null || collider.gameObject == null || !collider.gameObject.activeInHierarchy)
-                {
-                    PTC("Avatar Collider");
-                    Detected();
-                    break;
-                }
-            }
+            if (colliderName.StartsWith(allowedName))
+                return true;
         }
-        SendCustomEventDelayedSeconds(nameof(CheckAvatarCollider), 0f);
-    }
 
-    public void CheckViewing()
-    {
-        if (AC() & !allowColliderView)
+        if (autoIgnorePickupables)
         {
-            Collider[] colliders = Physics.OverlapSphere(camerapos, 0.1f, Physics.AllLayers & ~(1 << LayerMask.NameToLayer("PlayerLocal")) & ~(1 << LayerMask.NameToLayer("Player")));
-
-            foreach (Collider collider in colliders)
-            {
-                if (collider != null && collider.gameObject != null)
-                {
-                    bool isAllowed = false;
-
-                    if (collider.GetComponent<VRCStation>() != null ||
-                        (collider.transform.parent != null && collider.transform.parent.GetComponent<VRCStation>() != null))
-                    {
-                        isAllowed = true;
-                    }
-                    else
-                    {
-                        string colliderName = collider.gameObject.name.ToLower().Trim();
-                        for (int i = 0; i < funnycolliders.Length; i++)
-                        {
-                            if (colliderName.StartsWith(funnycolliders[i].ToLower().Trim()))
-                            {
-                                isAllowed = true;
-                                break;
-                            }
-                        }
-
-                        if (!isAllowed && autoIgnorePickupables)
-                        {
-                            VRC.SDK3.Components.VRCPickup pickup = collider.GetComponent<VRC.SDK3.Components.VRCPickup>();
-                            if (pickup == null && collider.transform.parent != null)
-                            {
-                                pickup = collider.transform.parent.GetComponentInParent<VRC.SDK3.Components.VRCPickup>();
-                            }
-                            if (pickup != null)
-                            {
-                                isAllowed = true;
-                            }
-                        }
-                    }
-
-                    if (!isAllowed)
-                    {
-                        PTC("Collider Viewing");
-                        Vector3 reflection = Vector3.Reflect(localPlayer.GetVelocity(), (camerapos - collider.ClosestPoint(camerapos)).normalized) * 0.8f;
-                        reflection = reflection.magnitude < 0.5f ? reflection.normalized * 2f : reflection;
-                        localPlayer.SetVelocity(reflection);
-                        if (localPlayer.IsUserInVR())
-                        {
-                            localPlayer.TeleportTo(localPlayer.GetPosition(), localPlayer.GetRotation());
-                        }
-                        else
-                        {
-                            localPlayer.TeleportTo(localPlayer.GetPosition() + (camerapos - collider.ClosestPoint(camerapos)).normalized * 0.045f, localPlayer.GetRotation());
-                        }
-                        break;
-                    }
-                }
-            }
+            VRC.SDK3.Components.VRCPickup pickup = collider.GetComponent<VRC.SDK3.Components.VRCPickup>();
+            if (pickup == null && collider.transform.parent != null)
+                pickup = collider.transform.parent.GetComponentInParent<VRC.SDK3.Components.VRCPickup>();
+            if (pickup != null)
+                return true;
         }
-        SendCustomEventDelayedSeconds(nameof(CheckViewing), 0.01f);
+
+        return false;
     }
 
-    // Helper Functions \\
-
-    private bool AC()
-    {
-        return Vector3.Distance(localPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtection && !isTeleporting && antiCheat;
-    }
+    private bool AC() => Vector3.Distance(localPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtection && !isTeleporting && antiCheat;
 
     private void PTC(string item)
     {
@@ -273,9 +270,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     velocityChanged = false;
                 }
                 else
-                {
                     SendCustomEventDelayedSeconds(nameof(resetvelo), 0.05f);
-                }
             }
             else
             {
@@ -306,12 +301,11 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             localPlayer.SetVelocity(Vector3.zero);
             SendCustomEventDelayedSeconds(nameof(Teleported), 0.25f);
             PTC("Respawning");
+            RespawnAttempts += 1;
         }
     }
 
-    // Recreated VRChat functions to add proper support for them (because vrchat doesnt allow you to hook onto functions afaik!) \\
-
-    public void SetPlayerVelocity(Vector3 velo) // Example usage: antiCheat.SetPlayerVelocity(new Vector3(0,5,0))
+    public void SetPlayerVelocity(Vector3 velo)
     {
         resetvelo();
         if (allowBhopping)
@@ -321,13 +315,11 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             runspeed = velo.magnitude + 2.75f;
         }
         else
-        {
             runspeed = velo.magnitude + 2.75f;
-        }
         localPlayer.SetVelocity(velo);
     }
 
-    public void TeleportPlayer(Vector3 pos, Quaternion rot, VRC_SceneDescriptor.SpawnOrientation sori, bool smooth) // Example usage: antiCheat.TeleportPlayer(Position, Rotation, SpawnOrientation, Smooth), antiCheat.TeleportPlayer(new Vector3(0,5,0), Quaternion.identity, VRC_SceneDescriptor.SpawnOrientation.Default, false);
+    public void TeleportPlayer(Vector3 pos, Quaternion rot, VRC_SceneDescriptor.SpawnOrientation sori, bool smooth)
     {
         localPlayer.TeleportTo(pos, rot, sori, smooth);
         spt = math.INFINITY;
@@ -338,6 +330,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public void Seat()
     {
         PTC("VRCStation");
+        SeatAttempts += 1;
         spt = math.INFINITY;
         isTeleporting = true;
         SendCustomEventDelayedSeconds(nameof(Teleported), 0.25f);
