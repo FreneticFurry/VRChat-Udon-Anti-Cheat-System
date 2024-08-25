@@ -11,7 +11,7 @@ none the less! happy Udoning :)
 3. OVR Advanced & gogo loco abuse
 4. Menu Bugging
 5. Sticking heads through walls
-6. Long Armed Avatars
+6. Reach/ Long arm manipulation
 7. Speed manipulation
 
 this will not prevent someone who is using 3rd party software, that is EAC's job not mine!
