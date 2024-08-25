@@ -253,23 +253,27 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         {
             velocityChanged = true;
             ct = Time.time;
-            if (localPlayer.GetVelocity().magnitude < localPlayer.GetRunSpeed() + 3.75f)
+        }
+
+        if (localPlayer.GetVelocity().magnitude < localPlayer.GetRunSpeed() + 3.75f)
+        {
+            if (Time.time - ct >= 1.0f)
             {
-                if (Time.time - ct >= 0.25f)
-                {
-                    jumpspeed = 3.75f;
-                    runspeed = 2.75f;
-                    spt = localPlayer.GetRunSpeed() + 0.5f;
-                    velocityChanged = false;
-                }
-                else
-                    SendCustomEventDelayedSeconds(nameof(resetvelo), 0.05f);
+                jumpspeed = 3.75f;
+                runspeed = 2.75f;
+                spt = localPlayer.GetRunSpeed() + 0.5f;
+
+                velocityChanged = false;
             }
             else
             {
-                velocityChanged = false;
                 SendCustomEventDelayedSeconds(nameof(resetvelo), 0.05f);
             }
+        }
+        else
+        {
+            ct = Time.time;
+            SendCustomEventDelayedSeconds(nameof(resetvelo), 0.05f);
         }
     }
 
@@ -301,6 +305,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public void SetPlayerVelocity(Vector3 velo)
     {
         resetvelo();
+
         if (allowBhopping)
         {
             spt = velo.magnitude + 4f;
@@ -308,7 +313,10 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             runspeed = velo.magnitude + 2.75f;
         }
         else
+        {
             runspeed = velo.magnitude + 2.75f;
+        }
+
         localPlayer.SetVelocity(velo);
     }
 
