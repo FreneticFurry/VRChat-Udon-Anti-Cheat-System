@@ -1,4 +1,7 @@
-V0.0.034 (Latest)
+V0.0.035 (Latest)
+- Fixed issue with: SetPlayerVelocity not properly resetting things (oopsies)
+
+V0.0.034
 - Removed: "Sudden Speed" due to it not actually being needed and being more problematic then not
 - Performance Optimization's
 - Removed: Tooltips due to popular developer vote
