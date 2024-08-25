@@ -227,11 +227,10 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
         if (autoIgnorePickupables)
         {
-            VRC.SDK3.Components.VRCPickup pickup = collider.GetComponent<VRC.SDK3.Components.VRCPickup>();
-            if (pickup == null && collider.transform.parent != null)
-                pickup = collider.transform.parent.GetComponentInParent<VRC.SDK3.Components.VRCPickup>();
-            if (pickup != null)
+            if (collider.transform.GetComponent<VRC.SDK3.Components.VRCPickup>() != null)
+            {
                 return true;
+            }
         }
 
         return false;
