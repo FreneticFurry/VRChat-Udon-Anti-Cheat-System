@@ -1,3 +1,0 @@
-Current Known Bugs
-
-1. Ragdolls do not work due to them spawning colliders within the Avatar so either a turn off flight detection or dont use the default combat setup
