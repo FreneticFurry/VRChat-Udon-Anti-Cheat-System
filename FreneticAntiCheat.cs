@@ -1,17 +1,19 @@
 using UdonSharp;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using VRC.SDKBase;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class FreneticAntiCheat : UdonSharpBehaviour
 {
+    [Header("Anti Mirror/ Camera")]
+    public Transform AntiObject;
+
     [Header("Detection")]
     public Vector3 detectionPoint;
     public bool enableSpawnPoint = false;
     public GameObject spawnPointLocation;
-    public float detectionProtection = 2;
+    public float detectionProtectionRadius = 2;
     public string allowedColliderNames = "examplecollider, bounding box example, bounding box second example";
 
     [Header("Height")]
@@ -34,6 +36,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public bool allowColliderView = false;
     public bool allowSpeedManipulation = false;
     public bool printDetection = true;
+    public bool AllowPersonalMirrors_Cameras = false;
 
     [HideInInspector] public int LongArmAttempts;
     [HideInInspector] public int FlightAttempts;
@@ -59,9 +62,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         funnycolliders = allowedColliderNames.ToLower().Split(',');
         for (int i = 0; i < funnycolliders.Length; i++) funnycolliders[i] = funnycolliders[i].Trim();
 
-        if (enableSpawnPoint && spawnPointLocation != null)
-            detectionPoint = spawnPointLocation.transform.position;
-
+        if (enableSpawnPoint && spawnPointLocation != null) detectionPoint = spawnPointLocation.transform.position;
         SendCustomEventDelayedSeconds(nameof(CheckStuff), 0.5f);
     }
 
@@ -113,6 +114,27 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         Detected();
                         break;
                     }
+                }
+            }
+
+            if (AntiObject != null)
+            {
+                if (!AllowPersonalMirrors_Cameras)
+                {
+                    AntiObject.transform.rotation = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation;
+                    if (Vector3.Distance(AntiObject.transform.position, camerapos) > 0.25f)
+                    {
+                        AntiObject.transform.position = camerapos;
+                    }
+
+                    if (!AntiObject.gameObject.activeSelf)
+                    {
+                        AntiObject.gameObject.SetActive(true);
+                    }
+                }
+                else if (AntiObject.gameObject.activeSelf)
+                {
+                    AntiObject.gameObject.SetActive(false);
                 }
             }
 
@@ -236,7 +258,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         return false;
     }
 
-    private bool AC() => Vector3.Distance(localPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtection && !isTeleporting && antiCheat;
+    private bool AC() => Vector3.Distance(localPlayer.GetPosition() + middlepoint, detectionPoint) >= detectionProtectionRadius && !isTeleporting && antiCheat;
 
     private void PTC(string item)
     {
