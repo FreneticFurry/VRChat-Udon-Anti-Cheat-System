@@ -37,6 +37,7 @@ if a seat exists please use the "Seat" code on it so it will actually work!
 
 1. Players can use "UI" to slightly bypass the anti Mirror's & Camera but will eventually get fixed if possible.
 2. Player Ragdolls DONT work currently & this may not get fixed because ragdolls are very very cosmetic.
+3. i forgot to do the Spawn Protection so it just doesnt work currently, oopsies (will be fixed in the next update)
 
 {Terms}
 
