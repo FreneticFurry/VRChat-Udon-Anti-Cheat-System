@@ -1,4 +1,4 @@
-# VRChat-Udon-Anti-Cheat-System
+# ----VRChat-Udon-Anti-Cheat-System----
 # **{Slight warning about the VRC Team}**
 
 The VRChat devs have hired some sus (pedo) individuals & there could be more so my suggestion is just not interacting with the VRChat team :)
@@ -52,9 +52,7 @@ i intend to keep most if not all of my things free so supporting would be very n
 
 - RyuukaVR: some bug finding
 
-
-
-# **AntiCheat Documentation**
+# **----AntiCheat Documentation----**
 
 this is the documentation for the AntiCheat, moved to here instead of being tooltips as developers have requested!
 
