@@ -7,7 +7,7 @@ using VRC.SDKBase;
 public class FreneticAntiCheat : UdonSharpBehaviour
 {
     [Header("Anti Mirror/ Camera")]
-    public Transform AntiObject;
+    public Transform antiObject;
 
     [Header("Detection")]
     public Vector3 detectionPoint;
@@ -17,7 +17,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public string allowedColliderNames = "examplecollider, bounding box example, bounding box second example";
 
     [Header("Height")]
-    public float maxOVRAdvancedHeight = 0.9f;
+    public float maxOVRAdvancedHeight = 6.9420f;
 
     [Header("Automatic Settings")]
     public bool autoMaxOVRHeight = true;
@@ -26,26 +26,14 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     [Header("Anti Cheat")]
     public bool antiCheat = true;
     public bool isTeleporting = false;
-    public bool isRagdoll = false;
 
     [Header("Debugging")]
     public bool allowBhopping = true;
-    public bool allowLongArms = false;
-    public bool allowFlight = false;
-    public bool allowOVRAdvanced = false;
-    public bool allowColliderView = false;
-    public bool allowSpeedManipulation = false;
+    public bool allowLongArms, allowFlight, allowOVRAdvanced, allowColliderView, allowSpeedManipulation, AllowPersonalMirrors_Cameras = false;
     public bool printDetection = true;
-    public bool AllowPersonalMirrors_Cameras = false;
 
-    [HideInInspector] public int LongArmAttempts;
-    [HideInInspector] public int FlightAttempts;
-    [HideInInspector] public int OVR_GoGoLocoAttempts;
-    [HideInInspector] public int ColliderViewAttempts;
-    [HideInInspector] public int SpeedManipulationAttempts;
-    [HideInInspector] public int SeatAttempts;
-    [HideInInspector] public int RespawnAttempts;
-    
+    [HideInInspector] public int LongArmAttempts, FlightAttempts, OVR_GoGoLocoAttempts, ColliderViewAttempts, SpeedManipulationAttempts, SeatAttempts, RespawnAttempts;
+
     private string[] funnycolliders;
     private float maxSpeed, jumpspeed = 3.75f, runspeed = 2.75f, spt, ct, lt, isp;
     private Vector3 previousPosition, velocity, middlepoint, camerapos, lastknowngood;
@@ -61,7 +49,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         spt = localPlayer.GetRunSpeed() + 0.5f;
         funnycolliders = allowedColliderNames.ToLower().Split(',');
         for (int i = 0; i < funnycolliders.Length; i++) funnycolliders[i] = funnycolliders[i].Trim();
-
         if (enableSpawnPoint && spawnPointLocation != null) detectionPoint = spawnPointLocation.transform.position;
         SendCustomEventDelayedSeconds(nameof(CheckStuff), 0.5f);
     }
@@ -78,6 +65,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         previousPosition = camerapos;
         Vector3 playerVelocity = localPlayer.GetVelocity();
         maxSpeed = localPlayer.GetRunSpeed() + (allowBhopping && (playerVelocity.y < -0.25f || playerVelocity.y > 0.25f) ? jumpspeed : runspeed);
+        middlepoint = new Vector3(0f, (localPlayer.GetAvatarEyeHeightAsMeters() * 0.5f), 0f);
     }
 
     public void CheckStuff()
@@ -117,24 +105,24 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 }
             }
 
-            if (AntiObject != null)
+            if (antiObject != null)
             {
                 if (!AllowPersonalMirrors_Cameras)
                 {
-                    AntiObject.transform.rotation = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation;
-                    if (Vector3.Distance(AntiObject.transform.position, camerapos) > 0.25f)
+                    antiObject.transform.rotation = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation;
+                    if (Vector3.Distance(antiObject.transform.position, camerapos) > 0.25f)
                     {
-                        AntiObject.transform.position = camerapos;
+                        antiObject.transform.position = camerapos;
                     }
 
-                    if (!AntiObject.gameObject.activeSelf)
+                    if (!antiObject.gameObject.activeSelf)
                     {
-                        AntiObject.gameObject.SetActive(true);
+                        antiObject.gameObject.SetActive(true);
                     }
                 }
-                else if (AntiObject.gameObject.activeSelf)
+                else if (antiObject.gameObject.activeSelf)
                 {
-                    AntiObject.gameObject.SetActive(false);
+                    antiObject.gameObject.SetActive(false);
                 }
             }
 
@@ -214,8 +202,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
             if (autoMaxOVRHeight)
             {
-                maxOVRAdvancedHeight = (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f) * 1.4f;
-                middlepoint = new Vector3(0f, (localPlayer.GetAvatarEyeHeightMaximumAsMeters() * 0.5f), 0f);
+                maxOVRAdvancedHeight = (localPlayer.GetAvatarEyeHeightAsMeters() * 0.5f) * 1.308f;
             }
 
             if (!allowOVRAdvanced && Vector3.Distance(localPlayer.GetPosition() + middlepoint, camerapos) >= maxOVRAdvancedHeight)
@@ -230,28 +217,28 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     private bool IsAllowedCollider(Collider collider)
     {
-        Transform current = collider.transform;
-        while (current != null)
+        if (collider != null || collider.transform != null)
         {
-            if (collider.transform.GetComponent<VRC.SDK3.Components.VRCStation>() != null)
+            Transform current = collider.transform;
+
+            while (current != null)
             {
-                return true;
+                if (current.GetComponent<VRC.SDKBase.VRCStation>() != null || current.GetComponent<VRC.SDKBase.VRC_PortalMarker>() != null)
+                {
+                    return true;
+                }
+
+                current = current.parent;
             }
-            current = current.parent;
-        }
 
-        string colliderName = collider.gameObject.name.ToLower().Trim();
-        foreach (string allowedName in funnycolliders)
-        {
-            if (colliderName.StartsWith(allowedName))
-                return true;
-        }
-
-        if (autoIgnorePickupables)
-        {
-            if (collider.transform.GetComponent<VRC.SDK3.Components.VRCPickup>() != null)
+            foreach (string allowedName in funnycolliders)
             {
-                return true;
+                if (collider.gameObject.name.ToLower().Trim().StartsWith(allowedName)) return true;
+            }
+
+            if (autoIgnorePickupables)
+            {
+                if (collider.transform.GetComponent<VRC.SDKBase.VRC_Pickup>() != null) return true;
             }
         }
 
@@ -264,7 +251,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     {
         if (printDetection)
         {
-            Debug.Log($"[<color=#007d0e>Frenetic Anti Cheat:</color>] [<color=#aa0104>{item}</color>] has been detected!");
+            Debug.Log($"[<color=#007d0e>Frenetic Anti Cheat</color>]: [<color=#aa0104>{item}</color>] has been detected!");
         }
     }
 
