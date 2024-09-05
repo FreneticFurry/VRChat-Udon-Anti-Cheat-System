@@ -49,6 +49,7 @@ i intend to keep most if not all of my things free so supporting would be very n
 # **{Credit}**
 
 - RyuukaVR: some bug finding
+- Zerithax: slight bug finding & very slight code suggestion
 
 # **----AntiCheat Documentation----**
 
