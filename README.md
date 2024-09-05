@@ -19,9 +19,8 @@ this will not prevent someone who is using 3rd party software, that is EAC's job
 # **{How To Use}**
 
 1. download from the releases section and place anti cheat prefab into the scene!
-2. ensure that the "Enforce Player Height" is turned on in VRCWorld
 
-if a seat exists please use the "Seat" code on it so it will actually work!
+if you want to use seats within your world its recommended to use the "Seat.cs" on all of them so they properly work!
 
 # **{VRC Restrictions}**
 
