@@ -87,24 +87,24 @@ this is the documentation for the AntiCheat, moved to here instead of being tool
 
 visible within a script you can do antiCheat.LongArmAttempts to get a value telling you how many times a user has abused a singular thing so you can setup special things that may happen when abusing 1 thing to much maybe, not recommended to write values eg. antiCheat.LogArmAttempts = 0
 
-'LongArmAttempts' - returns the amount of times a player has attempted to have long arms
-'FlightAttempts' - returns the amount of times a player has attempted to use a avatar collider to fly
-'OVR_GoGoLocoAttempts' - returns the amount of times a player has attempted to abuse OVR/GogoLoco
-'ColliderViewAttempts' - returns the amount of times a player has attempted to stick their head within a collider (this gets spammed alot so it isnt recommended to setup anything for it)
-'SpeedManipulationAttempts' - returns the amount of times a player has attempted to use something like OVR Advanced Settings to give themselves more speed then they should have
-'SeatAttempts' - returns the amount of times a player has entered or left a seat (this is combined so if a player enters a seat it will also say when they left a seat so 1 = im in a seat 2 = im noy in a seat, requires the seat to have the "Seat.cs" applied on it)
-'RespawnAttempts' - returns the amount of times a player has respawned
+1. 'LongArmAttempts' - returns the amount of times a player has attempted to have long arms
+2. 'FlightAttempts' - returns the amount of times a player has attempted to use a avatar collider to fly
+3. 'OVR_GoGoLocoAttempts' - returns the amount of times a player has attempted to abuse OVR/GogoLoco
+4. 'ColliderViewAttempts' - returns the amount of times a player has attempted to stick their head within a collider (this gets spammed alot so it isnt recommended to setup anything for it)
+5. 'SpeedManipulationAttempts' - returns the amount of times a player has attempted to use something like OVR Advanced Settings to give themselves more speed then they should have
+6. 'SeatAttempts' - returns the amount of times a player has entered or left a seat (this is combined so if a player enters a seat it will also say when they left a seat so 1 = im in a seat 2 = im noy in a seat, requires the seat to have the "Seat.cs" applied on it)
+7. 'RespawnAttempts' - returns the amount of times a player has respawned
 
 # **{Functions}**
 
-'TeleportPlayer(Vector3 Position, Quaternion Rotation, VRC_SceneDescriptor.SpawnOrientation SpawnOrientation, Bool smooth)' - allows a player to properly teleport, a replacement for: "localplayer.TeleportTo"
-'SetPlayerVelocity(Vector3 Velocity)' - allows a player to properly use the 'SetVelocity', a replacement for: "localplayer.SetVelocity()"
-'Detected' - this function is called for every single detection method used, this is used to tell the anticheat 'this player has been detected! move them to the "DetectionPoint"'
-'PTC(String Message)' - "Print To Console" prints out "[Frenetic Anti Cheat]: YourMessageHere has been detected!" but will only work if the "printDetection" is set to true
+1. 'TeleportPlayer(Vector3 Position, Quaternion Rotation, VRC_SceneDescriptor.SpawnOrientation SpawnOrientation, Bool smooth)' - allows a player to properly teleport, a replacement for: "localplayer.TeleportTo"
+2. 'SetPlayerVelocity(Vector3 Velocity)' - allows a player to properly use the 'SetVelocity', a replacement for: "localplayer.SetVelocity()"
+3. 'Detected' - this function is called for every single detection method used, this is used to tell the anticheat 'this player has been detected! move them to the "DetectionPoint"'
+4. 'PTC(String Message)' - "Print To Console" prints out "[Frenetic Anti Cheat]: YourMessageHere has been detected!" but will only work if the "printDetection" is set to true
 
 -Helper Functions-
 
-'resetvelo' - properly resets the velocity for the function: "SetPlayerVelocity(Vector3 Velocity)"
-'Teleported' - properly resets the "TeleportPlayer(Vector3 Position, Quaternion Rotation, VRC_SceneDescriptor.SpawnOrientation SpawnOrientation, Bool smooth)"
-'OnPlayerRespawn' - this is a override it tells the anticheat that a player has respawned and properly allows them to
-'Seat' - used within the "Seat.cs" allows players to use seats properly
+1. 'resetvelo' - properly resets the velocity for the function: "SetPlayerVelocity(Vector3 Velocity)"
+2. 'Teleported' - properly resets the "TeleportPlayer(Vector3 Position, Quaternion Rotation, VRC_SceneDescriptor.SpawnOrientation SpawnOrientation, Bool smooth)"
+3. 'OnPlayerRespawn' - this is a override it tells the anticheat that a player has respawned and properly allows them to
+4. 'Seat' - used within the "Seat.cs" allows players to use seats properly
