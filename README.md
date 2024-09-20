@@ -34,8 +34,8 @@ if you want to use seats within your world its recommended to use the "Seat.cs" 
 
 # **{Known Issues}**
 
-1. Players can use "UI" to slightly bypass the anti Mirror's & Camera but will eventually get fixed if possible.
-2. Player Ragdolls DONT work currently & this may not get fixed because ragdolls are very very cosmetic.
+1. the "SetPlayerVelocity()" can sometimes reset abit to early & some speed checks also choose to give a false positive sometimes.
+2. Players with Ragdolls currently dont work! the only way for ragdolls to work with the AC is if you turn off the flight detection, this may not get resolved as ragdolls are very very cosmetic. ( player.CombatSetup() )
 
 # **{Terms}**
 
