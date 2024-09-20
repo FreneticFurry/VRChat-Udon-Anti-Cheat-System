@@ -15,6 +15,7 @@ The VRChat devs have hired some sus (pedo) individuals & there could be more so 
 8. Mirror's & Camera cheating
 
 this isn't a solution for 3rd party clients, its EAC & VRChat team's job to prevent that, not mine.
+
 this will protect against 'normal' players who're trying to abuse things that vrchat has eg. using Personal Mirrors to ESP through walls.
 
 # **{How To Use}**
