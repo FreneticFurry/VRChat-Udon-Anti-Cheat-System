@@ -32,7 +32,7 @@ if you want to use seats within your world its recommended to use the "Seat.cs" 
 
 # **{Known Issues}**
 
-`. Players with Ragdolls currently dont work! the only way for ragdolls to work with the AC is if you turn off the flight detection, this may not get resolved as ragdolls are very very cosmetic. ( player.CombatSetup() )
+1. Players with Ragdolls currently dont work! the only way for ragdolls to work with the AC is if you turn off the flight detection, this may not get resolved as ragdolls are very very cosmetic. ( player.CombatSetup() )
 
 # **{Terms}**
 
