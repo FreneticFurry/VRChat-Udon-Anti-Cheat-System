@@ -30,14 +30,9 @@ if you want to use seats within your world its recommended to use the "Seat.cs" 
 2. if the vrchat devs with Udon 2 decide to not be inept then actual things can be created! if access & other things happen with Udon 2 this'll get a update accordingly to hopefully make it better!
 3. unfortunately world creators also may not outright ban players from their worlds so this system will detect and allow the creator to either a respawn them after being detected as a cheater or b place them into a per server cheater room to ban players per instance (ik its dumb but its the vrchat devs so what'd you expect from them.)
 
-# **{Planned Future Updates}**
-
-1. adding detection for: Player Blocking, if a player blocks another then they cannot see each other and in something like a game world that makes things very difficult so making players visible when blocked will surfice!
-
 # **{Known Issues}**
 
-1. the "SetPlayerVelocity()" can sometimes reset abit to early & some speed checks also choose to give a false positive sometimes.
-2. Players with Ragdolls currently dont work! the only way for ragdolls to work with the AC is if you turn off the flight detection, this may not get resolved as ragdolls are very very cosmetic. ( player.CombatSetup() )
+`. Players with Ragdolls currently dont work! the only way for ragdolls to work with the AC is if you turn off the flight detection, this may not get resolved as ragdolls are very very cosmetic. ( player.CombatSetup() )
 
 # **{Terms}**
 
