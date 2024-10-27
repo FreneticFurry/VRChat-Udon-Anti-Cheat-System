@@ -1,10 +1,10 @@
 ~{Roadmap (Development)}~
 
-1. Change the Collider viewing to allow for Layers to be used for ignoring colliders aswell (Done)
+X. Change the Collider viewing to allow for Layers to be used for ignoring colliders aswell (Done)
 2. Add a new setting for Detection to allow a detection zone or to just prevent players from cheating eg. attempted to fly the player got placed where they was before attempting to fly
 3. Add a method to verify if a play should be able to actually be allowed to pickup a VRC_Pickup object (eg. being behind a wall and sticking hands through the wall to grab or do things they shouldn't *cough* vr players *cough*)
 4. Fix a slight issue with seats in some very weird cases thinking a player is cheating/ speeding
-5. Refine existing methods (Done)
+X. Refine existing methods (Done)
 6. Make a new method for anti collider viewing to prevent weird cases of players getting placed where they shouldn't when anti speed is turned off
 7. Add Micro checks for some things
 8. Player Blocking detection (so players arnt just invisible and hard to even notice when playing something like a game world)
