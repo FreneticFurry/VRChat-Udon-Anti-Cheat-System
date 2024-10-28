@@ -1,7 +1,7 @@
 ~{Current Development}~
 
 (Done Things)
-1. Change the Collider viewing to allow for Layers to be used for ignoring colliders aswell
+1. Change the Collider viewing to allow for Layers to be used for ignoring colliders aswell (along with reintroducing the ignoring of objects parented to a tool object properly)
 2. Refine existing methods
 3. Player Blocking detection (so players arnt just invisible and hard to even notice when playing something like a game world)
 4. Fix a slight issue with seats in some very weird cases thinking a player is cheating/ speeding
