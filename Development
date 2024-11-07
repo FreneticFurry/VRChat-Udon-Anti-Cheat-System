@@ -6,7 +6,7 @@
 3. Player Blocking detection (so players arnt just invisible and hard to even notice when playing something like a game world)
 4. Fix a slight issue with seats in some very weird cases thinking a player is cheating/ speeding
 5. Make a new Flight Detection thats more compatible with Ragdolls
+6. Add a method to verify if a player should be allowed to pickup a VRC_Pickup object (eg. being behind a wall and sticking hands through the wall to grab or do things they shouldn't *cough* vr players *cough*)
 
 (Not Done Things (yet))
 1. Add a new setting for Detection to allow a detection zone or to just prevent players from cheating eg. attempted to fly the player got placed where they was before attempting to fly
-2. Add a method to verify if a player should be allowed to pickup a VRC_Pickup object (eg. being behind a wall and sticking hands through the wall to grab or do things they shouldn't *cough* vr players *cough*)
