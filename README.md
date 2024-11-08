@@ -78,11 +78,12 @@ this is the documentation for the AntiCheat, moved to here instead of being tool
 5. 'allowOVRAdvanced' - allows players to use GogoLoco/ Ovr Advanced settings to move their view into places that it shouldn't be,  recommended value: <span style="color: red;">False</span>
 6. 'allowColliderView' - allows players to place their heads into walls, recommended value: <span style="color: red;">False</span>
 7. 'allowSpeedManipulation' - allows players to gain speed via things like OVR advanced, recommended value: <span style="color: red;">False</span>
-8. 'printDetection' - this will print what is being detected into the console so you can manually test cases of cheating and debug the world, recommended value: <span style="color: red;">False</span>
-9. 'AllowPersonalMirrors_Cameras' - allows players to use camera's or mirrors to see other players or the enviorment, recommended value: <span style="color: red;">False</span> (you can also go within the prefab to set what it will prevent the player from seeing)
-10.  'noColliderBlackout' - setting this to true allows camera inside of colliders to not be blacked out
-11. 'disableBounds' - disables the in bounds detection
-12. 'noPickupVerification' - setting to true will turn off the pickup verification unlocking the "pickupable" option within VRCPickup
+8. 'allowBlockInvis' - allows players to be invisible when blocked when set to true
+9. 'printDetection' - this will print what is being detected into the console so you can manually test cases of cheating and debug the world, recommended value: <span style="color: red;">False</span>
+10. 'AllowPersonalMirrors_Cameras' - allows players to use camera's or mirrors to see other players or the enviorment, recommended value: <span style="color: red;">False</span> (you can also go within the prefab to set what it will prevent the player from seeing)
+11.  'noColliderBlackout' - setting this to true allows camera inside of colliders to not be blacked out
+12. 'disableBounds' - disables the in bounds detection
+13. 'noPickupVerification' - setting to true will turn off the pickup verification unlocking the "pickupable" option within VRCPickup
 
 # **{Detection Attempts}**
 
