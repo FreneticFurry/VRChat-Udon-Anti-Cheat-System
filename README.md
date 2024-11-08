@@ -73,13 +73,14 @@ this is the documentation for the AntiCheat, moved to here instead of being tool
 1. 'allowBhopping' - allows for faster speeds, if jumping is allowed in a world this should be turned to true but its also recommended to have it on regardless,  recommended value: <span style="color: green;">True</span>
 2. 'allowLongArms' - allows players to have "LongArms" this is recommended to be turned on because players like to sometimes use avatar with very long arms or edit their steamvr settings for extended reaching,  recommended value: <span style="color: red;">False</span>
 3. 'allowFlight' - allows players to use things like colliders within a avatar to fly within a world, recommended value: <span style="color: red;">False</span>
-4. 'allowOVRAdvanced' - allows players to use GogoLoco/ Ovr Advanced settings to move their view into places that it shouldn't be,  recommended value: <span style="color: red;">False</span>
-5. 'allowColliderView' - allows players to place their heads into walls, recommended value: <span style="color: red;">False</span>
-6. 'allowSpeedManipulation' - allows players to gain speed via things like OVR advanced, recommended value: <span style="color: red;">False</span>
-7. 'printDetection' - this will print what is being detected into the console so you can manually test cases of cheating and debug the world, recommended value: <span style="color: red;">False</span>
-8. 'AllowPersonalMirrors_Cameras' - allows players to use camera's or mirrors to see other players or the enviorment, recommended value: <span style="color: red;">False</span> (you can also go within the prefab to set what it will prevent the player from seeing)
-9.  'noColliderBlackout' - setting this to true allows camera inside of colliders to not be blacked out
-10. 'disableBounds' - disables the in bounds detection
+4. 'ragdollSupport' - gives the "allowFlight" proper ragdoll support but may allow players to get to some smaller places they should've not been able to so if you dont use ragdolls eg. player.CombatSetup() dont set this to true!
+5. 'allowOVRAdvanced' - allows players to use GogoLoco/ Ovr Advanced settings to move their view into places that it shouldn't be,  recommended value: <span style="color: red;">False</span>
+6. 'allowColliderView' - allows players to place their heads into walls, recommended value: <span style="color: red;">False</span>
+7. 'allowSpeedManipulation' - allows players to gain speed via things like OVR advanced, recommended value: <span style="color: red;">False</span>
+8. 'printDetection' - this will print what is being detected into the console so you can manually test cases of cheating and debug the world, recommended value: <span style="color: red;">False</span>
+9. 'AllowPersonalMirrors_Cameras' - allows players to use camera's or mirrors to see other players or the enviorment, recommended value: <span style="color: red;">False</span> (you can also go within the prefab to set what it will prevent the player from seeing)
+10.  'noColliderBlackout' - setting this to true allows camera inside of colliders to not be blacked out
+11. 'disableBounds' - disables the in bounds detection
 # **{Detection Attempts}**
 
 visible within a script you can do antiCheat.LongArmAttempts to get a value telling you how many times a user has abused a singular thing so you can setup special things that may happen when abusing 1 thing to much maybe, not recommended to write values eg. antiCheat.LogArmAttempts = 0
