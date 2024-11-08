@@ -5,14 +5,14 @@ The VRChat devs have hired some sus (pedo) individuals & there could be more so 
 
 # **{Features}**
 
-1. Collider Flying
-2. Seat Cheating
-3. OVR Advanced & gogo loco abuse
-4. Menu Bugging
-5. Sticking heads through walls
-6. Reach/ Long arm manipulation
-7. Speed manipulation
-8. Mirror's & Camera cheating
+1. anti Collider Flying
+2. anti Seat Cheating
+3. anti OVR Advanced & gogo loco abuse
+4. anti Menu Bugging
+5. anti Sticking heads through walls
+6. anti Reach/ Long arm manipulation
+7. anti Speed manipulation
+8. anti Mirror's & Camera cheating
 9. out of bounds detection
 10. anti block invis
 
