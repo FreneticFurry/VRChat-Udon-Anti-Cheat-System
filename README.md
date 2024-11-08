@@ -14,6 +14,7 @@ The VRChat devs have hired some sus (pedo) individuals & there could be more so 
 7. Speed manipulation
 8. Mirror's & Camera cheating
 9. out of bounds detection
+10. anti block invis
 
 this isn't a solution for 3rd party clients, its EAC & VRChat team's job to prevent that, not mine.
 
