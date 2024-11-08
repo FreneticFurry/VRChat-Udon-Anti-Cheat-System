@@ -2,12 +2,14 @@ Shader "Frenetic/Anti Mirror&Camera"
 {
     Properties
     {
-        [Enum(Mirrors_Cameras, 0, Cameras, 1, Mirrors, 2, Player, 3)] _HideUIIn ("Hide UI In", Float) = 0
-        [Enum(Both, 0, Cameras, 1, Mirrors, 2)] _RenderIn ("Render In", Float) = 0
+        [Enum(None, 4, Mirrors and Cameras , 0, Cameras, 1, Mirrors, 2, Player, 3)] _HideUIIn ("Hide UI In", Float) = 4
+        [Enum(None, 3, Both, 0, Cameras, 1, Mirrors, 2)] _RenderIn ("Render In", Float) = 3
+        [Toggle] _Blackout ("Blackout", Float) = 0
+        _BlackoutAmt ("Blackout Amount", Range(0, 1)) = 1
     }
     SubShader
     {
-        Tags { "Queue"="Overlay+999999999" "RenderType"="Overlay+999999999" }
+        Tags { "Queue"="Overlay+225375" }
 
         Pass
         {
@@ -20,14 +22,16 @@ Shader "Frenetic/Anti Mirror&Camera"
             
             #include "UnityCG.cginc"
 
+            UNITY_DEFINE_INSTANCED_PROP(float, _RenderIn)
+            UNITY_DEFINE_INSTANCED_PROP(float, _VRChatCameraMode)
+            UNITY_DEFINE_INSTANCED_PROP(float, _VRChatMirrorMode)
+            UNITY_DEFINE_INSTANCED_PROP(float, _Blackout)
+            UNITY_DEFINE_INSTANCED_PROP(float, _BlackoutAmt)
+
             struct v2f
             {
                 float4 vertex : SV_POSITION;
             };
-
-            float _RenderIn;
-            float _VRChatCameraMode;
-            float _VRChatMirrorMode;
 
             v2f vert(uint id : SV_VertexID)
             {
@@ -39,12 +43,15 @@ Shader "Frenetic/Anti Mirror&Camera"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                bool renderInCamera = (_VRChatCameraMode != 0.0);
-                bool renderInMirror = (_VRChatMirrorMode != 0.0);
+                bool renderInCamera = UNITY_ACCESS_INSTANCED_PROP(_VRChatCameraMode_arr, _VRChatCameraMode);
+                bool renderInMirror = UNITY_ACCESS_INSTANCED_PROP(_VRChatMirrorMode_arr, _VRChatMirrorMode);
 
-                if (_RenderIn == 0 && !(renderInCamera || renderInMirror)) discard;
-                if (_RenderIn == 1 && !renderInCamera) discard;
-                if (_RenderIn == 2 && !renderInMirror) discard;
+                if (UNITY_ACCESS_INSTANCED_PROP(_Blackout_arr, _Blackout) >= 0.5)
+                    return fixed4(0, 0, 0, UNITY_ACCESS_INSTANCED_PROP(_BlackoutAmt_arr, _BlackoutAmt));
+                if (UNITY_ACCESS_INSTANCED_PROP(_RenderIn_arr, _RenderIn) == 3) discard;
+                if (UNITY_ACCESS_INSTANCED_PROP(_RenderIn_arr, _RenderIn) == 0 && !(renderInCamera || renderInMirror)) discard;
+                if (UNITY_ACCESS_INSTANCED_PROP(_RenderIn_arr, _RenderIn) == 1 && !renderInCamera) discard;
+                if (UNITY_ACCESS_INSTANCED_PROP(_RenderIn_arr, _RenderIn) == 2 && !renderInMirror) discard;
 
                 return fixed4(0, 0, 0, 1);
             }
@@ -54,7 +61,6 @@ Shader "Frenetic/Anti Mirror&Camera"
         // Hide UI
         Pass
         {
-            Tags { "Queue" = "Transparent-1" }
             ZWrite On
             Cull Off
 
@@ -63,16 +69,17 @@ Shader "Frenetic/Anti Mirror&Camera"
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 3.0
+            
             #include "UnityCG.cginc"
+
+            UNITY_DEFINE_INSTANCED_PROP(float, _HideUIIn)
+            UNITY_DEFINE_INSTANCED_PROP(float, _VRChatCameraMode)
+            UNITY_DEFINE_INSTANCED_PROP(float, _VRChatMirrorMode)
 
             struct v2f
             {
                 float4 vertex : SV_POSITION;
             };
-
-            float _HideUIIn;
-            float _VRChatCameraMode;
-            float _VRChatMirrorMode;
 
             v2f vert(uint id : SV_VertexID)
             {
@@ -84,27 +91,14 @@ Shader "Frenetic/Anti Mirror&Camera"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                bool renderInCamera = (_VRChatCameraMode != 0.0);
-                bool renderInMirror = (_VRChatMirrorMode != 0.0);
+                bool renderInCamera = UNITY_ACCESS_INSTANCED_PROP(_VRChatCameraMode_arr, _VRChatCameraMode);
+                bool renderInMirror = UNITY_ACCESS_INSTANCED_PROP(_VRChatMirrorMode_arr, _VRChatMirrorMode);
 
-                if (_HideUIIn == 0)
-                {
-                    if (!(renderInCamera || renderInMirror)) discard;
-                }
-                else if (_HideUIIn == 1)
-                {
-                    if (!renderInCamera) discard;
-                }
-                else if (_HideUIIn == 2)
-                {
-                    if (!renderInMirror) discard;
-                }
-                else if (_HideUIIn == 3)
-                {}
-                else
-                {
-                    discard;
-                }
+                if (UNITY_ACCESS_INSTANCED_PROP(_HideUIIn_arr, _HideUIIn) == 4) discard;
+                if (UNITY_ACCESS_INSTANCED_PROP(_HideUIIn_arr, _HideUIIn) == 0 && !(renderInCamera || renderInMirror)) discard;
+                else if (UNITY_ACCESS_INSTANCED_PROP(_HideUIIn_arr, _HideUIIn) == 1 && !renderInCamera) discard;
+                else if (UNITY_ACCESS_INSTANCED_PROP(_HideUIIn_arr, _HideUIIn) == 2 && !renderInMirror) discard;
+
                 return fixed4(0, 0, 0, 1);
             }
             ENDCG
