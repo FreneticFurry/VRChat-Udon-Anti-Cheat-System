@@ -13,6 +13,7 @@ The VRChat devs have hired some sus (pedo) individuals & there could be more so 
 6. Reach/ Long arm manipulation
 7. Speed manipulation
 8. Mirror's & Camera cheating
+9. out of bounds detection
 
 this isn't a solution for 3rd party clients, its EAC & VRChat team's job to prevent that, not mine.
 
@@ -21,6 +22,7 @@ this will protect against 'normal' players who're trying to abuse things that vr
 # **{How To Use}**
 
 1. download from the releases section and place anti cheat prefab into the scene!
+2. have TMP/ TextMeshPro installed properly
 
 if you want to use seats within your world its recommended to use the "Seat.cs" on all of them so they properly work!
 
@@ -76,7 +78,8 @@ this is the documentation for the AntiCheat, moved to here instead of being tool
 6. 'allowSpeedManipulation' - allows players to gain speed via things like OVR advanced, recommended value: <span style="color: red;">False</span>
 7. 'printDetection' - this will print what is being detected into the console so you can manually test cases of cheating and debug the world, recommended value: <span style="color: red;">False</span>
 8. 'AllowPersonalMirrors_Cameras' - allows players to use camera's or mirrors to see other players or the enviorment, recommended value: <span style="color: red;">False</span> (you can also go within the prefab to set what it will prevent the player from seeing)
-
+9.  'noColliderBlackout' - setting this to true allows camera inside of colliders to not be blacked out
+10. 'disableBounds' - disables the in bounds detection
 # **{Detection Attempts}**
 
 visible within a script you can do antiCheat.LongArmAttempts to get a value telling you how many times a user has abused a singular thing so you can setup special things that may happen when abusing 1 thing to much maybe, not recommended to write values eg. antiCheat.LogArmAttempts = 0
@@ -95,6 +98,7 @@ visible within a script you can do antiCheat.LongArmAttempts to get a value tell
 2. 'SetPlayerVelocity(Vector3 Velocity)' - allows a player to properly use the 'SetVelocity', a replacement for: "localplayer.SetVelocity()"
 3. 'Detected' - this function is called for every single detection method used, this is used to tell the anticheat 'this player has been detected! move them to the "DetectionPoint"'
 4. 'PTC(String Message)' - "Print To Console" prints out "[Frenetic Anti Cheat]: YourMessageHere has been detected!" but will only work if the "printDetection" is set to true
+5. IsHandClear(Collider, LeftOrRightHand, Layers, IgnoredColliders) - takes the position of the object/ collider from the left or right hand, returns true or false if the hands are able to properly see a targetted object, left as public for custom pickup systems!
 
 **-Helper Functions-**
 
