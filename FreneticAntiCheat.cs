@@ -385,20 +385,24 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     blackoutObj.gameObject.SetActive(true);
                 }
 
-                Vector3 headPosition = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
-                Collider[] nearbyColliders = Physics.OverlapSphere(headPosition, 0.5f, ~allowedLayers & ~LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"));
-
                 bool isInsideCollider = false;
+
+                Collider[] nearbyColliders = Physics.OverlapSphere(camerapos, 0.1f, Physics.AllLayers);
 
                 foreach (Collider collider in nearbyColliders)
                 {
                     if (collider == null) continue;
 
+                    if ((~allowedLayers & ~LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water") & (1 << collider.gameObject.layer)) == 0)
+                    {
+                        continue;
+                    }
+
                     bool allowedCollider = false;
 
-                    foreach (Collider inBoundCollider in inBounds)
+                    for (int i = 0; i < inBounds.Length; i++)
                     {
-                        if (inBoundCollider == collider)
+                        if (inBounds[i] == collider)
                         {
                             allowedCollider = true;
                             break;
@@ -424,10 +428,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         continue;
                     }
 
-                    Vector3 closestPoint = collider.ClosestPoint(headPosition);
-                    float distance = Vector3.Distance(headPosition, closestPoint);
-
-                    if (distance <= 0)
+                    if (collider.bounds.Contains(camerapos))
                     {
                         isInsideCollider = true;
                         break;
