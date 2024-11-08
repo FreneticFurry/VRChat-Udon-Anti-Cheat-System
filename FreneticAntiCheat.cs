@@ -394,16 +394,30 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 {
                     if (collider == null) continue;
 
-                    bool bounds = false;
+                    bool allowedCollider = false;
+
                     foreach (Collider inBoundCollider in inBounds)
                     {
                         if (inBoundCollider == collider)
                         {
-                            bounds = true;
+                            allowedCollider = true;
                             break;
                         }
                     }
-                    if (bounds) continue;
+
+                    if (!allowedCollider)
+                    {
+                        foreach (string allowedName in funnycolliders)
+                        {
+                            if (collider.gameObject.name.ToLower().Trim().StartsWith(allowedName))
+                            {
+                                allowedCollider = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (allowedCollider) continue;
 
                     if (collider.GetComponent<VRC.SDKBase.VRCStation>() != null || collider.GetComponent<VRC.SDKBase.VRC_PortalMarker>() != null)
                     {
