@@ -81,6 +81,8 @@ this is the documentation for the AntiCheat, moved to here instead of being tool
 9. 'AllowPersonalMirrors_Cameras' - allows players to use camera's or mirrors to see other players or the enviorment, recommended value: <span style="color: red;">False</span> (you can also go within the prefab to set what it will prevent the player from seeing)
 10.  'noColliderBlackout' - setting this to true allows camera inside of colliders to not be blacked out
 11. 'disableBounds' - disables the in bounds detection
+12. 'noPickupVerification' - setting to true will turn off the pickup verification unlocking the "pickupable" option within VRCPickup
+
 # **{Detection Attempts}**
 
 visible within a script you can do antiCheat.LongArmAttempts to get a value telling you how many times a user has abused a singular thing so you can setup special things that may happen when abusing 1 thing to much maybe, not recommended to write values eg. antiCheat.LogArmAttempts = 0
