@@ -500,7 +500,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     VRC_Pickup pickup = collider.GetComponent<VRC_Pickup>();
                     if (pickup != null)
                     {
-                        if (IsHandClear(pickup.GetComponent<Collider>(), true, allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"), inBounds))
+                        if (IsHandClear(pickup.GetComponent<Collider>(), true, LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"), inBounds))
                         {
                             pickup.GetComponent<VRC_Pickup>().pickupable = true;
                         }
