@@ -107,7 +107,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             {
                 bool touching = false;
 
-                Collider[] colliders = Physics.OverlapCapsule(localPlayer.GetPosition() + new Vector3(0, 0.05f, 0), localPlayer.GetPosition() - new Vector3(0, localPlayer.GetJumpImpulse() * 0.115f + 0.05f, 0), 0.2f, ~LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water", "MirrorReflection", "PickupNoEnvironment", "Interactive", "TransparentFX"));
+                Collider[] colliders = Physics.OverlapCapsule(localPlayer.GetPosition() + new Vector3(0, 0.05f, 0), localPlayer.GetPosition() - new Vector3(0, localPlayer.GetJumpImpulse() * 0.115f + 0.05f, 0), 0.2f, ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water", "MirrorReflection", "PickupNoEnvironment", "Interactive", "TransparentFX"));
                 foreach (Collider collider in colliders)
                 {
                     if (collider != null)
@@ -191,7 +191,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
                     bool allowedCollider = false;
 
-                    if (((1 << collider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
+                    if (((1 << collider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
                     {
                         allowedCollider = true;
                     }
@@ -302,7 +302,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
                                     bool AllowedN = false;
 
-                                    if (((1 << nearbyCollider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
+                                    if (((1 << nearbyCollider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
                                     {
                                         AllowedN = true;
                                     }
@@ -394,7 +394,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
                     bool allowedCollider = false;
 
-                    if (((1 << collider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
+                    if (((1 << collider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
                     {
                         allowedCollider = true;
                     }
@@ -500,7 +500,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     VRC_Pickup pickup = collider.GetComponent<VRC_Pickup>();
                     if (pickup != null)
                     {
-                        if (IsHandClear(pickup.GetComponent<Collider>(), true, allowedLayers = (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, allowedLayers = (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds))
+                        if (IsHandClear(pickup.GetComponent<Collider>(), true, (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, allowedLayers = (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds))
                         {
                             pickup.GetComponent<VRC_Pickup>().pickupable = true;
                         }
