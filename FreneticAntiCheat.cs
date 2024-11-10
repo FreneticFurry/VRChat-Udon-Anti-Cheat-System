@@ -20,7 +20,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     public GameObject spawnPointLocation;
     public float detectionProtectionRadius = 2;
     [Header("Colliders")]
-    public string allowedColliderNames = "Example, example";
+    public string[] allowedColliderNames = new string[0];
     public LayerMask allowedLayers;
 
     [Header("Automatic Settings")]
@@ -40,8 +40,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     [HideInInspector] public int LongArmAttempts, FlightAttempts, OVR_GoGoLocoAttempts, ColliderViewAttempts, SpeedManipulationAttempts, SeatAttempts, RespawnAttempts, OutOfBoundsAttempts;
 
-    private string[] funnycolliders;
-    private float maxSpeed, jumpspeed = 3f, runspeed = 2f, ct, lt, isp, maxOVRAdvancedHeight, ft;
+    private float maxSpeed, jumpspeed = 3f, runspeed = 2f, ft, ic, ct;
     private Vector3 previousPosition, velocity, middlepoint, camerapos, lastknowngood, flightp;
     private VRCPlayerApi localPlayer;
     private Vector3[] funnytable = new Vector3[10];
@@ -54,8 +53,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
     {
         localPlayer = Networking.LocalPlayer;
         previousPosition = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
-        funnycolliders = allowedColliderNames.ToLower().Split(',');
-        for (int i = 0; i < funnycolliders.Length; i++) funnycolliders[i] = funnycolliders[i].Trim();
         if (enableSpawnPoint && spawnPointLocation != null) detectionPoint = spawnPointLocation.transform.position;
         SendCustomEventDelayedSeconds(nameof(CheckStuff), 0.5f);
     }
@@ -75,6 +72,71 @@ public class FreneticAntiCheat : UdonSharpBehaviour
         Vector3 playerVelocity = localPlayer.GetVelocity();
         maxSpeed = (localPlayer.GetAvatarEyeHeightAsMeters() < 0.83f ? 0.83f : localPlayer.GetAvatarEyeHeightAsMeters()) / 2 + localPlayer.GetRunSpeed() + (allowBhopping && (Mathf.Abs(playerVelocity.y) > 0.25f) ? jumpspeed : runspeed);
         middlepoint = new Vector3(0f, localPlayer.GetAvatarEyeHeightAsMeters() * 0.5f, 0f);
+
+        if (AC() && !allowColliderView)
+        {
+            bool inc = false;
+            Vector3 c = Vector3.zero;
+
+            Collider[] nearbyColliders = Physics.OverlapSphere(Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 0.15f, ~allowedLayers | ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"));
+
+            foreach (Collider collider in nearbyColliders)
+            {
+                if (collider == null) continue;
+
+                bool isInBounds = false;
+                foreach (Collider boundCollider in inBounds)
+                {
+                    if (collider == boundCollider)
+                    {
+                        isInBounds = true;
+                        break;
+                    }
+                }
+
+                bool isFunnyCollider = false;
+                foreach (string funnyColliderName in allowedColliderNames)
+                {
+                    if (collider.gameObject.name.Equals(funnyColliderName))
+                    {
+                        isFunnyCollider = true;
+                        break;
+                    }
+                }
+
+                if (isInBounds || isFunnyCollider) continue;
+
+                foreach (Collider targetCollider in nearbyColliders)
+                {
+                    if (targetCollider != null && collider == targetCollider)
+                    {
+                        inc = true;
+                        c = collider.ClosestPoint(Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position);
+                        break;
+                    }
+                }
+
+                if (inc) break;
+            }
+
+            if (inc)
+            {
+                SetPlayerVelocity((Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position - c).normalized * 2);
+
+                ic += Time.deltaTime;
+
+                if (ic >= 0.2)
+                {
+                    TeleportPlayer(lastknowngood, Networking.LocalPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
+                    ic = 0f;
+                }
+            }
+            else
+            {
+                lastknowngood = Networking.LocalPlayer.GetPosition();
+                ic = 0f;
+            }
+        }
     }
 
     public void CheckStuff()
@@ -180,195 +242,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 }
             }
 
-            if (!allowColliderView)
-            {
-                bool iic = false;
-                bool inc = false;
-
-                foreach (Collider collider in Physics.OverlapSphere(camerapos, 0.1f, Physics.AllLayers))
-                {
-                    if (collider == null || collider.gameObject == null) continue;
-
-                    bool allowedCollider = false;
-
-                    if (((1 << collider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
-                    {
-                        allowedCollider = true;
-                    }
-
-                    if (!allowedCollider)
-                    {
-                        Transform current = collider.transform;
-                        while (current != null)
-                        {
-                            if (current.GetComponent<VRC.SDKBase.VRCStation>() != null || current.GetComponent<VRC.SDKBase.VRC_PortalMarker>() != null)
-                            {
-                                allowedCollider = true;
-                                break;
-                            }
-                            current = current.parent;
-                        }
-
-                        if (!allowedCollider)
-                        {
-                            foreach (string allowedName in funnycolliders)
-                            {
-                                if (collider.gameObject.name.ToLower().Trim().StartsWith(allowedName))
-                                {
-                                    allowedCollider = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (!allowedCollider && autoIgnorePickupables)
-                        {
-                            bool PickupC = false;
-
-                            Transform Cur = collider.transform;
-
-                            while (Cur != null)
-                            {
-                                if (Cur.GetComponent<VRC.SDKBase.VRC_Pickup>() != null)
-                                {
-                                    PickupC = true;
-                                    break;
-                                }
-
-                                for (int i = 0; i < Cur.childCount; i++)
-                                {
-                                    if (Cur.GetChild(i).GetComponent<VRC.SDKBase.VRC_Pickup>() != null)
-                                    {
-                                        PickupC = true;
-                                        break;
-                                    }
-                                }
-
-                                if (PickupC) break;
-                                Cur = Cur.parent;
-                            }
-                            if (PickupC) allowedCollider = true;
-                        }
-                    }
-
-                    if (!allowedCollider)
-                    {
-                        inc = true;
-
-                        bool bounds = false;
-                        if (!disableBounds)
-                        {
-                            for (int i = 0; i < inBounds.Length; i++)
-                            {
-                                if (inBounds[i] == collider)
-                                {
-                                    bounds = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (disableBounds || (!bounds && collider.bounds.Contains(camerapos)))
-                        {
-                            ColliderViewAttempts += 1;
-                            PTC("Collider Viewing", 1, true, ColliderViewAttempts);
-
-                            Vector3 movement = (camerapos - collider.ClosestPoint(camerapos)).normalized;
-
-                            if (Time.time - lt >= 0.5f)
-                            {
-                                Vector3 safePosition = collider.ClosestPoint(camerapos) + movement * 2f;
-
-                                bool isSafe = true;
-                                Collider[] nearbyColliders = Physics.OverlapSphere(safePosition, 0.15f, Physics.AllLayers);
-                                for (int i = 0; i < nearbyColliders.Length; i++)
-                                {
-                                    Collider nearbyCollider = nearbyColliders[i];
-                                    if (nearbyCollider == null || nearbyCollider.gameObject == null) continue;
-
-                                    bool isNearbyInBounds = false;
-                                    if (!disableBounds)
-                                    {
-                                        for (int j = 0; j < inBounds.Length; j++)
-                                        {
-                                            if (inBounds[j] == nearbyCollider)
-                                            {
-                                                isNearbyInBounds = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if (isNearbyInBounds) continue;
-
-                                    bool AllowedN = false;
-
-                                    if (((1 << nearbyCollider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
-                                    {
-                                        AllowedN = true;
-                                    }
-
-                                    if (!AllowedN)
-                                    {
-                                        Transform CurN = nearbyCollider.transform;
-                                        while (CurN != null)
-                                        {
-                                            if (CurN.GetComponent<VRC.SDKBase.VRCStation>() != null || CurN.GetComponent<VRC.SDKBase.VRC_PortalMarker>() != null)
-                                            {
-                                                AllowedN = true;
-                                                break;
-                                            }
-                                            CurN = CurN.parent;
-                                        }
-                                    }
-
-                                    if (!AllowedN)
-                                    {
-                                        for (int j = 0; j < funnycolliders.Length; j++)
-                                        {
-                                            if (nearbyCollider.gameObject.name.ToLower().Trim().StartsWith(funnycolliders[j]))
-                                            {
-                                                AllowedN = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    if (!AllowedN && autoIgnorePickupables)
-                                    {
-                                        if (nearbyCollider.transform != null && nearbyCollider.transform.GetComponent<VRC.SDKBase.VRC_Pickup>() != null) AllowedN = true;
-                                    }
-
-                                    if (!AllowedN)
-                                    {
-                                        isSafe = false;
-                                        break;
-                                    }
-                                }
-
-                                TeleportPlayer(isSafe ? safePosition : lastknowngood, localPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
-                                lt = Time.time;
-                            }
-                            else SetPlayerVelocity(movement * 2f);
-
-                            iic = true;
-                            break;
-                        }
-                        else if (disableBounds || !bounds) SetPlayerVelocity((camerapos - collider.ClosestPoint(camerapos)).normalized * 2f);
-                    }
-
-                    if (!iic && inc && Time.time - lt >= 0.5f)
-                    {
-                        lastknowngood = localPlayer.GetPosition();
-                        lt = Time.time;
-                    }
-                    else if (!inc)
-                    {
-                        lastknowngood = localPlayer.GetPosition();
-                        lt = Time.time;
-                    }
-                }
-            }
-
             if (!noColliderBlackout && blackoutObj != null)
             {
                 if (Vector3.Distance(blackoutObj.transform.position, camerapos) > 0.25f)
@@ -385,17 +258,20 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 Vector3 headPosition = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
                 bool isInsideCollider = false;
 
+                // Get all colliders within a small radius around the camera position
                 foreach (Collider collider in Physics.OverlapSphere(camerapos, 0.05f, Physics.AllLayers))
                 {
                     if (collider == null || collider.gameObject == null) continue;
 
                     bool allowedCollider = false;
 
+                    // Check if the collider is on an allowed layer
                     if (((1 << collider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
                     {
                         allowedCollider = true;
                     }
 
+                    // Check for VRCStation or VRC_PortalMarker components in the hierarchy
                     if (!allowedCollider)
                     {
                         Transform current = collider.transform;
@@ -408,23 +284,27 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                             }
                             current = current.parent;
                         }
+                    }
 
-                        if (!allowedCollider)
+                    // Check if the collider's name matches any in funnyColliders
+                    if (!allowedCollider)
+                    {
+                        foreach (string allowedName in allowedColliderNames)
                         {
-                            foreach (string allowedName in funnycolliders)
+                            if (collider.gameObject.name.ToLower().Trim().StartsWith(allowedName.ToLower().Trim()))
                             {
-                                if (collider.gameObject.name.ToLower().Trim().StartsWith(allowedName))
-                                {
-                                    allowedCollider = true;
-                                    break;
-                                }
+                                allowedCollider = true;
+                                break;
                             }
                         }
                     }
 
+                    // Skip further checks if the collider is allowed
                     if (allowedCollider) continue;
 
                     bool bounds = false;
+
+                    // Check bounds only if not disabled
                     if (!disableBounds)
                     {
                         for (int i = 0; i < inBounds.Length; i++)
@@ -437,6 +317,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         }
                     }
 
+                    // Determine if the camera position is inside the collider bounds
                     if (disableBounds || (!bounds && collider.bounds.Contains(camerapos)))
                     {
                         isInsideCollider = true;
@@ -444,6 +325,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     }
                 }
 
+                // Set the blackout material based on whether inside a collider
                 blackoutObj.GetComponent<Renderer>().material.SetInt("_Blackout", isInsideCollider ? 1 : 0);
             }
             else
