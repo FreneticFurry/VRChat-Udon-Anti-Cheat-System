@@ -345,18 +345,15 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                                     }
                                 }
 
-                                localPlayer.TeleportTo(isSafe ? safePosition : lastknowngood, localPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
+                                TeleportPlayer(isSafe ? safePosition : lastknowngood, localPlayer.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
                                 lt = Time.time;
                             }
-                            else localPlayer.SetVelocity(movement * 2f);
+                            else SetPlayerVelocity(movement * 2f);
 
                             iic = true;
                             break;
                         }
-                        else if (disableBounds || !bounds)
-                        {
-                            localPlayer.SetVelocity((camerapos - collider.ClosestPoint(camerapos)).normalized * 2f);
-                        }
+                        else if (disableBounds || !bounds) SetPlayerVelocity((camerapos - collider.ClosestPoint(camerapos)).normalized * 2f);
                     }
 
                     if (!iic && inc && Time.time - lt >= 0.5f)
