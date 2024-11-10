@@ -78,7 +78,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             bool inc = false;
             Vector3 c = Vector3.zero;
 
-            Collider[] nearbyColliders = Physics.OverlapSphere(Networking.LocalPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 0.15f, ~allowedLayers | ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"));
+            Collider[] nearbyColliders = Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 0.075f, ~allowedLayers | ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"));
 
             foreach (Collider collider in nearbyColliders)
             {
@@ -258,20 +258,17 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 Vector3 headPosition = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
                 bool isInsideCollider = false;
 
-                // Get all colliders within a small radius around the camera position
                 foreach (Collider collider in Physics.OverlapSphere(camerapos, 0.05f, Physics.AllLayers))
                 {
                     if (collider == null || collider.gameObject == null) continue;
 
                     bool allowedCollider = false;
 
-                    // Check if the collider is on an allowed layer
                     if (((1 << collider.gameObject.layer) & (allowedLayers | LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"))) != 0)
                     {
                         allowedCollider = true;
                     }
 
-                    // Check for VRCStation or VRC_PortalMarker components in the hierarchy
                     if (!allowedCollider)
                     {
                         Transform current = collider.transform;
@@ -286,7 +283,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         }
                     }
 
-                    // Check if the collider's name matches any in funnyColliders
                     if (!allowedCollider)
                     {
                         foreach (string allowedName in allowedColliderNames)
@@ -299,12 +295,10 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         }
                     }
 
-                    // Skip further checks if the collider is allowed
                     if (allowedCollider) continue;
 
                     bool bounds = false;
 
-                    // Check bounds only if not disabled
                     if (!disableBounds)
                     {
                         for (int i = 0; i < inBounds.Length; i++)
@@ -317,7 +311,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                         }
                     }
 
-                    // Determine if the camera position is inside the collider bounds
                     if (disableBounds || (!bounds && collider.bounds.Contains(camerapos)))
                     {
                         isInsideCollider = true;
@@ -325,7 +318,6 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     }
                 }
 
-                // Set the blackout material based on whether inside a collider
                 blackoutObj.GetComponent<Renderer>().material.SetInt("_Blackout", isInsideCollider ? 1 : 0);
             }
             else
@@ -336,7 +328,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 }
             }
 
-            if (!allowOVRAdvanced && Vector3.Distance(localPlayer.GetPosition() + middlepoint, camerapos) >= localPlayer.GetAvatarEyeHeightAsMeters() * 0.733f)
+            if (!allowOVRAdvanced && Vector3.Distance(localPlayer.GetPosition() + middlepoint, camerapos) >= localPlayer.GetAvatarEyeHeightAsMeters() * 0.75f)
             {
                 OVR_GoGoLocoAttempts += 1;
                 PTC("OVR/ Gogo Loco", 1, true, OVR_GoGoLocoAttempts);
