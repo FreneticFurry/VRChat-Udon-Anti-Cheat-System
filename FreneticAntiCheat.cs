@@ -505,6 +505,57 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 }
             }
         }
+        else
+        {
+            VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
+            VRCPlayerApi.GetPlayers(players);
+
+            foreach (VRCPlayerApi player in players)
+            {
+                if (player == localPlayer) continue;
+
+                if (player != null && !player.isLocal && colliderPlayer != null)
+                {
+                    bool playerExists = false;
+
+                    foreach (Transform child in colliderPlayer.transform.parent)
+                    {
+                        if (child.name == $"{player.displayName} Collider")
+                        {
+                            playerExists = true;
+                            break;
+                        }
+                    }
+
+                    if (!playerExists)
+                    {
+                        GameObject colliderplayer = Instantiate(colliderPlayer, colliderPlayer.transform.parent);
+                        colliderplayer.name = $"{player.displayName} Collider";
+                    }
+                }
+
+                Transform ColliderPlayer = colliderPlayer.transform.parent.Find($"{player.displayName} Collider");
+
+                if (ColliderPlayer != null && player != null)
+                {
+                    bool blocked = false;
+
+                    RaycastHit[] hits = Physics.RaycastAll(player.GetPosition(), Vector3.up, player.GetAvatarEyeHeightAsMeters() * 7.5f);
+
+                    foreach (RaycastHit hit in hits)
+                    {
+                        Collider collider = hit.collider;
+                        if (collider == null || collider.gameObject == null || !collider.gameObject.activeInHierarchy)
+                        {
+                            blocked = true;
+                            break;
+                        }
+                    }
+                    ColliderPlayer.gameObject.SetActive(false);
+                }
+            }
+
+        }
 
         SendCustomEventDelayedSeconds(nameof(CheckStuff), 0f);
     }
