@@ -372,7 +372,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     if (pickup != null) pickup.pickupable = false;
                 }
 
-                foreach (Collider collider in Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 50f))
+                foreach (Collider collider in Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 2.5f))
                 {
                     if (collider == null) continue;
 
