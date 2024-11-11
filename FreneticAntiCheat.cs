@@ -369,7 +369,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     VRC_Pickup pickup = collider.GetComponent<VRC_Pickup>();
                     if (pickup != null)
                     {
-                        if (IsHandClear(pickup.GetComponent<Collider>(), true, allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water") & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water") & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds))
+                        if (IsHandClear(pickup.GetComponent<Collider>(), true, (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds))
                         {
                             pickup.GetComponent<VRC_Pickup>().pickupable = true;
                         }
@@ -381,10 +381,16 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                 }
             }
         }
-        else if (!antiCheat && antiMirror_Camera != null)
+        else if (!AC())
         {
-            antiMirror_Camera.transform.gameObject.SetActive(false);
-            blackoutObj.gameObject.SetActive(false);
+            if (antiMirror_Camera != null)
+            {
+                antiMirror_Camera.transform.gameObject.SetActive(false);
+            }
+            if (blackoutObj != null)
+            {
+                blackoutObj.transform.gameObject.SetActive(false);
+            }
         }
 
         if (!allowBlockInvis && antiBlocked_Player != null)
