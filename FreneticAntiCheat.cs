@@ -76,7 +76,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             bool inc = false;
             Vector3 c = Vector3.zero;
 
-            Collider[] nearbyColliders = Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 0.075f, ~allowedLayers | ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"));
+            Collider[] nearbyColliders = Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 0.075f, ~allowedLayers.value & ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"));
 
             foreach (Collider collider in nearbyColliders)
             {
@@ -167,7 +167,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             {
                 bool touching = false;
 
-                Collider[] colliders = Physics.OverlapCapsule(localPlayer.GetPosition() + new Vector3(0, 0.05f, 0), localPlayer.GetPosition() - new Vector3(0, localPlayer.GetJumpImpulse() * 0.115f + 0.05f, 0), 0.2f, allowedLayers | ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water", "MirrorReflection", "PickupNoEnvironment", "Interactive", "TransparentFX"));
+                Collider[] colliders = Physics.OverlapCapsule(localPlayer.GetPosition() + new Vector3(0, 0.05f, 0), localPlayer.GetPosition() - new Vector3(0, localPlayer.GetJumpImpulse() * 0.115f + 0.05f, 0), 0.2f, ~allowedLayers.value & ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"));
                 foreach (Collider collider in colliders)
                 {
                     if (collider != null)
@@ -362,6 +362,16 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
             if (!noPickupVerification)
             {
+                Collider[] Colliders = Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 500f);
+
+                foreach (Collider collider in Colliders)
+                {
+                    if (collider == null) continue;
+
+                    VRC_Pickup pickup = collider.GetComponent<VRC_Pickup>();
+                    if (pickup != null) pickup.pickupable = false;
+                }
+
                 foreach (Collider collider in Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 50f))
                 {
                     if (collider == null) continue;
@@ -369,7 +379,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     VRC_Pickup pickup = collider.GetComponent<VRC_Pickup>();
                     if (pickup != null)
                     {
-                        if (IsHandClear(pickup.GetComponent<Collider>(), true, (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, (allowedLayers | LayerMask.GetMask("Walkthrough", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water")) & ~(1 << LayerMask.NameToLayer("Pickup")), inBounds))
+                        if (IsHandClear(pickup.GetComponent<Collider>(), true, ~allowedLayers.value & ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"), inBounds) && IsHandClear(pickup.GetComponent<Collider>(), false, ~allowedLayers.value & ~LayerMask.GetMask("Walkthrough", "Pickup", "Player", "PlayerLocal", "UI", "InternalUI", "HardwareObjects", "UiMenu", "Water"), inBounds))
                         {
                             pickup.GetComponent<VRC_Pickup>().pickupable = true;
                         }
@@ -544,23 +554,9 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
                 if (ColliderPlayer != null && player != null)
                 {
-                    bool blocked = false;
-
-                    RaycastHit[] hits = Physics.RaycastAll(player.GetPosition(), Vector3.up, player.GetAvatarEyeHeightAsMeters() * 7.5f);
-
-                    foreach (RaycastHit hit in hits)
-                    {
-                        Collider collider = hit.collider;
-                        if (collider == null || collider.gameObject == null || !collider.gameObject.activeInHierarchy)
-                        {
-                            blocked = true;
-                            break;
-                        }
-                    }
                     ColliderPlayer.gameObject.SetActive(false);
                 }
             }
-
         }
 
         SendCustomEventDelayedSeconds(nameof(CheckStuff), 0f);
@@ -663,20 +659,23 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
         Debug.DrawLine(originPosition, targetCollider.transform.position, isLeftHand ? Color.blue : Color.green);
 
-        if (!Physics.Raycast(originPosition, (targetCollider.transform.position - originPosition).normalized, out RaycastHit hit, 50f, ~ignoredLayers) || hit.collider == targetCollider) return true;
+        if (!Physics.Raycast(originPosition, (targetCollider.transform.position - originPosition).normalized, out RaycastHit hit, Vector3.Distance(originPosition, targetCollider.transform.position), ignoredLayers) || hit.collider == targetCollider || hit.point == targetCollider.transform.position) return true;
 
         if (hit.collider != null)
         {
+            foreach (string funnyColliderName in allowedColliderNames)
+            {
+                if (hit.collider.gameObject.name.ToLower().Trim().StartsWith(funnyColliderName.ToLower().Trim()))
+                {
+                    return true;
+                }
+            }
             foreach (Collider ignoredCollider in ignoredColliders)
             {
-                if (hit.collider == ignoredCollider)
-                    return true;
+                if (hit.collider == ignoredCollider) return true;
             }
 
-            if (hit.collider.GetComponent<VRC.SDKBase.VRCStation>() != null || hit.collider.GetComponent<VRC.SDKBase.VRC_PortalMarker>() != null)
-            {
-                return true;
-            }
+            if (hit.collider.GetComponent<VRC.SDKBase.VRCStation>() != null || hit.collider.GetComponent<VRC.SDKBase.VRC_PortalMarker>() != null) return true;
         }
 
         return false;
