@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using VRC.SDKBase;
 using TMPro;
+using System;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class FreneticAntiCheat : UdonSharpBehaviour
@@ -33,8 +34,12 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     [Header("Settings")]
     public bool allowBhopping = true;
-    public bool allowLongArms, allowFlight, ragdollSupport, allowOVRAdvanced, allowColliderView, allowSpeedManipulation, allowBlockInvis, AllowPersonalMirrors_Cameras, noColliderBlackout, disableBounds, noPickupVerification, playerCollision = false;
+    public bool allowLongArms, allowFlight, ragdollSupport, allowOVRAdvanced, allowColliderView, allowSpeedManipulation, allowBlockInvis, AllowPersonalMirrors_Cameras, noColliderBlackout, disableBounds = false;
     public bool printDetection = true;
+
+    [Header("Players")]
+    [Range(0, 100)] public float maximumPickupRange = 2.5f;
+    public bool noPickupVerification, playerCollision = false;
 
     [HideInInspector] public int LongArmAttempts, FlightAttempts, OVR_GoGoLocoAttempts, ColliderViewAttempts, SpeedManipulationAttempts, SeatAttempts, RespawnAttempts, OutOfBoundsAttempts;
 
@@ -372,7 +377,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
                     if (pickup != null) pickup.pickupable = false;
                 }
 
-                foreach (Collider collider in Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, 2.5f))
+                foreach (Collider collider in Physics.OverlapSphere(localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position, maximumPickupRange))
                 {
                     if (collider == null) continue;
 
