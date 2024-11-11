@@ -33,7 +33,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
 
     [Header("Settings")]
     public bool allowBhopping = true;
-    public bool allowLongArms, allowFlight, ragdollSupport, allowOVRAdvanced, allowColliderView, allowSpeedManipulation, allowBlockInvis, AllowPersonalMirrors_Cameras, noColliderBlackout, disableBounds, noPickupVerification = false;
+    public bool allowLongArms, allowFlight, ragdollSupport, allowOVRAdvanced, allowColliderView, allowSpeedManipulation, allowBlockInvis, AllowPersonalMirrors_Cameras, noColliderBlackout, disableBounds, noPickupVerification, playerCollision = false;
     public bool printDetection = true;
 
     [HideInInspector] public int LongArmAttempts, FlightAttempts, OVR_GoGoLocoAttempts, ColliderViewAttempts, SpeedManipulationAttempts, SeatAttempts, RespawnAttempts, OutOfBoundsAttempts;
@@ -447,7 +447,7 @@ public class FreneticAntiCheat : UdonSharpBehaviour
             }
         }
 
-        if (!allowBlockInvis && colliderPlayer != null)
+        if (playerCollision && colliderPlayer != null)
         {
             VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
             VRCPlayerApi.GetPlayers(players);
