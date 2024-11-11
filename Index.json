@@ -1,0 +1,13 @@
+{
+    "packages": [
+        {
+            "name": "com.github.Frenetic.AntiCheat",
+            "displayName": "Frenetic AntiCheat",
+            "version": "v0.0.040",
+            "url": "https://github.com/FreneticFurry/VRChat-Udon-Anti-Cheat-System/releases/download/v0.0.040/Frenetic.AntiCheat.unitypackage",
+            "author": {
+                "name": "Frenetic Furry!",
+            }
+        }
+    ]
+}
