@@ -69,6 +69,7 @@ this is the documentation for the AntiCheat, moved to here instead of being tool
 9. 'autoIgnorePickupables' - if set to true it will ignore any object that a player can pickup similar to inputting a name into the: "allowedColliderNames"
 10. 'antiCheat' - turns the anticheat on or off
 11. 'isTeleporting' - this tells that anticheat when a player is teleporting (remember to set it to false when you're done with a teleport)
+12. 'useDetectionPoint' - determines if the anticheat will teleport the player back to a previous known good positon or a detection zone for when someone gets detected for cheating, some detections override this setting due to their nature.
 
 # **{Debug}**
 
@@ -102,7 +103,7 @@ visible within a script you can do antiCheat.LongArmAttempts to get a value tell
 
 1. 'TeleportPlayer(Vector3 Position, Quaternion Rotation, VRC_SceneDescriptor.SpawnOrientation SpawnOrientation, Bool smooth)' - allows a player to properly teleport, a replacement for: "localplayer.TeleportTo"
 2. 'SetPlayerVelocity(Vector3 Velocity)' - allows a player to properly use the 'SetVelocity', a replacement for: "localplayer.SetVelocity()"
-3. 'Detected' - this function is called for every single detection method used, this is used to tell the anticheat 'this player has been detected! move them to the "DetectionPoint"'
+3. 'Detected(type)' - this function is called for every single detection method used, this is used to tell the anticheat 'this player has been detected! move them to the "DetectionPoint", Type being set to 1 overrides the useDetectionPoint and teleports to the detection zone!
 4. 'PTC(item, state, counter, count, usedBy)' - "Print To Console" prints out "[Frenetic Anti Cheat]: YourMessageHere has been detected!" but will only work if the "printDetection" is set to true
 5. IsHandClear(Collider, LeftOrRightHand, Layers, IgnoredColliders) - takes the position of the object/ collider from the left or right hand, returns true or false if the hands are able to properly see a targetted object, left as public for custom pickup systems!
 
