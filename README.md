@@ -103,7 +103,7 @@ visible within a script you can do antiCheat.LongArmAttempts to get a value tell
 1. 'TeleportPlayer(Vector3 Position, Quaternion Rotation, VRC_SceneDescriptor.SpawnOrientation SpawnOrientation, Bool smooth)' - allows a player to properly teleport, a replacement for: "localplayer.TeleportTo"
 2. 'SetPlayerVelocity(Vector3 Velocity)' - allows a player to properly use the 'SetVelocity', a replacement for: "localplayer.SetVelocity()"
 3. 'Detected' - this function is called for every single detection method used, this is used to tell the anticheat 'this player has been detected! move them to the "DetectionPoint"'
-4. 'PTC(String Message)' - "Print To Console" prints out "[Frenetic Anti Cheat]: YourMessageHere has been detected!" but will only work if the "printDetection" is set to true
+4. 'PTC(item, state, counter, count, usedBy)' - "Print To Console" prints out "[Frenetic Anti Cheat]: YourMessageHere has been detected!" but will only work if the "printDetection" is set to true
 5. IsHandClear(Collider, LeftOrRightHand, Layers, IgnoredColliders) - takes the position of the object/ collider from the left or right hand, returns true or false if the hands are able to properly see a targetted object, left as public for custom pickup systems!
 
 **-Helper Functions-**
