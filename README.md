@@ -1,7 +1,7 @@
 # ----VRChat-Udon-AntiCheat-System: FAC----
 # **{Slight warning about the VRC Team}**
 
-The VRChat devs have hired some sus (pedo) individuals & there could be more so my suggestion is just not interacting with the VRChat team :)
+VRChat has hired multiple sus (Pedo) people & there could be more! i highly suggest not interacting with the VRChat team unless needed.
 
 # **{Features}**
 
