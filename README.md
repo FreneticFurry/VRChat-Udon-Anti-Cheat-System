@@ -36,7 +36,9 @@ if you want to use seats within your world its recommended to use the "Seat.cs" 
 
 # **{Known Issues}**
 
-1. no known issues currently!
+1. sometimes players can be set to 0 improperly
+2. flying doesnt get caught properly when detection point is different
+3. other minor fixes are needed but currently shouldn't be a problem
 
 # **{Terms}**
 
