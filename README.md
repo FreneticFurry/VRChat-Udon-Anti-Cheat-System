@@ -1,7 +1,8 @@
 # ----VRChat-Udon-AntiCheat-System: FAC----
 # **{Slight warning about the VRC Team}**
 
-VRChat has hired multiple sus (Pedo) people & there could be more! i highly suggest not interacting with the VRChat team unless needed.
+the VRChat team has hired some pedofile's, make odd to bad choices (alot), and more.
+i strongly recommend that you DONT interact with the VRC team (this is my own opinion dont be mad.)
 
 # **{Features}**
 
@@ -19,7 +20,7 @@ VRChat has hired multiple sus (Pedo) people & there could be more! i highly sugg
 
 this isn't a solution for 3rd party clients, its EAC & VRChat team's job to prevent that, not mine.
 
-this will protect against 'normal' players who're trying to abuse things that vrchat has eg. using Personal Mirrors to ESP through walls.
+this will protect against 'normal' players who're trying to abuse things that vrchat has eg. using Personal Mirrors or camera's to ESP through walls.
 
 # **{How To Use}**
 
@@ -30,15 +31,25 @@ if you want to use seats within your world its recommended to use the "Seat.cs" 
 
 # **{VRC Restrictions}**
 
-1. VRChat devs do not allow access to avatars so this is about the best that i can think of for things such as collider flying
-2. if the vrchat devs with Udon 2 decide to not be inept then actual things can be created! if access & other things happen with Udon 2 this'll get a update accordingly to hopefully make it better!
-3. unfortunately world creators also may not outright ban players from their worlds so this system will detect and allow the creator to either a respawn them after being detected as a cheater or b place them into a per server cheater room to ban players per instance (ik its dumb but its the vrchat devs so what'd you expect from them.)
+the VRChat team makes udon very limiting "VRChat offers an endless collection of social VR experiences by giving the power of creation to its community." is a lie, just have to hope that Udon 2 isnt as awful as it currently seems to be
+VRChat does not allow Udon to directly access much to anything about the avatar's anything like checking for colliders is probably oversights that can be taken advantage of here luckily.
 
 # **{Known Issues}**
 
 1. sometimes players can be set to 0 improperly
 2. flying doesnt get caught properly when detection point is different
 3. other minor fixes are needed but currently shouldn't be a problem
+
+# **{Future Update Plans}**
+
+1. Add support for using: https://github.com/FreneticFurry/VRC-Respawn-Tracker to make it trigger to allow logic to be ran by other players upon being detected properly.
+2. Add new OVR logic for more leniency so players can still have the ability to use OVR Advanced abit more without entirely restricting it
+3. Fix the "Ragdoll Support" not preventing players from using avatar colliders to fly when the setting "Enable Spawn Point" is turned on
+4. Add customizable leniency to various settings to allow developers to test the AC in various situations so they can have things more strict or lenient towards things.
+5. Attempt a fix for the Chatbox being hidden by the AntiMirror&Camera shader (i dont really think i can exclude the chatbox but ill give it a shot.)
+6. Make the shader force stop shaders from abusing things such as using a Depth pass to view the depth only bypassing effects such as fog
+7. Attempt to prevent external camera's such as RenderTextures from being used to bypass the AntiMirror&Camera shader
+8. Various small fixes/ changes that dont need to be stated here since the list is already long but should make the anticheat overall better!
 
 # **{Terms}**
 
@@ -48,6 +59,9 @@ you may redistribute this code & even edit it, i only ask that you credit me for
 
 if you'd like to support my random shananagains then feel free! https://www.patreon.com/freneticfurry
 i intend to keep most if not all of my things free so supporting would be very nice :3
+
+if you need help &/ or assistance with the AntiCheat please feel free to contact me on discord: freneticfurry
+(also a good way to report bugs to me so they can be fixed making the anticheat better.)
 
 # **{Credit}**
 
@@ -72,6 +86,8 @@ this is the documentation for the AntiCheat, moved to here instead of being tool
 10. 'antiCheat' - turns the anticheat on or off
 11. 'isTeleporting' - this tells that anticheat when a player is teleporting (remember to set it to false when you're done with a teleport)
 12. 'useDetectionPoint' - determines if the anticheat will teleport the player back to a previous known good positon or a detection zone for when someone gets detected for cheating, some detections override this setting due to their nature.
+
+(Next Update) 13. 'speedLeniency' - makes the speed detection more lenient or more aggressive values from 1 to 3.5 because anything more then that you might aswell just turn of the speed detection entirely (if you really want it unlocked you can remove the recommended range.)
 
 # **{Debug}**
 
