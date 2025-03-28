@@ -52,7 +52,7 @@ VRChat does not allow Udon to directly access much to anything about the avatar'
 7. Attempt to prevent external camera's such as RenderTextures from being used to bypass the AntiMirror&Camera shader
 8. Various small fixes/ changes that dont need to be stated here since the list is already long but should make the anticheat overall better!
 
-do note: im taking my time on the next update, it will be a minute before the next update comes out because its going through alot of through testing to improve things :D
+do note: im taking my time on the next update, it will be a minute before the next update comes out because its going through alot of thorough testing to improve things to hopefully make things as good as possible :D
 
 # **{Terms}**
 
