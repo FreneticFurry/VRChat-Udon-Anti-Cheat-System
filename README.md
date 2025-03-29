@@ -1,9 +1,9 @@
 # ----VRChat-Udon-AntiCheat-System: FAC----
 # **{Slight warning about the VRC Team}**
 
-the VRChat team has hired some pedo's and seemingly refuses to remove them, make odd to bad choices (alot), and more.
+the VRC-Team have made some rough choices over the years (eg. inviting someone underage to a alcohol/ drinking party & hiring some people that probably shouldn't have been hired &/ or should've been fired by now)
 
-i strongly recommend that you DONT interact with the VRC team (this is my own opinion dont be mad.)
+personally i recommend to interact with the VRC-Team in a minimal manner/ little - not at all, i just cant find myself being able to trust them much/ at all due to broken promises and various other things (this is my own opinion dont be mad pls. ;-;)
 
 # **{Features}**
 
