@@ -44,13 +44,13 @@ VRChat does not allow Udon to directly access much to anything about the avatar'
 # **{Future Update Plans}**
 
 1. Add support for using: https://github.com/FreneticFurry/VRC-Respawn-Tracker to make it trigger to allow logic to be ran by other players upon being detected properly. (Done)
-2. Add new OVR logic for more leniency so players can still have the ability to use OVR Advanced abit more without entirely restricting it
-3. Fix the "Ragdoll Support" not preventing players from using avatar colliders to fly when the setting "Enable Spawn Point" is turned on
+2. Add new OVR logic for more leniency so players can still have the ability to use OVR Advanced abit more without entirely restricting it (Done)
+3. Fix the "Ragdoll Support" not preventing players from using avatar colliders to fly when the setting "Enable Spawn Point" is turned on (Done
 4. Add customizable leniency to various settings to allow developers to test the AC in various situations so they can have things more strict or lenient towards things. (Done)
-5. Attempt a fix for the Chatbox being hidden by the AntiMirror&Camera shader (i dont really think i can exclude the chatbox but ill give it a shot.) (Afaik this cant be done due to how VRChat is. sry chatbox users.)
-6. Make the shader force stop shaders from abusing things such as using a Depth pass to view the depth only bypassing effects such as fog
-7. Attempt to prevent external camera's such as RenderTextures from being used to bypass the AntiMirror&Camera shader
-8. Various small fixes/ changes that dont need to be stated here since the list is already long but should make the anticheat overall better!
+5. ~~Attempt a fix for the Chatbox being hidden by the AntiMirror&Camera shader~~ (ive tried everything i could, doesnt seem possible, sorry chatbox users.)
+6. Make the shader force stop shaders from abusing things such as using a Depth pass to view the depth only bypassing effects such as fog (Done)
+7. Attempt to prevent external camera's such as RenderTextures from being used to bypass the AntiMirror&Camera shader (Done)
+8. Various small fixes/ changes that dont need to be stated here since the list is already long but should make the anticheat overall better! (70-80%)
 
 do note: im taking my time on the next update, it will be a minute before the next update comes out because its going through alot of thorough testing to improve things to hopefully make things as good as possible :D
 
