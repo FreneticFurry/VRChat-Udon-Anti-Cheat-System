@@ -13,7 +13,7 @@ anti block invis (done)
 
 anti out of bounds (done)
 
-anti respawning (done)
+anti respawning (done, trudolph's feature request)
 
 anti out of bounds (done)
 
@@ -26,6 +26,8 @@ tool/ interaction verification (planned)
 anti Mirror's & Camera cheating (planned)
 
 anti avatar overlay esp cheating (planned)
+
+mark client users as cheating remotely (planned, Vector Lotus's Feature request)
 
 # -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
@@ -59,7 +61,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 # -{Credit}-
 
 - Zerithax: alot of bug finding & some slight scripting help
-- Vector Lotus: some bug finding/ QA help
+- Vector Lotus: good amount of bug finding/ QA help & feature suggestion
 - Trudolph: some bug finding/ QA help & feature suggestion
 
 
