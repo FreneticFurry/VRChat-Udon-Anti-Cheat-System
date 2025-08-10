@@ -69,7 +69,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | Flight | set to true to have the anti cheat detect flight set to false to have the anti cheat flight manipulation. | True
 | Flight Leniency | set the float to define the allowed leniency before it starts thinking that the player is flying when they shouldn't be. | 0.1
 | View Manipulation | set to true to have the anti cheat detect View Manipulation set to false to have the anti cheat allow View Manipulation. | True
-| View Leniency | set the float to define the allowed leniency before it starts thinking that the player is flying when they shouldn't be. | 0
+| View Leniency | set the float to define the allowed leniency before it starts thinking that the player is attempting to go outside a reasonable range via something like space drag. | 0
 | Anti Block Invis | set to true to have a visual blocked avatar when someone blocks another player set to false to let players just remain invisible to each other if they block each other. | True
 | Anti Blocked Avatar | set this to a gameobject to define the blocked avatar used, look at the default blocked avatar as a reference to set this up with a custom one. | Anti Block Default
 | Enable Bounds | set to true to have the anti cheat detect the player going out of bounds set to false to have the anti cheat allow the player to go out of bounds. | False
