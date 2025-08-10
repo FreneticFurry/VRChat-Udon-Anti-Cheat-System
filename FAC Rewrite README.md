@@ -64,7 +64,6 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | FAC.TeleportPlayer(Position, Rotation, SpawnOrientation, RemoteSmoothing) | exact same as TeleportTo just with extra steps to tell FAC to allow the teleport | can be used for any purpose you'd want this int for |
 | FAC.Seat() | similar to TeleportPlayer() but more designed for VRCStations instead | can be used for any purpose you'd want this int for |
 | FAC.IsGrounded | returns true if the player is on the floor returns false if the player is not on the floor eg. jumping | can be used for any purpose you'd want this int for |
-
 | FAC.ViewAttempts | returns a Int value for the amount of times the LocalPlayer attempted to look in a collider | can be used for any purpose you'd want this int for |
 | FAC.SpeedAttempts | returns a Int value for the amount of times the LocalPlayer attempted to gain more speed then what is allowed | can be used for any purpose you'd want this int for |
 | FAC.FlyAttempts | returns a Int value for the amount of times the LocalPlayer attempted to fly/ stay in the air when they shouldn't be able to | can be used for any purpose you'd want this int for |
