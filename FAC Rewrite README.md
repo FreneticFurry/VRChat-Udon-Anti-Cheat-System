@@ -27,7 +27,7 @@ anti Mirror's & Camera cheating (planned)
 
 anti avatar overlay esp cheating (planned)
 
-mark client users as cheating remotely (planned, Vector Lotus's Feature request)
+mark client users as cheating remotely like in PD2 (planned, Vector Lotus's Feature request)
 
 # -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
