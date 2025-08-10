@@ -19,7 +19,7 @@ anti out of bounds (done)
 
 - planned features that will be worked on in order -
 
-mark client users as cheating remotely like in PD2 (in progress, Vector Lotus's Feature request)
+mark client users as cheating remotely like in PD2 (feature halted because people dont agree with it, might continue it as a optional addon for FAC instead of a built-in feature: Vector Lotus's Feature request)
 
 anti ovr advanced/ gogo loco (in progress - slightly done)
 
