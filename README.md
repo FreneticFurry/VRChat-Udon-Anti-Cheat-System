@@ -64,7 +64,6 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 # **{Credit}**
 
-- RyuukaVR: very slight bug finding
 - Zerithax: alot of bug finding & some slight scripting help
 - Vector Lotus: some bug finding/ QA help
 - Trudolph: some bug finding/ QA help & feature suggestion
