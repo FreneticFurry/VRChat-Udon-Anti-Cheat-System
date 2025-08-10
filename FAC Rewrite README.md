@@ -60,7 +60,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 - Public exposed functions
 
 | Function | Description | Usage |
-|:---------|:------------|:------------|
+|:-------|:------------|:------------|
 | FAC.SetPlayerVelocity(Velocity) | tells the anticheat that the localPlayer velocity is going to be changed by the world and allows that to happen | can be used for any purpose you'd want this int for |
 | FAC.TeleportPlayer(Position, Rotation, SpawnOrientation, RemoteSmoothing) | exact same as TeleportTo just with extra steps to tell FAC to allow the teleport | can be used for any purpose you'd want this int for |
 | FAC.Seat() | similar to TeleportPlayer() but more designed for VRCStations instead | can be used for any purpose you'd want this int for |
