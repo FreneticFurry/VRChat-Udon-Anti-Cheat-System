@@ -4,18 +4,27 @@ warning: this is subject to change, this is put here in preperation for FAC Rewr
 
 # -{Features}-
 anti flying (done)
+
 anti speed manipulation (done)
+
 anti seat cheating (done)
+
 anti block invis (done)
+
 anti out of bounds (done)
+
 anti respawning (done)
+
 anti out of bounds (done)
 
 - planned features that will be worked on in order -
 
 anti ovr advanced/ gogo loco (slightly done)
+
 tool/ interaction verification (planned)
+
 anti Mirror's & Camera cheating (planned)
+
 anti avatar overlay esp cheating (planned)
 
 # -{Setup/ Install}-
