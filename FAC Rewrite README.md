@@ -45,7 +45,7 @@ by using, editing or redistributing FAC you agree to these terms:
 
 1. you may make edits, changes and so on to FAC.
 2. in some way shape or form provide proper credit to me for FAC.
-3. you may not sell FAC, FAC is a F2U asset it is not to be sold by anyone for any reason none of the code found within FAC is not to be sold.
+3. you may not sell FAC, FAC is a F2U asset it is not to be sold by anyone for any reason all of the code found within FAC should not be sold nor should snippets.
 4. you may redistrubute FAC in any F2U way. (preferrably via forking FAC on github)
 5. you may make assets that directly use FAC or interact with FAC in any way shape or form.
 6. if you're making your own similar system you can use FAC as a example, you may not copy-paste FAC code and call it your own.
