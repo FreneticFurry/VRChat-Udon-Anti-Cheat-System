@@ -118,5 +118,5 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 | Function | Description | Usage |
 |:---------|:------------|:------------|
-| FAC.Detected(State, Reason, Counter) | formats output and teleports the player to the harsh location | Detected(0, "Example", 420) & Detected(1, "Example", 420) |
+| FAC.Detected(State, Reason, Counter) | formats output and teleports the player to the harsh location | Detected(0, "Example", 420) = formatting & Detected(1, "Example", 420) = teleport player to harsh location |
 | FAC.onTeleportEnd() | used to define when a teleport has ended/ finished | this function is exposed but not meant for development is intended for internal usage |
