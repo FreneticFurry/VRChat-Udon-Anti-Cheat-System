@@ -61,8 +61,8 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 | Function | Description | Usage |
 |:-------|:------------|:------------|
-| FAC.SetPlayerVelocity(Velocity) | tells the anticheat that the localPlayer velocity is going to be changed by the world and allows that to happen | can be used for any purpose you'd want this int for |
-| FAC.TeleportPlayer(Position, Rotation, SpawnOrientation, RemoteSmoothing) | exact same as TeleportTo just with extra steps to tell FAC to allow the teleport | can be used for any purpose you'd want this int for |
+| FAC.SetPlayerVelocity(Velocity) | tells the anticheat that the localPlayer velocity is going to be changed by the world and allows that to happen | use to set the player velocity correctly |
+| FAC.TeleportPlayer(Position, Rotation, SpawnOrientation, RemoteSmoothing) | exact same as TeleportTo just with extra steps to tell FAC to allow the teleport | use to teleport the player where you'd want to teleport them |
 | FAC.Seat() | similar to TeleportPlayer() but more designed for VRCStations instead | can be used for any purpose you'd want this int for |
 | FAC.IsGrounded | returns true if the player is on the floor returns false if the player is not on the floor eg. jumping | can be used for any purpose you'd want this int for |
 | FAC.ViewAttempts | returns a Int value for the amount of times the LocalPlayer attempted to look in a collider | can be used for any purpose you'd want this int for |
