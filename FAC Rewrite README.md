@@ -57,7 +57,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 # -{Documentation}-
 
-- Public exposed functions -
+- Public exposed functions
 
 | Function | Description | Usage |
 |:---------|:------------|:------------|
@@ -72,9 +72,9 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | FAC.OutOfBoundsAttempts | returns a Int value for the amount of times the LocalPlayer attempted to get out of bounds | can be used for any purpose you'd want this int for |
 | FAC.RespawnCount | returns a Int value for the amount of times the LocalPlayer has respawned | can be used for any purpose you'd want this int for |
 
-- Internal functions -
-| Function | Description | Usage |
-|:------------------------|:------------------------------------|:------------------------------------|
+- Internal functions
 
+| Function | Description | Usage |
+|:---------|:------------|:------------|
 | FAC.Detected(State, Reason, Counter) | formats output and teleports the player to the harsh location | Detected(0, "Example", 420) & Detected(1, "Example", 420) |
 | FAC.onTeleportEnd() | used to define when a teleport has ended/ finished | this function is exposed but not meant for development is intended for internal usage |
