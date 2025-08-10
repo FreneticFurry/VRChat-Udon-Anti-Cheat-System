@@ -59,34 +59,34 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 - Settings
 
-| Setting | Description |
-|:---------|:------------|
-| Enable Anti Cheat | set to true to have the anti cheat work set to false to disable the entire anti cheat.
-| Collider Viewing | set to true to have the anti cheat detect collider viewing set to false to have the anti cheat allow collider viewing.
-| Collider Viewing Range | change the float to define the range before fac will try to prevent the player from viewing inside a collider. Default: 0.125
-| Speed Manipulation | set to true to have the anti cheat detect speed manipulation set to false to have the anti cheat allow speed manipulation.
-| Speed Leniency | set the float to define the allowed leniency before it starts thinking that the player is speed manipulating. Default: 3;
-| Flight | set to true to have the anti cheat detect flight set to false to have the anti cheat flight manipulation.
-| Flight Leniency | set the float to define the allowed leniency before it starts thinking that the player is flying when they shouldn't be. Default: 0.1;
-| View Manipulation | set to true to have the anti cheat detect View Manipulation set to false to have the anti cheat allow View Manipulation.
-| View Leniency | set the float to define the allowed leniency before it starts thinking that the player is flying when they shouldn't be. Default: 0;
-| Anti Block Invis | set to true to have a visual blocked avatar when someone blocks another player set to false to let players just remain invisible to each other if they block each other.
-| Anti Blocked Avatar | set this to a gameobject to define the blocked avatar used, look at the default blocked avatar as a reference to set this up with a custom one.
-| Enable Bounds | set to true to have the anti cheat detect the player going out of bounds set to false to have the anti cheat allow the player to go out of bounds.
-| In Bounds Colliders | this is a array of colliders used for Enable Bounds if there is no colliders here the Enable Bounds doesnt work.
-| Punishment Location | set this to a location you want to use when a harsh punishment is used on a player.
-| Punish Collider Viewing | set to true to send the player to the punishment location when they get detected for attempting to look inside a collider
-| Punish Speed Manipulation | set to true to send the player to the punishment location when they get detected for attempting to gain more speed then what is allowed
-| Punish Flight | set to true to send the player to the punishment location when they get detected for attempting to fly
-| Punish ViewManipulation | set to true to send the player to the punishment location when they get detected for attempting to space drag out of a reasonable range
-| Punish Out Of Bounds | set to true to send the player to the punishment location when they get detected for being out of bounds.
-| Disallow Respawning | set to true to turn off respawning via the quick menu.
-| Is Grounded Radius | set the float to change how large the check is for seeing if the player is or isnt grounded. Default: 0.2
-| Ignored Objects | this is a array of objects to be ignored by the anti cheat, example: if a object here is set to Walkthrough and the player stands on top it will consider them as fly cheating or not grounded/ on floor.
-| Collider Layers | used to define what layers the Is Grounded logic will use, should be set to be just on Default but can be used for more layers if needed.
-| Log Errors | set to true to output Error logs from FAC.
-| Log Events | set to true to output Event/ Function logs from FAC.
-| Log Detections | set to true to output each detection when they happen from FAC.
+| Setting | Description | Default Value |
+|:---------|:------------|:------------|
+| Enable Anti Cheat | set to true to have the anti cheat work set to false to disable the entire anti cheat. | True
+| Collider Viewing | set to true to have the anti cheat detect collider viewing set to false to have the anti cheat allow collider viewing. | True
+| Collider Viewing Range | change the float to define the range before fac will try to prevent the player from viewing inside a collider. | 0.125
+| Speed Manipulation | set to true to have the anti cheat detect speed manipulation set to false to have the anti cheat allow speed manipulation. | True
+| Speed Leniency | set the float to define the allowed leniency before it starts thinking that the player is speed manipulating. | 3
+| Flight | set to true to have the anti cheat detect flight set to false to have the anti cheat flight manipulation. | True
+| Flight Leniency | set the float to define the allowed leniency before it starts thinking that the player is flying when they shouldn't be. | 0.1
+| View Manipulation | set to true to have the anti cheat detect View Manipulation set to false to have the anti cheat allow View Manipulation. | True
+| View Leniency | set the float to define the allowed leniency before it starts thinking that the player is flying when they shouldn't be. | 0
+| Anti Block Invis | set to true to have a visual blocked avatar when someone blocks another player set to false to let players just remain invisible to each other if they block each other. | True
+| Anti Blocked Avatar | set this to a gameobject to define the blocked avatar used, look at the default blocked avatar as a reference to set this up with a custom one. | Anti Block Default
+| Enable Bounds | set to true to have the anti cheat detect the player going out of bounds set to false to have the anti cheat allow the player to go out of bounds. | False
+| In Bounds Colliders | this is a array of colliders used for Enable Bounds if there is no colliders here the Enable Bounds doesnt work. | None
+| Punishment Location | set this to a location you want to use when a harsh punishment is used on a player. | (0, 0, 0)
+| Punish Collider Viewing | set to true to send the player to the punishment location when they get detected for attempting to look inside a collider. | False
+| Punish Speed Manipulation | set to true to send the player to the punishment location when they get detected for attempting to gain more speed then what is allowed. | False
+| Punish Flight | set to true to send the player to the punishment location when they get detected for attempting to fly. | False
+| Punish ViewManipulation | set to true to send the player to the punishment location when they get detected for attempting to space drag out of a reasonable range. | False
+| Punish Out Of Bounds | set to true to send the player to the punishment location when they get detected for being out of bounds. | False
+| Disallow Respawning | set to true to turn off respawning via the quick menu. | False
+| Is Grounded Radius | set the float to change how large the check is for seeing if the player is or isnt grounded. | 0.2
+| Ignored Objects | this is a array of objects to be ignored by the anti cheat, example: if a object here is set to Walkthrough and the player stands on top it will consider them as fly cheating or not grounded/ on floor. | None
+| Collider Layers | used to define what layers the Is Grounded logic will use, should be set to be just on Default but can be used for more layers if needed. | Default
+| Log Errors | set to true to output Error logs from FAC. | False
+| Log Events | set to true to output Event/ Function logs from FAC. | False
+| Log Detections | set to true to output each detection when they happen from FAC. | False
 
 - Public exposed functions (designed for Development)
 
