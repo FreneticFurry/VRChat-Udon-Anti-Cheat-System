@@ -82,7 +82,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | Punish Out Of Bounds | set to true to send the player to the punishment location when they get detected for being out of bounds. | False
 | Disallow Respawning | set to true to turn off respawning via the quick menu. | False
 | Is Grounded Radius | set the float to change how large the check is for seeing if the player is or isnt grounded. | 0.2
-| Ignored Objects | this is a array of objects to be ignored by the anti cheat, example: if a object here is set to Walkthrough and the player stands on top it will consider them as fly cheating or not grounded/ on floor. | None
+| Ignored Objects | this is a array of objects to be ignored by the anti cheat, example: if a object here is set to Walkthrough and the player stands on top it will consider them as fly cheating or not grounded/ not on any floor. | None
 | Collider Layers | used to define what layers the Is Grounded logic will use, should be set to be just on Default but can be used for more layers if needed. | Default
 | Log Errors | set to true to output Error logs from FAC. | False
 | Log Events | set to true to output Event/ Function logs from FAC. | False
