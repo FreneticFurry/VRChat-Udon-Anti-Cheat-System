@@ -59,7 +59,6 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 - Public exposed functions -
 | Function | Description | Usage |
-
 |:------------------------|:------------------------------------|:------------------------------------|
 
 | FAC.SetPlayerVelocity(Velocity) | tells the anticheat that the localPlayer velocity is going to be changed by the world and allows that to happen | can be used for any purpose you'd want this int for |
@@ -76,7 +75,6 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 - Internal functions -
 | Function | Description | Usage |
-
 |:------------------------|:------------------------------------|:------------------------------------|
 
 | FAC.Detected(State, Reason, Counter) | formats output and teleports the player to the harsh location | Detected(0, "Example", 420) & Detected(1, "Example", 420) |
