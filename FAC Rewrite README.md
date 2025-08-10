@@ -57,7 +57,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 # -{Documentation}-
 
-- Public exposed functions
+- Public exposed functions (designed for Development)
 
 | Function | Description | Usage |
 |:-------|:------------|:------------|
@@ -72,7 +72,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | FAC.OutOfBoundsAttempts | returns a Int value for the amount of times the LocalPlayer attempted to get out of bounds | can be used for any purpose you'd want this int for |
 | FAC.RespawnCount | returns a Int value for the amount of times the LocalPlayer has respawned | can be used for any purpose you'd want this int for |
 
-- Internal functions
+- Internal functions (not designed for development)
 
 | Function | Description | Usage |
 |:---------|:------------|:------------|
