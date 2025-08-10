@@ -1,8 +1,8 @@
-#-{FAC Rewrite}-
+# -{FAC Rewrite}-
 
 warning: this is subject to change, this is put here in preperation for FAC Rewrite to eventually replace the current ReadMe and documentation, just temporary storage and lets you view what is actively being added or changed!
 
-#-{Features}-
+# -{Features}-
 anti flying (done)
 anti speed manipulation (done)
 anti seat cheating (done)
@@ -18,7 +18,7 @@ tool/ interaction verification (planned)
 anti Mirror's & Camera cheating (planned)
 anti avatar overlay esp cheating (planned)
 
-#-{Setup/ Install}-
+# -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
 2. import the unitypackage into your unity project
 3. place the prefab from the FAC folder "FAC: AntiCheat" into your scene
