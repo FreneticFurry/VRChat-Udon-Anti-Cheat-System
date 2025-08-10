@@ -19,15 +19,15 @@ anti out of bounds (done)
 
 - planned features that will be worked on in order -
 
-anti ovr advanced/ gogo loco (slightly done)
+mark client users as cheating remotely like in PD2 (in progress, Vector Lotus's Feature request)
+
+anti ovr advanced/ gogo loco (in progress - slightly done)
 
 tool/ interaction verification (planned)
 
 anti Mirror's & Camera cheating (planned)
 
 anti avatar overlay esp cheating (planned)
-
-mark client users as cheating remotely like in PD2 (planned, Vector Lotus's Feature request)
 
 # -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
