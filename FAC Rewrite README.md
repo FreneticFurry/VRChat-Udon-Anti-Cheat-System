@@ -17,8 +17,6 @@ anti out of bounds (done)
 
 anti respawning (done - trudolph's feature request)
 
-anti out of bounds (done)
-
 - planned features that will be worked on in order -
 
 mark client users as cheating remotely like in PD2 (in progess, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
