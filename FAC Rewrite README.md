@@ -1,6 +1,6 @@
 # -{FAC Rewrite}-
 
-i've been asked when rewrite will come out, rewrite will come out... when im done, im taking my time and im trying my best to test and ensure rewrite works and is very easy for a world creator to use, while i work on it please be patient while i think and figure out what to do or add (im just one person lol)
+i've been asked when rewrite will come out, rewrite will eventually come out as i dont have any deadlines or expected times for it to be out, i am just 1 person working on this and i only have so many people that're willing to help me test and learn... im working on my own game world(s) aswell so that also adds delay onto FAC aswell so with that being said please be patient.
 
 warning: this is subject to change, this is put here in preperation for FAC Rewrite to eventually replace the current ReadMe and documentation, just temporary storage and lets you view what is actively being added or changed!
 
