@@ -105,9 +105,9 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 | Function | Description | Usage |
 |:-------|:------------|:------------|
-| FAC.SetPlayerVelocity(Velocity) | tells the anticheat that the localPlayer velocity is going to be changed by the world and allows that to happen | use to set the player velocity correctly |
-| FAC.TeleportPlayer(Position, Rotation, SpawnOrientation, RemoteSmoothing) | exact same as TeleportTo just with extra steps to tell FAC to allow the teleport | use to teleport the player where you'd want to teleport them |
-| FAC.Seat() | similar to TeleportPlayer() but more designed for VRCStations instead | use this to allow a world seat to be used correctly |
+| FAC._SetPlayerVelocity(Velocity) | tells the anticheat that the localPlayer velocity is going to be changed by the world and allows that to happen | use to set the player velocity correctly |
+| FAC._TeleportPlayer(Position, Rotation, SpawnOrientation, RemoteSmoothing) | exact same as TeleportTo just with extra steps to tell FAC to allow the teleport | use to teleport the player where you'd want to teleport them |
+| FAC._Seat() | similar to TeleportPlayer() but more designed for VRCStations instead | use this to allow a world seat to be used correctly |
 | FAC.IsGrounded | returns true if the player is on the floor returns false if the player is not on the floor eg. jumping | use this if you want to know if the LocalPlayer is on the ground or not |
 | FAC.ViewAttempts | returns a Int value for the amount of times the LocalPlayer attempted to look in a collider | can be used for any purpose you'd want this int for |
 | FAC.SpeedAttempts | returns a Int value for the amount of times the LocalPlayer attempted to gain more speed then what is allowed | can be used for any purpose you'd want this int for |
@@ -120,5 +120,5 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 | Function | Description | Usage |
 |:---------|:------------|:------------|
-| FAC.Detected(State, Reason, Counter) | formats output and teleports the player to the harsh location | Detected(0, "Example", 420) = formatting & Detected(1, "Example", 420) = teleport player to harsh location |
-| FAC.onTeleportEnd() | used to define when a teleport has ended/ finished | this function is exposed but not meant for development is intended for internal usage |
+| FAC._Detected(State, Reason, Counter) | formats output and teleports the player to the harsh location | Detected(0, "Example", 420) = formatting & Detected(1, "Example", 420) = teleport player to harsh location |
+| FAC._onTeleportEnd() | used to define when a teleport has ended/ finished | this function is exposed but not meant for development is intended for internal usage |
