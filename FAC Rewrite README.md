@@ -19,6 +19,7 @@ warning: this is subject to change, this is put here in preperation for FAC Rewr
 9. tool/ interaction verification (planned)
 10. anti Mirror's & Camera cheating (planned)
 11. anti avatar overlay esp cheating (planned)
+12. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
 
 # -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
