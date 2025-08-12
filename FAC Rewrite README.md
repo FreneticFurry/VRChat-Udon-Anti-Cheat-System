@@ -5,29 +5,20 @@ i've been asked when rewrite will come out, rewrite will eventually come out as 
 warning: this is subject to change, this is put here in preperation for FAC Rewrite to eventually replace the current ReadMe and documentation, just temporary storage and lets you view what is actively being added or changed!
 
 # -{Features}-
-anti flying (done)
-
-anti speed manipulation (done)
-
-anti seat cheating (done)
-
-anti block invis (done)
-
-anti out of bounds (done)
-
-anti respawning (done - trudolph's feature request)
+1. anti flying (done)
+2. anti speed manipulation (done)
+3. anti seat cheating (done)
+4. anti block invis (done)
+5. anti out of bounds (done)
+6. anti respawning (done - trudolph's feature request)
 
 - planned features that will be worked on in order -
 
-mark client users as cheating remotely like in PD2 (in progess, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
-
-anti ovr advanced/ gogo loco (in progress - slightly done)
-
-tool/ interaction verification (planned)
-
-anti Mirror's & Camera cheating (planned)
-
-anti avatar overlay esp cheating (planned)
+7. mark client users as cheating remotely like in PD2 (in progess, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
+8. anti ovr advanced/ gogo loco (in progress - slightly done)
+9. tool/ interaction verification (planned)
+10. anti Mirror's & Camera cheating (planned)
+11. anti avatar overlay esp cheating (planned)
 
 # -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
