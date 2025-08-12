@@ -11,13 +11,13 @@ warning: this is subject to change, this is put here in preperation for FAC Rewr
 4. anti block invis (done)
 5. anti out of bounds (done)
 6. anti respawning (done - trudolph's feature request)
+7. anti Mirror's & Camera cheating (done)
 
-- planned features that will be worked on in order -
+- planned features -
 
-7. mark client users as cheating remotely like in PD2 (in progess, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
-8. anti ovr advanced/ gogo loco (in progress - slightly done)
-9. tool/ interaction verification (planned)
-10. anti Mirror's & Camera cheating (planned)
+8. mark client users as cheating remotely like in PD2 (in progess, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
+9. anti ovr advanced/ gogo loco (in progress - slightly done)
+10. tool/ interaction verification (planned)
 11. anti avatar overlay esp cheating (planned)
 12. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
 
