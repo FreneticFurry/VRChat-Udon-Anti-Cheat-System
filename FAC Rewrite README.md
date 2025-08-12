@@ -56,7 +56,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 - Vector Lotus: good amount of bug finding/ QA help & feature suggestion
 - Trudolph: some bug finding/ QA help & feature suggestion
 
-$${\color{red}Welcome \space \color{lightblue}To \space \color{lightgreen}{github}}$$
+$${\color{red}idk what im doing in github :sob:}$$
 
 # -{Documentation}-
 
