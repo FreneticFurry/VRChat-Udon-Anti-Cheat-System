@@ -56,6 +56,8 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 - Vector Lotus: good amount of bug finding/ QA help & feature suggestion
 - Trudolph: some bug finding/ QA help & feature suggestion
 
+<code style="color : dont mind me">text</code>
+
 # -{Documentation}-
 
 - Settings
