@@ -56,7 +56,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 - Vector Lotus: good amount of bug finding/ QA help & feature suggestion
 - Trudolph: some bug finding/ QA help & feature suggestion
 
-<span style="color:#ff0000;">test?</span>:
+<span style="color:blue;">blue test</span>
 
 # -{Documentation}-
 
