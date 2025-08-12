@@ -77,6 +77,9 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | Anti Blocked Avatar | set this to a gameobject to define the blocked avatar used, look at the default blocked avatar as a reference to set this up with a custom one. | Anti Block Default
 | Enable Bounds | set to true to have the anti cheat detect the player going out of bounds set to false to have the anti cheat allow the player to go out of bounds. | False
 | In Bounds Colliders | this is a array of colliders used for Enable Bounds if there is no colliders here the Enable Bounds doesnt work. | None
+| Protect Mirrors Cameras Layers | this determines if the anti cheat will or will not protect against layer viewing primarily in mirror's or camera's | True
+| Use Shader Block | this will determine if the anti cheat will use "ShaderBlock" WARNING: will disable Username and Chatbox, anything transparent will not render, change the render queue to fix though makes other shaders able to render aswell in avatars. | False
+| Protected Layers | this is a LayerMask only supporting 31 inputs as unity only allows for 32 layers, change to protect layers within the mirrors and camera's (this cannot be changed in realtime it is a startup process.) | Mixed
 | Punishment Location | set this to a location you want to use when a harsh punishment is used on a player. | (0, 0, 0)
 | Punish Collider Viewing | set to true to send the player to the punishment location when they get detected for attempting to look inside a collider. | False
 | Punish Speed Manipulation | set to true to send the player to the punishment location when they get detected for attempting to gain more speed then what is allowed. | False
