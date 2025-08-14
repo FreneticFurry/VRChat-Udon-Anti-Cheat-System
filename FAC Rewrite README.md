@@ -30,7 +30,10 @@ warning: this is subject to change, this is put here in preperation for FAC Rewr
 5. under prefab/resources "FAC: Synced Data" should be there containing the blocked player, configure sync settings for it there
 
 # -{Known Issues}-
-hackers might be able to manipulate the blocked player sync data, no preventions in place for that but there is plans to add preventions or at minimum reductions to that potential issue
+
+1. hackers might be able to manipulate the blocked player sync data, no preventions in place for that but there is plans to add preventions or at minimum reductions to that potential issue
+2. the anti collider viewing if a player uses ovr to place their view on the other side of a thin wall their view will get stuck unless they go around the collider
+3. the anti collider viewing is better at understanding mesh colliders but has alot of inaccuracies that cause unexpected behaviour with non convex colliders
 
 # -{TOS}-
 
