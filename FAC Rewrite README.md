@@ -1,5 +1,7 @@
 # -{FAC Rewrite}-
 
+[![Translations](https://img.shields.io/badge/🌐-Translations-blue)](./translations)
+
 i've been asked when rewrite will come out, rewrite will eventually come out as i dont have any deadlines or expected times for it to be out, i am just 1 person working on this and i only have so many people that're willing to help me test and learn... im working on my own game world(s) aswell so that also adds delay onto FAC aswell so with that being said please be patient.
 
 warning: this is subject to change, this is put here in preparation for FAC Rewrite to eventually replace the current ReadMe and documentation, just temporary storage and lets you view what is actively being added or changed!
@@ -10,12 +12,12 @@ warning: this is subject to change, this is put here in preparation for FAC Rewr
 3. anti seat cheating (done)
 4. anti block invis (done)
 5. anti out of bounds (done)
-6. anti respawning (done - trudolph's feature request)
+6. anti respawning (done - Trudolph's feature request)
 7. anti Mirror's & Camera cheating (done)
 
 - planned features roadmap - subject to change: things can be added or removed at any time, its just current thoughts and idea's on what to prevent or at least attempt to prevent
 
-8. mark client users as cheating remotely like in PD2 (in progess, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
+8. mark client users as cheating remotely like in PD2 (in progress, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
 9. anti ovr advanced/ gogo loco (in progress - slightly done)
 10. tool/ interaction verification (planned)
 11. anti avatar overlay esp cheating (planned)
@@ -33,7 +35,11 @@ warning: this is subject to change, this is put here in preparation for FAC Rewr
 
 1. hackers might be able to manipulate the blocked player sync data, no preventions in place for that but there is plans to add preventions or at minimum reductions to that potential issue
 2. the anti collider viewing if a player uses ovr to place their view on the other side of a thin wall their view will get stuck unless they go around the collider
-3. the anti collider viewing is better at understanding mesh colliders but has alot of inaccuracies that cause unexpected behaviour with non convex colliders
+3. the anti collider viewing is better at understanding mesh colliders but has alot of inaccuracies that cause unexpected behavior with non convex colliders
+
+# -{Planned non feature things}-
+
+1. add translations for multiple languages, i need to find a translator will maybe setup temporary files for this.
 
 # -{TOS}-
 
@@ -42,13 +48,13 @@ by using, editing or redistributing FAC you agree to these terms:
 1. you may make edits, changes and so on to FAC.
 2. in some way shape or form provide proper credit to me for FAC.
 3. you may not sell FAC, FAC is a F2U asset it is not to be sold by anyone for any reason all of the code found within FAC should not be sold nor should snippets.
-4. you may redistrubute FAC in any F2U way. (preferrably via forking FAC on github)
+4. you may redistribute FAC in any F2U way. (preferably via forking FAC on github)
 5. you may make assets that directly use FAC or interact with FAC in any way shape or form.
 6. if you're making your own similar system you can use FAC as a example, you may not copy-paste FAC code and call it your own.
 
 # -{Support}-
 
-if you'd like to support my random shananagains then feel free! https://www.patreon.com/freneticfurry
+if you'd like to support my random shenanigans then feel free! https://www.patreon.com/freneticfurry
 i intend to keep most if not all of my things free! supporting allows me to put more time and effort into F2U projects.
 
 if you need help/ support with FAC please feel free to contact me on discord: freneticfurry
@@ -76,7 +82,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | View Manipulation | set to true to have the anti cheat detect View Manipulation set to false to have the anti cheat allow View Manipulation. | True
 | View Leniency | set the float to define the allowed leniency before it starts thinking that the player is attempting to go outside a reasonable range via something like space drag. | 0
 | Anti Block Invis | set to true to have a visual blocked avatar when someone blocks another player set to false to let players just remain invisible to each other if they block each other. | True
-| Anti Blocked Avatar | set this to a gameobject to define the blocked avatar used, look at the default blocked avatar as a reference to set this up with a custom one. | Anti Block Default
+| Anti Blocked Avatar | set this to a gameObject to define the blocked avatar used, look at the default blocked avatar as a reference to set this up with a custom one. | Anti Block Default
 | Enable Bounds | set to true to have the anti cheat detect the player going out of bounds set to false to have the anti cheat allow the player to go out of bounds. | False
 | In Bounds Colliders | this is a array of colliders used for Enable Bounds if there is no colliders here the Enable Bounds doesnt work. | None
 | Protect Mirrors Cameras Layers | this determines if the anti cheat will or will not protect against layer viewing primarily in mirror's or camera's | True
