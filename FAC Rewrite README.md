@@ -23,6 +23,9 @@ warning: this is subject to change, this is put here in preparation for FAC Rewr
 11. anti avatar overlay esp cheating (planned)
 12. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
 13. verification functions (tool/ interaction library for development)
+14. anti mesh viewing (this is the succsessor to anti collider view, this will use the mesh and prevent the player from getting into it thus would support Blend Shapes, if it cannot access the mesh information it will default to use a collider instead however! mesh colliders will not work because i cant figure that out at least in a good way as of right now...)
+
+for the people with the FAC rewrite pre alpha build - to use anti mesh viewing you MUST turn on read/write on your meshes or use a explict collider eg. box collider, if you as a tester know a better way please let me know.
 
 # -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
