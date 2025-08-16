@@ -14,16 +14,18 @@ warning: this is subject to change, this is put here in preparation for FAC Rewr
 5. anti out of bounds (done)
 6. anti respawning (done - Trudolph's feature request)
 7. anti Mirror's & Camera cheating (done)
+8. anti Shader cheating (done)
+9. anti collider viewing/ no clipping (done)
 
 - planned features roadmap - subject to change: things can be added or removed at any time, its just current thoughts and idea's on what to prevent or at least attempt to prevent
 
-8. mark client users as cheating remotely like in PD2 (in progress, will be a Experimental addon for FAC, use at your own risk and ensure that you set it up correctly as that is very important. - Vector Lotus's Feature request)
-9. anti ovr advanced/ gogo loco (in progress - slightly done)
-10. tool/ interaction verification (planned)
-11. anti avatar overlay esp cheating (planned)
-12. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
-13. verification functions (tool/ interaction library for development)
-14. anti collider viewing (in progess)
+1. mark client users as cheating remotely like in PD2 (halted, might not be added in any form due to ambiguity, further thoughts and expirimentation needed. - Vector Lotus's feature request)
+2. anti ovr advanced/ gogo loco (in progress - slightly done)
+3. tool/ interaction verification (planned)
+4. anti avatar overlay esp cheating (planned)
+5. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
+6. verification functions (tool/ interaction library for development)
+7. anti camera, drone, dolly collider view/ noclipping (planned)
 
 for the people with the FAC rewrite pre alpha build - to use anti mesh viewing you MUST turn on read/write on your meshes or use a explict collider eg. box collider, if you as a tester know a better way please let me know.
 
