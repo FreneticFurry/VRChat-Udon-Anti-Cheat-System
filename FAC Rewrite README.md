@@ -49,11 +49,17 @@ for the people with the FAC rewrite pre alpha build - to use anti mesh viewing y
 by using, editing or redistributing FAC you agree to these terms:
 
 1. you may make edits, changes and so on to FAC.
-2. in some way shape or form provide proper credit to me for FAC.
+2. in some way shape or form provide proper credit to me for FAC if you make edits &/ or changes to FAC in some way.
 3. you may not sell FAC, FAC is a F2U asset it is not to be sold by anyone for any reason all of the code found within FAC should not be sold nor should snippets.
 4. you may redistribute FAC in any F2U way. (preferably via forking FAC on github)
 5. you may make assets that directly use FAC or interact with FAC in any way shape or form.
 6. if you're making your own similar system you can use FAC as a example, you may not copy-paste FAC code and call it your own.
+
+# Attribution
+
+it would be greatly appreciated if you place in your VRChat world an attribution prefab provided with this package.
+
+you're not required to place or have any sort of message saying FAC is within your world as it is entirely optional but if you do it helps spread the word and supports the growth of this.
 
 # -{Support}-
 
