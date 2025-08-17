@@ -16,31 +16,28 @@ warning: this is subject to change, this is put here in preparation for FAC Rewr
 7. anti Mirror's & Camera cheating (done)
 8. anti Shader cheating (done)
 9. anti collider viewing/ no clipping (done)
+10. anti view manipulation (done, currently just blacks out the screen so this is still in progress to find a alternative solution to that if possible)
 
 - planned features roadmap - subject to change: things can be added or removed at any time, its just current thoughts and idea's on what to prevent or at least attempt to prevent
 
-1. mark client users as cheating remotely like in PD2 (halted, might not be added in any form due to ambiguity, further thoughts and expirimentation needed. - Vector Lotus's feature request)
-2. anti ovr advanced/ gogo loco (in progress - slightly done)
-3. tool/ interaction verification (planned)
-4. anti avatar overlay esp cheating (planned)
-5. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
-6. verification functions (tool/ interaction library for development)
-7. anti camera, drone, dolly collider view/ noclipping (planned)
+1. mark client users as cheating remotely like in PD2 (halted, might not be added in any form due to ambiguity, further thoughts and experimentation needed. - Vector Lotus's feature request)
+2. tool/ interaction verification (planned)
+3. anti avatar overlay esp cheating (planned)
+4. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
+5. verification functions (tool/ interaction library for development)
 
-for the people with the FAC rewrite pre alpha build - to use anti mesh viewing you MUST turn on read/write on your meshes or use a explict collider eg. box collider, if you as a tester know a better way please let me know.
+for the people with the FAC rewrite pre alpha build - to use anti mesh viewing you MUST turn on read/write on your meshes or use a explicit collider eg. box collider, if you as a tester know a better way please let me know.
 
 # -{Setup/ Install}-
 1. download FAC.UnityPackage from the latest downloads
-2. import the unitypackage into your unity project
+2. import the UnityPackage into your unity project
 3. place the prefab from the FAC folder "FAC: AntiCheat" into your scene
 4. configure settings for FAC on the prefab if needed
 5. under prefab/resources "FAC: Synced Data" should be there containing the blocked player, configure sync settings for it there
 
 # -{Known Issues}-
 
-1. hackers might be able to manipulate the blocked player sync data, no preventions in place for that but there is plans to add preventions or at minimum reductions to that potential issue
-2. the anti collider viewing if a player uses ovr to place their view on the other side of a thin wall their view will get stuck unless they go around the collider
-3. the anti collider viewing is better at understanding mesh colliders but has alot of inaccuracies that cause unexpected behavior with non convex colliders
+no known issues as of right now
 
 # -{Planned non feature things}-
 
