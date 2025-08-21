@@ -1,7 +1,5 @@
 # -{FAC Rewrite}-
 
-[![Translations](https://img.shields.io/badge/🌐-Translations-blue)](./translations)
-
 i've been asked when rewrite will come out, rewrite will eventually come out as i dont have any deadlines or expected times for it to be out, i am just 1 person working on this and i only have so many people that're willing to help me test and learn... im working on my own game world(s) aswell so that also adds delay onto FAC aswell so with that being said please be patient.
 
 warning: this is subject to change, this is put here in preparation for FAC Rewrite to eventually replace the current ReadMe and documentation, just temporary storage and lets you view what is actively being added or changed!
@@ -16,15 +14,14 @@ warning: this is subject to change, this is put here in preparation for FAC Rewr
 7. anti Mirror's & Camera cheating (done)
 8. anti Shader cheating (done)
 9. anti collider viewing/ no clipping (done)
-10. anti view manipulation (done, currently just blacks out the screen so this is still in progress to find a alternative solution to that if possible)
+10. anti view manipulation & menu bugging (done)
+11. tool/ interaction verification (done)
 
 - planned features roadmap - subject to change: things can be added or removed at any time, its just current thoughts and idea's on what to prevent or at least attempt to prevent
 
-1. mark client users as cheating remotely like in PD2 (halted, might not be added in any form due to ambiguity, further thoughts and experimentation needed. - Vector Lotus's feature request)
-2. tool/ interaction verification (planned)
-3. anti avatar overlay esp cheating (planned)
-4. anti menu bugging (planned, some other detection will likely fix it but if no other one does then direct support will be made)
-5. verification functions (tool/ interaction library for development)
+1. anti avatar overlay esp cheating (planned)
+2. player collision/ pushing (planned, thinking about it being more like how it is within TF2 where it isnt 100% collisions but rather just a push force to keep players out of each other instead)
+3. extra verification for VRCPickup's to prevent VRCPickup position/ hold bugging (planned)
 
 for the people with the FAC rewrite pre alpha build - to use anti mesh viewing you MUST turn on read/write on your meshes or use a explicit collider eg. box collider, if you as a tester know a better way please let me know.
 
@@ -96,6 +93,8 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 | Protect Mirrors Cameras Layers | this determines if the anti cheat will or will not protect against layer viewing primarily in mirror's or camera's | True
 | Use Shader Block | this will determine if the anti cheat will use "ShaderBlock" $${\color{#ff0000}Warning}$$: will disable Usernames and Chatboxs, anything transparent will not render, change the ShaderBlock render queue to fix (changing the queue will also allow avatars to get around the ShaderBlock, set it up how you want it to be.) | False
 | Protected Layers | this is a LayerMask only supporting 31 inputs as unity only allows for 32 layers, change to protect layers within the mirrors and camera's (this cannot be changed in realtime it is a startup process.) | Mixed
+| Auto Pickup Verification | this is a bool to let FAC automaticly handle if pickups are or arnt allowed to be picked up or automaticly dropped when they're in places they shouldn't be | True
+| Pickup Max Range | this is a float to determine the distance from the player it will be searching for tools in, recommended setting this to be 1.5 the Proximity of your biggest tool eg. tool a.Proximity is 10 should set this to be 15. | 5
 | Punishment Location | set this to a location you want to use when a harsh punishment is used on a player. | (0, 0, 0)
 | Punish Collider Viewing | set to true to send the player to the punishment location when they get detected for attempting to look inside a collider. | False
 | Punish Speed Manipulation | set to true to send the player to the punishment location when they get detected for attempting to gain more speed then what is allowed. | False
@@ -114,6 +113,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 | Function | Description | Usage |
 |:-------|:------------|:------------|
+| FAC._CanInteract(Object, AllowedDistance, IgnoredLayers, PlayerPosition, HandPosition) | returns a bool for if the HandPosition is allowed to interact with something, will return false if behind walls or such | can be used for any purpose you'd want this for, exposed Player Pose and Hand Pose for cases of entirely custom player controllers or similar |
 | FAC._SetPlayerVelocity(Velocity) | tells the anticheat that the localPlayer velocity is going to be changed by the world and allows that to happen | use to set the player velocity correctly |
 | FAC._TeleportPlayer(Position, Rotation, SpawnOrientation, RemoteSmoothing) | exact same as TeleportTo just with extra steps to tell FAC to allow the teleport | use to teleport the player where you'd want to teleport them |
 | FAC._Seat() | similar to TeleportPlayer() but more designed for VRCStations instead | use this to allow a world seat to be used correctly |
