@@ -34,11 +34,24 @@ for the people with the FAC rewrite pre alpha build - to use anti mesh viewing y
 
 # -{Known Issues}-
 
-no known issues as of right now
+will be fixed before any alpha, beta or release - current phase: closed testing.
+
+1. it is possible to bypass speed manipulation by brute force because it sometimes doesnt remember the correct location
+2. it is possible to get stuck into the floor in such a way that it prevents menus from opening by brute forcing constantly
+3. it is possible to use TeleportTo multiple times causing speed manipulation to allow a teleport when it shouldn't
+4. the blocked avatar client user abuse prevention in some cases cause most data to stop being used (intended but should be more lenient for avatars since avatar creators seemingly never have the same arm span because they do not have a unified workflow at all eg. random/ very inconsistent proportions.)
+5. it is possible to trigger the anti collider detection and reset the ovr position to teleport onto or past things you shouldn't be able to when brute forcing
+6. auto tool verification sometimes will improperly think the tool belongs to someone else and not trigger when it should be triggering due to an oversight with the peer watching other players (unnamed planned feature to watch remote players to see if they're cheating, i just dont know what to name that.)
+7. various shader visual problems regarding depth
+8. it is possible to get recorrected in such a way from the anti flying + anti collider view that will cause the player to get stuck between multiple colliders because it doesnt check for the players full bounds but just the head
+9. players can cause a halt to a section of detection by getting teleported into another player because it doesnt handle that correctly
+10. it is theorized that a cheater/ 3rd party client user could change values that they shouldn't be able to that could affect other players
+11. blocked player sync sends data at a constant rate when it should only send data when it needs to - if multiple people are blocked could potentially be to much data to be handling causing network overhead to be worse
+12. there is currently no anti stuck checks eg. player got misplaced between colliders - this will be made as a final failsafe as the detections should be able to place the player in a good place on its own but to fix potential issues this would be ideal to have as safeguard.
 
 # -{Planned non feature things}-
 
-1. add translations for multiple languages, i need to find a translator will maybe setup temporary files for this.
+-1. add translations for multiple languages, i need to find a translator will maybe setup temporary files for this.- wont be able to happen because i couldn't find anyone for this.
 
 # -{TOS}-
 
@@ -67,7 +80,7 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 # -{Credit}-
 
-- Zerithax: alot of bug finding & some slight scripting help
+- Zerithax: alot of bug finding & some slight scripting help (only in versions .041 and below)
 - Vector Lotus: good amount of bug finding/ QA help & feature suggestion
 - Trudolph: some bug finding/ QA help & feature suggestion
 
