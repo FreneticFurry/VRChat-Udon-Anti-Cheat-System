@@ -1,6 +1,6 @@
 # -{FAC Rewrite}-
 
-development on FAC might be entirely halted and stopped, in short: im probably switching to a vastly more desirable platform then vrchat
+FAC rewrite development is going to be slowen down by alot, ive kinda switched to a different platform where the playerbase isnt so undesirable / nuisences (i am still working on this but very slowly, this is good because it allows testers to test and find problems!)
 
 i've been asked when rewrite will come out, rewrite will eventually come out as i dont have any deadlines or expected times for it to be out, i am just 1 person working on this and i only have so many people that're willing to help me test and learn... im working on my own game world(s) aswell so that also adds delay onto FAC aswell so with that being said please be patient.
 
