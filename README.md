@@ -1,12 +1,12 @@
-# ----VRChat-Udon-AntiCheat-System: FAC----
+# ----VRChat-Udon-AntiCheat-System: FAC (Discontinued)----
 FAC - Frenetic Anti Cheat, designed to try and give more power to world developers allowing for better cheat prevention against various VRChat oversights or flaws (primarily good for game worlds but can be used in any other type of worlds.)
 
-please be aware: it is not my job to protect against a 3rd party client user, FAC is to prevent the "normal" players from abusing built-in features in vrchat, it is not possible to protect against a 3rd party client user because vrchat systems use a peer to peer like system making it where developers cannot do any form of true server sided verification.
+please be aware: it is not my job to protect against a 3rd party client user, FAC is to prevent the "normal" players from abusing built-in features in vrchat, it is not possible to protect against a 3rd party client user because vrchat systems use a peer to peer like system making it where developers cannot do any form of true server sided verification. (in short, never trust other clients if you can to prevent bad actors.)
 
 if you come across a hacker you should
 1. record them
 2. contact vrchat support
-3. if the issue is severe suchas the hacker is able to change their DisplayName then look on: https://feedback.vrchat.com/ and make a canny or upvote a canny so vrchats internal team can stop being lazy hopefully fix issues/ do their jobs.
+3. if the issue is severe suchas the hacker is able to change their DisplayName then look on: https://feedback.vrchat.com/ and make a canny or upvote a canny so vrchats internal team can stop being lazy hopefully fix issues / do their jobs abit faster rather then slower.
 
 # **{FAC Features}**
 
@@ -36,12 +36,12 @@ if you want to use seats within your world its recommended to use the "Seat.cs" 
 1. sometimes players can be set to 0 improperly
 2. flying doesnt get caught properly when detection point is different
 3. other minor fixes are needed but currently shouldn't be a problem
+4. probably alot more issues
 
 # **{Future Update Plans}**
 
-1. FAC rewrite, FAC could use some touch ups and better logic in alot of spots and i feel like ive gotten better at coding so im rewriting the entire thing to overall make FAC better
-
-Note: im taking my time and doing QA tests to better ensure the FAC rewrite will release in a very good and very stable state unlike prior releases.
+FAC will not be maintained nor get further updates at least at this time, ive kinda moved away from VRChat as a whole
+eventually might come back to this in a few years
 
 # **{TOS}**
 
@@ -64,6 +64,5 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 # **{Credit}**
 
-- Zerithax: alot of bug finding & some slight scripting help
-- Vector Lotus: some bug finding/ QA help
-- Trudolph: some bug finding/ QA help & feature suggestion
+- Vector Lotus: alot of bug finding/ QA help & feature suggestion
+- Trudolph: alot of bug finding/ QA help & feature suggestion
