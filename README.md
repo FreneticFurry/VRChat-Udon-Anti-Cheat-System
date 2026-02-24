@@ -1,4 +1,4 @@
-# ----VRChat-Udon-AntiCheat-System: FAC (Discontinued)----
+# ----VRChat-Udon-AntiCheat-System: FAC----
 FAC - Frenetic Anti Cheat, designed to try and give more power to world developers allowing for better cheat prevention against various VRChat oversights or flaws (primarily good for game worlds but can be used in any other type of worlds.)
 
 please be aware: it is not my job to protect against a 3rd party client user, FAC is to prevent the "normal" players from abusing built-in features in vrchat, it is not possible to protect against a 3rd party client user because vrchat systems use a peer to peer like system making it where developers cannot do any form of true server sided verification. (in short, never trust other clients if you can to prevent bad actors.)
@@ -40,8 +40,9 @@ if you want to use seats within your world its recommended to use the "Seat.cs" 
 
 # **{Future Update Plans}**
 
-FAC will not be maintained nor get further updates at least at this time, ive kinda moved away from VRChat as a whole
-eventually might come back to this in a few years
+FAC will continue to be maintained and upkept but quite slowly, i dont get much feedback if any at all so its difficult to be able to know every issue (im also not the best at coding & refuse to use ai for help.)
+
+currently working on a rewrite to again hopefully help with various issues as ive gotten better at coding :)
 
 # **{TOS}**
 
@@ -66,3 +67,4 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 
 - Vector Lotus: alot of bug finding/ QA help & feature suggestion
 - Trudolph: alot of bug finding/ QA help & feature suggestion
+- Ryuu: insight & minor maintenence help
