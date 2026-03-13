@@ -66,6 +66,6 @@ if you need help/ support with FAC please feel free to contact me on discord: fr
 # **{Credit}**
 
 - Vector Lotus: alot of bug finding/ QA help & feature suggestion
-- Trudolph: alot of bug finding/ QA help & feature suggestion
+- Trudolph: alot of bug finding / QA help, feature suggestions & insight
 - Ryuu: insight, minor maintenence & coding help
 - Nexel: slight help with QA / bug finding
