@@ -44,6 +44,8 @@ FAC will continue to be maintained and upkept but quite slowly, i dont get much 
 
 currently working on a rewrite to again hopefully help with various issues as ive gotten better at coding :)
 
+future updates for FAC might have to go paid, i hope you can understand as to why that may be.
+
 # **{TOS}**
 
 by using, editing or redistributing FAC you agree to these terms:
